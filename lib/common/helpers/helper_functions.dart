@@ -16,7 +16,7 @@ class HelperFunctions {
 
   Future<void> logout() async {
     await refresh();
-    await FirebaseService.deleteFcmToken();
+    // await FirebaseService.deleteFcmToken();
     GetIt.I<AppManagerCubit>().checkUser();
     await GetIt.I<PrefsRepository>().clearLocal();
     return;

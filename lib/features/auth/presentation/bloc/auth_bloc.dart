@@ -84,12 +84,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     this._prefsRepository,
   ) : super(AuthState()) {
     on<RegisterEvent>(_onRegisterEvent);
-    on<LoginEvent>(_onLoginEvent);
+    // on<LoginEvent>(_onLoginEvent);
     on<LogoutEvent>(_onLogoutEvent);
     on<ResetPasswordEvent>(_onResetPasswordEvent);
     on<ResetPasswordGenerateEvent>(_onResetPasswordGenerateEvent);
     on<ResetPasswordCheckEvent>(_onResetPasswordCheckEvent);
-    on<VerificationEvent>(_onVerificationEvent);
+    // on<VerificationEvent>(_onVerificationEvent);
     on<ResendCodeEvent>(_onResendCodeEvent);
     on<ChangeCountryEvent>(_onChangeCountryEvent);
   }
@@ -224,68 +224,68 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     return "+${state.selectedCountry.phoneCode}$phone";
   }
 
-  FutureOr<void> _onLoginEvent(
-      LoginEvent event, Emitter<AuthState> emit) async {
-    if (loginForm.invalid) {
-      loginForm.markAllAsTouched();
-      return;
-    }
-    final fcm = await FirebaseService.getFcmToken();
+  // FutureOr<void> _onLoginEvent(
+  //     LoginEvent event, Emitter<AuthState> emit) async {
+  //   if (loginForm.invalid) {
+  //     loginForm.markAllAsTouched();
+  //     return;
+  //   }
+  //   final fcm = await FirebaseService.getFcmToken();
 
-    emit(state.copyWith(loginStatus: const BlocStatus.loading()));
+  //   emit(state.copyWith(loginStatus: const BlocStatus.loading()));
 
-    final loginParams = LoginParams(
-      phone: loginPhoneNumber,
-      password: loginForm.control(kFromPassword).value,
-      fcm: fcm,
-    );
+  //   final loginParams = LoginParams(
+  //     phone: loginPhoneNumber,
+  //     password: loginForm.control(kFromPassword).value,
+  //     fcm: fcm,
+  //   );
 
-    final response = await _loginUsecase(loginParams);
+  //   final response = await _loginUsecase(loginParams);
 
-    await response.fold(
-      (exception, message) async =>
-          emit(state.copyWith(loginStatus: BlocStatus.fail(error: message))),
-      (value) async {
-        emit(state.copyWith(
-          loginStatus: const BlocStatus.success(),
-          phone: loginForm.control(kFromPhone).value,
-          hasAccountNotVerified: value.data!.customer.phoneVerifiedAt == null,
-        ));
-        await _prefsRepository.setCustomer(value.data!);
+  //   await response.fold(
+  //     (exception, message) async =>
+  //         emit(state.copyWith(loginStatus: BlocStatus.fail(error: message))),
+  //     (value) async {
+  //       emit(state.copyWith(
+  //         loginStatus: const BlocStatus.success(),
+  //         phone: loginForm.control(kFromPhone).value,
+  //         hasAccountNotVerified: value.data!.customer.phoneVerifiedAt == null,
+  //       ));
+  //       await _prefsRepository.setCustomer(value.data!);
 
-        loginForm
-          ..value = {
-            kFromPhone: "",
-            kFromPassword: "",
-          }
-          ..markAsUntouched();
-        _appManagerCubit.checkUser();
+  //       loginForm
+  //         ..value = {
+  //           kFromPhone: "",
+  //           kFromPassword: "",
+  //         }
+  //         ..markAsUntouched();
+  //       _appManagerCubit.checkUser();
 
-        event.onSuccess(value.data!);
-      },
-    );
-  }
+  //       event.onSuccess(value.data!);
+  //     },
+  //   );
+  // }
 
-  FutureOr<void> _onVerificationEvent(
-      VerificationEvent event, Emitter<AuthState> emit) async {
-    emit(state.copyWith(verificationStatus: const BlocStatus.loading()));
+  // FutureOr<void> _onVerificationEvent(
+  //     VerificationEvent event, Emitter<AuthState> emit) async {
+  //   emit(state.copyWith(verificationStatus: const BlocStatus.loading()));
 
-    final response = await _verificationUsecase(
-        VerificationParams(code: event.code, phone: event.phone));
+  //   final response = await _verificationUsecase(
+  //       VerificationParams(code: event.code, phone: event.phone));
 
-    response.fold(
-      (exception, message) => emit(
-          state.copyWith(verificationStatus: BlocStatus.fail(error: message))),
-      (value) {
-        event.onSuccess.call();
+  //   response.fold(
+  //     (exception, message) => emit(
+  //         state.copyWith(verificationStatus: BlocStatus.fail(error: message))),
+  //     (value) {
+  //       event.onSuccess.call();
 
-        emit(state.copyWith(
-          verificationStatus: const BlocStatus.success(),
-          // phone: loginForm.control(kFromPhone).value,
-        ));
-      },
-    );
-  }
+  //       emit(state.copyWith(
+  //         verificationStatus: const BlocStatus.success(),
+  //         // phone: loginForm.control(kFromPhone).value,
+  //       ));
+  //     },
+  //   );
+  // }
 
   String get loginPhoneNumber {
     final phone = loginForm.control(kFromPhone).value;
