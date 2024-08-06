@@ -15,6 +15,7 @@ import 'features/app/presentation/pages/app.dart';
 //       "onBackgroundMessage: notification **** ${message.notification?.toMap().toString()} ****"
 //       "\n data *** ${message.data.toString()} ***");
 // }
+//print
 Future<void> main() async {
   await initialization(
     () => const App(),
