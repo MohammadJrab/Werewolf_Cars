@@ -9,6 +9,7 @@ import 'package:werewolf_cars/features/app/presentation/widgets/onboarding_widge
 import 'package:werewolf_cars/features/auth/presentation/pages/congrate_page.dart';
 import 'package:werewolf_cars/features/auth/presentation/pages/login_page.dart';
 import 'package:werewolf_cars/features/auth/presentation/pages/sigup_page.dart';
+import 'package:werewolf_cars/features/chat/presentation/chat_page.dart';
 
 import '../../../features/app/presentation/pages/base_page.dart';
 import '../../../features/app/presentation/pages/splash_page.dart';
@@ -37,7 +38,8 @@ class GRouter {
         name: _config.krpRoot,
         pageBuilder: (BuildContext context, GoRouterState state) {
           return _builderPage(
-            child: const SplashScreen(),
+            // child: const SplashScreen(),
+            child: const ChatPage(),
             state: state,
           );
         },

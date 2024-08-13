@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
       const Duration(microseconds: 1200),
       () {
-        GRouter.router.goNamed(GRouter.config.krpOnboardingRoutePath);
+        GRouter.router.goNamed(GRouter.config.chatsRoutes.chatsPage);
 
         // final isAuth = GetIt.I<PrefsRepository>().registeredCustomer;
         // final bool isPhoneVerified =
