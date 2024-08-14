@@ -35,7 +35,7 @@ class SendButton extends StatelessWidget {
                 context.textTheme.bodyMedium!.s15.xb.withColor(AppColors.white),
             // style: TextStyle(color: AppColors.white, fontSize: 16),
           ),
-          2.horizontalSpace,
+          4.horizontalSpace,
           const AppSvgPicture(Assets.svgSend),
           2.horizontalSpace,
         ],

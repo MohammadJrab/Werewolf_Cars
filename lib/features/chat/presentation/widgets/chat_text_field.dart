@@ -15,7 +15,7 @@ class ChatTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: HWEdgeInsets.only(left: 10, right: 10, bottom: 10, top: 10),
+        padding: HWEdgeInsets.only(left: 8, right: 8, bottom: 10, top: 10),
         decoration: BoxDecoration(
           border: Border.all(
             color: AppColors.greyStroke,

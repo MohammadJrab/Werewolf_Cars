@@ -37,7 +37,7 @@ class ChatBubbleItemWidget extends StatelessWidget {
                   topLeft: Radius.circular(20.r))),
           child: Text(
             'Message body Message body Message body Message Message body Message body Message body Message ',
-            style: context.textTheme.bodyLarge!.s17
+            style: context.textTheme.bodyLarge!.s15
                 .withColor(isCurrent ? AppColors.white : AppColors.black),
           ),
         ),
@@ -65,7 +65,6 @@ class ChatBubbleItemWidget extends StatelessWidget {
                       width: 15.w,
                     ),
                   )
-             
                 : const SizedBox(),
             4.horizontalSpace,
           ],
