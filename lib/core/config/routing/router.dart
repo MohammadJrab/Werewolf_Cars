@@ -10,6 +10,8 @@ import 'package:werewolf_cars/features/auth/presentation/pages/congrate_page.dar
 import 'package:werewolf_cars/features/auth/presentation/pages/login_page.dart';
 import 'package:werewolf_cars/features/auth/presentation/pages/sigup_page.dart';
 import 'package:werewolf_cars/features/chat/presentation/chat_page.dart';
+import 'package:werewolf_cars/features/faviorate/presentation/faviorate_page.dart';
+import 'package:werewolf_cars/features/my_car/my_cars_page.dart';
 
 import '../../../features/app/presentation/pages/base_page.dart';
 import '../../../features/app/presentation/pages/splash_page.dart';
@@ -39,7 +41,7 @@ class GRouter {
         pageBuilder: (BuildContext context, GoRouterState state) {
           return _builderPage(
             // child: const SplashScreen(),
-            child: const ChatPage(),
+            child: const MyCarsPage(),
             state: state,
           );
         },
