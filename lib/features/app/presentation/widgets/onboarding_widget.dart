@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
+import 'package:simple_shadow/simple_shadow.dart';
 import 'package:werewolf_cars/core/config/routing/router.dart';
 import 'package:werewolf_cars/core/config/theme/colors_app.dart';
 import 'package:werewolf_cars/core/config/theme/typography.dart';
@@ -31,43 +32,57 @@ class OnboardingPage extends StatelessWidget {
   Widget body(BuildContext context) {
     return BlocProvider.value(
         value: GetIt.I<AuthBloc>(),
-        child: Padding(
-          padding: HWEdgeInsets.symmetric(horizontal: 28),
-          child: Column(
-            children: [
-              80.verticalSpace,
-              AppText(
-                LocaleKeys.onboarding_welcomeToWerewolfCars,
-                style: context.textTheme.bodyLarge?.xb.s40
+        child: Column(
+          children: [
+            60.verticalSpace,
+            Padding(
+              padding: HWEdgeInsets.symmetric(horizontal: 28),
+              child: SimpleShadow(
+                color: AppColors.orange,
+                offset: const Offset(0, 4),
+                opacity: 0.3,
+                sigma: 4,
+                child: AppText(
+                  LocaleKeys.onboarding_welcomeToWerewolfCars,
+                  style: context.textTheme.bodyLarge?.xb.s40
+                      .withColor(AppColors.orange),
+                ),
+              ),
+            ),
+            100.verticalSpace,
+            Image.asset(
+              Assets.imagesOnboarding,
+            ),
+            80.verticalSpace,
+            Padding(
+              padding: HWEdgeInsets.symmetric(horizontal: 28),
+              child: AppText(
+                LocaleKeys.onboarding_buyAndSellCarsEffortlessly,
+                style: context.textTheme.headlineMedium?.xb
                     .withColor(AppColors.orange),
               ),
-              120.verticalSpace,
-              Image.asset(
-                Assets.imagesOnboarding,
-              ),
-              80.verticalSpace,
-              AppText(
-                LocaleKeys.onboarding_buyAndSellCarsEffortlessly,
-                style: context.textTheme.headlineMedium?.xb,
-              ),
-              10.verticalSpace,
-              AppText(
+            ),
+            15.verticalSpace,
+            Padding(
+              padding: HWEdgeInsetsDirectional.only(start: 5),
+              child: AppText(
                 LocaleKeys.onboarding_YourPerfectRideisJustATapAway,
                 style: context.textTheme.bodyLarge?.s20.sb,
               ),
-              100.verticalSpace,
-              AppElevatedButton(
-                appButtonStyle: AppButtonStyle.primary,
-                style: const ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(AppColors.white)),
-                onPressed: () =>
-                    context.goNamed(GRouter.config.mainRoutes.home),
-                text: LocaleKeys.letsgo,
-                textStyle: context.textTheme.titleLarge.xb
-                    .withColor(AppColors.blackLight),
-              ),
-            ],
-          ),
+            ),
+            77.verticalSpace,
+            AppElevatedButton(
+              appButtonStyle: AppButtonStyle.primary,
+              style: ButtonStyle(
+                  backgroundColor:
+                      const WidgetStatePropertyAll(AppColors.white),
+                  minimumSize: WidgetStatePropertyAll(Size(319.w, 54.h))),
+              onPressed: () => context.goNamed(GRouter.config.mainRoutes.home),
+              text: LocaleKeys.letsgo,
+              textStyle: context.textTheme.titleLarge.xb
+                  .withColor(AppColors.blackLight),
+            ),
+          ],
         ));
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
 
-const Size designSize = Size(430, 932);
+const Size designSize = Size(375, 812);
 
 const kPerPage = 20;
