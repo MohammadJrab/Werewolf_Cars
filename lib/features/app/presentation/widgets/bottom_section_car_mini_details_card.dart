@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:werewolf_cars/core/config/theme/colors_app.dart';
 import 'package:werewolf_cars/core/config/theme/typography.dart';
 import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
@@ -24,9 +25,7 @@ class BottomSectionCarMiniDetailsCard extends StatelessWidget {
                 style: context.textTheme.bodyLarge!.s17.xb
                     .withColor(AppColors.white),
               ),
-              const SizedBox(
-                height: 10,
-              ),
+             10.verticalSpace,
               Row(
                 children: [
                   Text(
