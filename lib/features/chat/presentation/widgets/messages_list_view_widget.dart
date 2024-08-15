@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:werewolf_cars/core/utils/responsive_padding.dart';
-import 'package:werewolf_cars/features/chat/presentation/chat_page.dart';
+import 'package:werewolf_cars/features/chat/presentation/pages/chat_page.dart';
 
 import 'message_item_widget.dart';
 

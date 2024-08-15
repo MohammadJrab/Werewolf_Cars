@@ -7,11 +7,11 @@ import 'package:werewolf_cars/core/utils/responsive_padding.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_svg_picture.dart';
 import 'package:werewolf_cars/generated/assets.dart';
 
-import 'widgets/chat_text_field.dart';
-import 'widgets/circlue_user_image_widget.dart';
-import 'widgets/messages_list_view_widget.dart';
-import 'widgets/user_name.dart';
-import 'widgets/white_divider.dart';
+import '../widgets/chat_text_field.dart';
+import '../widgets/circlue_user_image_widget.dart';
+import '../widgets/messages_list_view_widget.dart';
+import '../widgets/user_name.dart';
+import '../widgets/white_divider.dart';
 
 class ChatPage extends StatelessWidget {
   const ChatPage({super.key});
