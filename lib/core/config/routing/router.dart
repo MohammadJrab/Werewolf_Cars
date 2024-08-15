@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:werewolf_cars/core/config/routing/router_config.dart';
 import 'package:werewolf_cars/core/config/theme/colors_app.dart';
-import 'package:werewolf_cars/features/Privacy_Policy/presentation/pages/privacy_policy_page.dart';
-import 'package:werewolf_cars/features/about_us/presentation/pages/about_us_page.dart';
+import 'package:werewolf_cars/features/profile/presentation/pages/edit_profile_page.dart';
+import 'package:werewolf_cars/features/profile/presentation/pages/privacy_policy_page.dart';
+import 'package:werewolf_cars/features/profile/presentation/pages/about_us_page.dart';
 import 'package:werewolf_cars/features/app/presentation/pages/error_page.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/onboarding_widget.dart';
 import 'package:werewolf_cars/features/auth/presentation/pages/congrate_page.dart';
@@ -45,7 +46,7 @@ class GRouter {
         pageBuilder: (BuildContext context, GoRouterState state) {
           return _builderPage(
             // child: const SplashScreen(),
-            child: const ProfilePage(),
+            child: const EditProfilePage(),
             state: state,
           );
         },

@@ -36,8 +36,7 @@ class SettingsSectionProfile extends StatelessWidget {
         ),
         const ProfileItemSettingsWidget(
           title: 'Language',
-          // TODO : add language svg correct
-          svgIcon: Assets.svgYear,
+          svgIcon: Assets.svgGlobe,
         ),
         const ProfileItemSettingsWidget(
           title: 'Privacy Policy',
