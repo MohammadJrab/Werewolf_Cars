@@ -46,7 +46,7 @@ class GRouter {
         pageBuilder: (BuildContext context, GoRouterState state) {
           return _builderPage(
             // child: const SplashScreen(),
-            child: const EditProfilePage(),
+            child: const NotificationsPage(),
             state: state,
           );
         },
