@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:werewolf_cars/core/config/theme/colors_app.dart';
 import 'package:werewolf_cars/core/utils/responsive_padding.dart';
+import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
 
 class DateTimeWidgetMessageItem extends StatelessWidget {
   const DateTimeWidgetMessageItem({
@@ -19,7 +20,7 @@ class DateTimeWidgetMessageItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(40.r),
         color: AppColors.white,
       ),
-      child: const Text(
+      child: const AppText(
         '8 jun 2024',
         maxLines: 1,
         style: TextStyle(

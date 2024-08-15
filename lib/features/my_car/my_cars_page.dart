@@ -6,7 +6,7 @@ import 'package:werewolf_cars/features/app/presentation/widgets/custom_appbar.da
 class MyCarsPage extends StatelessWidget {
   const MyCarsPage({super.key});
 
-   @override
+  @override
   Widget build(BuildContext context) {
     return const Scaffold(
       backgroundColor: AppColors.blackLight,
@@ -17,16 +17,42 @@ class MyCarsPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            CarMiniDetailsCardWidget(isFaviorateIcon: false,isStatus: true,),
-            CarMiniDetailsCardWidget(isFaviorateIcon: false,isStatus: true,),
-            CarMiniDetailsCardWidget(isFaviorateIcon: false,isStatus: true,),
-            CarMiniDetailsCardWidget(isFaviorateIcon: false,isStatus: true,),
-            CarMiniDetailsCardWidget(isFaviorateIcon: false,isStatus: true,),
-            CarMiniDetailsCardWidget(isFaviorateIcon: false,isStatus: true,),
-            CarMiniDetailsCardWidget(isFaviorateIcon: false,isStatus: true,),
-            CarMiniDetailsCardWidget(isFaviorateIcon: false,isStatus: true,),
-            CarMiniDetailsCardWidget(isFaviorateIcon: false,isStatus: true,),
-         
+            CarMiniDetailsCardWidget(
+              isFaviorateIcon: false,
+              isStatus: true,
+            ),
+            CarMiniDetailsCardWidget(
+              isFaviorateIcon: false,
+              isStatus: true,
+            ),
+            CarMiniDetailsCardWidget(
+              isFaviorateIcon: false,
+              isStatus: true,
+            ),
+            CarMiniDetailsCardWidget(
+              isFaviorateIcon: false,
+              isStatus: true,
+            ),
+            CarMiniDetailsCardWidget(
+              isFaviorateIcon: false,
+              isStatus: true,
+            ),
+            CarMiniDetailsCardWidget(
+              isFaviorateIcon: false,
+              isStatus: true,
+            ),
+            CarMiniDetailsCardWidget(
+              isFaviorateIcon: false,
+              isStatus: true,
+            ),
+            CarMiniDetailsCardWidget(
+              isFaviorateIcon: false,
+              isStatus: true,
+            ),
+            CarMiniDetailsCardWidget(
+              isFaviorateIcon: false,
+              isStatus: true,
+            ),
           ],
         ),
       ),

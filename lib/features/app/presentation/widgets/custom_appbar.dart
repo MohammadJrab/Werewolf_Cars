@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:werewolf_cars/core/config/theme/colors_app.dart';
+import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
 
 
 class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
@@ -17,7 +18,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
         preferredSize: const Size(double.infinity, kToolbarHeight),
         child: AppBar(
             backgroundColor: Colors.transparent,
-            title: Text(
+            title: AppText(
               text,
               style: const TextStyle(color: AppColors.white),
             ),

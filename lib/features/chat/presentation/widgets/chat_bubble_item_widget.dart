@@ -5,6 +5,7 @@ import 'package:werewolf_cars/core/config/theme/typography.dart';
 import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
 import 'package:werewolf_cars/core/utils/responsive_padding.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_svg_picture.dart';
+import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
 import 'package:werewolf_cars/generated/assets.dart';
 
 class ChatBubbleItemWidget extends StatelessWidget {
@@ -25,7 +26,7 @@ class ChatBubbleItemWidget extends StatelessWidget {
       children: [
         Container(
           padding: HWEdgeInsets.only(top: 20, bottom: 20, right: 12, left: 20),
-          width: MediaQuery.of(context).size.width * 0.6,
+          width: context.mediaQuery.size.width * 0.6,
           decoration: BoxDecoration(
               color: isCurrent ? AppColors.primary : AppColors.white,
               borderRadius: BorderRadius.only(
@@ -35,7 +36,7 @@ class ChatBubbleItemWidget extends StatelessWidget {
                       isCurrent ? Radius.circular(0.r) : Radius.circular(20.r),
                   topRight: Radius.circular(20.r),
                   topLeft: Radius.circular(20.r))),
-          child: Text(
+          child: AppText(
             'Message body Message body Message body Message Message body Message body Message body Message ',
             style: context.textTheme.bodyLarge!.s15
                 .withColor(isCurrent ? AppColors.white : AppColors.black),
@@ -48,7 +49,7 @@ class ChatBubbleItemWidget extends StatelessWidget {
           crossAxisAlignment:
               isCurrent ? CrossAxisAlignment.end : CrossAxisAlignment.start,
           children: [
-            const Text(
+            const AppText(
               '12:00 am',
               style: TextStyle(
                 color: AppColors.white,
