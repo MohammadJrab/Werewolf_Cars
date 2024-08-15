@@ -4,15 +4,22 @@ import 'package:werewolf_cars/core/config/theme/colors_app.dart';
 class WhiteDivider extends StatelessWidget {
   const WhiteDivider({
     super.key,
+    this.thickness = 4,
+    this.indent = 0,
+    this.endIndent = 0,
+    this.color = AppColors.whiteLess,
   });
-
+  final double thickness;
+  final double indent;
+  final double endIndent;
+  final Color color;
   @override
   Widget build(BuildContext context) {
-    return const Divider(
-      color: AppColors.white,
-      indent: 0,
-      endIndent: 0,
-      thickness: 4,
+    return Divider(
+      color: color,
+      indent: indent,
+      endIndent: endIndent,
+      thickness: thickness,
     );
   }
 }

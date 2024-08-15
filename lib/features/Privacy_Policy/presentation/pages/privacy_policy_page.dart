@@ -13,6 +13,7 @@ class PrivacyPolicy extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.blackLight,
       appBar: const CustomAppbar(text: LocaleKeys.settingsApp_privacyPolicy),
       body: Padding(
         padding: HWEdgeInsets.symmetric(horizontal: 10, vertical: 10),

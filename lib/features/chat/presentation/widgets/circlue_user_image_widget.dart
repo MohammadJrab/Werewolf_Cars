@@ -5,8 +5,11 @@ import 'package:werewolf_cars/generated/assets.dart';
 class CirclueUserImageWidget extends StatelessWidget {
   const CirclueUserImageWidget({
     super.key,
+    this.width = 60,
+    this.height = 60,
   });
-
+  final double width;
+  final double height;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,8 +24,8 @@ class CirclueUserImageWidget extends StatelessWidget {
         ),
       ),
       child: SizedBox(
-        width: 60.w,
-        height: 60.h,
+        width: width.w,
+        height: height.h,
       ),
     );
   }
