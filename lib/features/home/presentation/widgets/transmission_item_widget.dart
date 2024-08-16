@@ -26,8 +26,9 @@ class TextWithBorderItemWidget extends StatelessWidget {
         duration: const Duration(milliseconds: 400),
         margin: HWEdgeInsets.only(left: 18),
         alignment: Alignment.center,
+        padding: HWEdgeInsets.symmetric(horizontal: 20),
         height: 45.h,
-        width: 100.w,
+        // width: 100.w,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(14.r),
           border: Border.all(

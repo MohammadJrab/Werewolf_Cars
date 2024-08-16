@@ -20,7 +20,7 @@ class MakerItemFilterWidget extends StatelessWidget {
       onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 400),
-        width: 80.w,
+        width: isSelected ? 90.w : 80.w,
         height: 80.h,
         margin: HWEdgeInsets.only(left: 20.r),
         alignment: Alignment.center,
@@ -38,7 +38,10 @@ class MakerItemFilterWidget extends StatelessWidget {
                   color: AppColors.white,
                   width: 2,
                 )
-              : null,
+              : Border.all(
+                  color: Colors.transparent,
+                  width: 2,
+                ),
         ),
         child: AppSvgPicture(makersLogoPath),
       ),

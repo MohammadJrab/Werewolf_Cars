@@ -15,7 +15,16 @@ import 'package:werewolf_cars/features/home/presentation/widgets/year_section_fi
 import '../widgets/car_type_item.dart';
 import '../widgets/car_type_list_view_state.dart';
 import '../widgets/car_type_section.dart';
+import '../widgets/color_item.dart';
+import '../widgets/colors_list_view_state.dart';
+import '../widgets/colors_section.dart';
+import '../widgets/condition_list_view_state.dart';
+import '../widgets/condition_section.dart';
 import '../widgets/custom_slider_widget_state.dart';
+import '../widgets/cylinders_and_doors_list_view_state.dart';
+import '../widgets/cylinders_and_doors_section.dart';
+import '../widgets/fuel_type_list_view_state.dart';
+import '../widgets/fuel_type_section.dart';
 import '../widgets/price_section.dart';
 import '../widgets/suggestions_item.dart';
 import '../widgets/transmission_item_widget.dart';
@@ -42,86 +51,18 @@ class FilterPage extends StatelessWidget {
             const PriceSection(),
             const TransmissionSection(),
             const CarTypeSection(),
-            const FuelTypeSection()
+            const FuelTypeSection(),
+            const CylindersAndDoorsSection(
+              title: 'Cylinders',
+            ),
+            const CylindersAndDoorsSection(
+              title: 'Doors',
+            ),
+            const ColorsSection(),
+            const ConditionSection(),
           ],
         ),
       ),
-    );
-  }
-}
-
-class FuelTypeSection extends StatelessWidget {
-  const FuelTypeSection({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: HWEdgeInsets.only(left: 25),
-          child: AppText(
-            'Fuel type',
-            style:
-                context.textTheme.bodyLarge?.xb.s21.withColor(AppColors.white),
-          ),
-        ),
-        20.verticalSpace,
-        SizedBox(
-          height: 46.h,
-          child: const FuelTypeListView(),
-        ),
-        30.verticalSpace,
-      ],
-    );
-  }
-}
-
-class FuelTypeListView extends StatefulWidget {
-  const FuelTypeListView({super.key});
-
-  @override
-  State<FuelTypeListView> createState() => _FuelTypeListViewState();
-}
-
-class _FuelTypeListViewState extends State<FuelTypeListView> {
-  String? _selectedTransmission;
-
-  void _onItemSelected(String title) {
-    setState(() {
-      _selectedTransmission = title;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      scrollDirection: Axis.horizontal,
-      children: [
-        TextWithBorderItemWidget(
-          title: 'Diesel',
-          isSelected: _selectedTransmission == 'Diesel',
-          onTap: () => _onItemSelected('Diesel'),
-        ),
-        TextWithBorderItemWidget(
-          title: 'Electric',
-          isSelected: _selectedTransmission == 'Electric',
-          onTap: () => _onItemSelected('Electric'),
-        ),
-        TextWithBorderItemWidget(
-          title: 'Hybrid',
-          isSelected: _selectedTransmission == 'Hybrid',
-          onTap: () => _onItemSelected('Hybrid'),
-        ),
-        TextWithBorderItemWidget(
-          title: 'Petrol',
-          isSelected: _selectedTransmission == 'Petrol',
-          onTap: () => _onItemSelected('Petrol'),
-        ),
-        10.horizontalSpace
-      ],
     );
   }
 }
