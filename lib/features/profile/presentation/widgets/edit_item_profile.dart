@@ -21,7 +21,7 @@ class EditItemProfile extends StatelessWidget {
       padding: HWEdgeInsets.all(20),
       margin: HWEdgeInsets.only(bottom: 30),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r),
         color: AppColors.white,
       ),
       child: Row(

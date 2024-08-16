@@ -52,7 +52,7 @@ class NotificationItemWidget extends StatelessWidget {
       margin: HWEdgeInsets.symmetric(horizontal: 20, vertical: 10),
       width: context.mediaQuery.size.width,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(16.r),
         border: Border.all(
           color: AppColors.white,
         ),

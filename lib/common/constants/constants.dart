@@ -57,3 +57,17 @@ const List<String> makersLogos = [
   Assets.makersVolkswagen,
   Assets.makersVolvo,
 ];
+const List<String> svgCarType = [
+  Assets.svgCoupeCar,
+  Assets.svgHatchbackCar,
+  Assets.svgLimousineCar,
+  Assets.svgMicroCar,
+  Assets.svgPickupCar,
+  Assets.svgRoadsterCar,
+  Assets.svgSedanCar,
+  Assets.svgSportsCar,
+  Assets.svgStationCar,
+  Assets.svgSuperCar,
+  Assets.svgSuvCar,
+  Assets.svgVanCar,
+];

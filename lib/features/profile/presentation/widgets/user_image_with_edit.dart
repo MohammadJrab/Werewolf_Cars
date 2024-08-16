@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:werewolf_cars/core/config/theme/colors_app.dart';
 import 'package:werewolf_cars/core/utils/responsive_padding.dart';
 import 'package:werewolf_cars/features/chat/presentation/widgets/circlue_user_image_widget.dart';
@@ -23,7 +24,7 @@ class UserImageWithEdit extends StatelessWidget {
               child: Container(
                 padding: HWEdgeInsets.all(1.5),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(10.r),
                   color: AppColors.white,
                 ),
                 child: const Icon(

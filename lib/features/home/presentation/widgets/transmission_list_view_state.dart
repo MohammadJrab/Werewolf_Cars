@@ -23,17 +23,17 @@ class _TransmissionListViewState extends State<TransmissionListView> {
     return ListView(
       scrollDirection: Axis.horizontal,
       children: [
-        TransmissionItemWidget(
+        TextWithBorderItemWidget(
           title: 'Automatic',
           isSelected: _selectedTransmission == 'Automatic',
           onTap: () => _onItemSelected('Automatic'),
         ),
-        TransmissionItemWidget(
+        TextWithBorderItemWidget(
           title: 'Manual',
           isSelected: _selectedTransmission == 'Manual',
           onTap: () => _onItemSelected('Manual'),
         ),
-        TransmissionItemWidget(
+        TextWithBorderItemWidget(
           title: 'Other',
           isSelected: _selectedTransmission == 'Other',
           onTap: () => _onItemSelected('Other'),

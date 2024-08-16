@@ -6,8 +6,8 @@ import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
 import 'package:werewolf_cars/core/utils/responsive_padding.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
 
-class TransmissionItemWidget extends StatelessWidget {
-  const TransmissionItemWidget({
+class TextWithBorderItemWidget extends StatelessWidget {
+  const TextWithBorderItemWidget({
     super.key,
     required this.title,
     required this.isSelected,

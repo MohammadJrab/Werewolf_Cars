@@ -26,7 +26,7 @@ class MakerItemFilterWidget extends StatelessWidget {
         alignment: Alignment.center,
         padding: HWEdgeInsets.all(20),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(16.r),
           gradient: const RadialGradient(
             colors: [
               AppColors.grey,

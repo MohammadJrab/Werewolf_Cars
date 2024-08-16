@@ -23,7 +23,7 @@ class CustomTextButton extends StatelessWidget {
         // padding: HWEdgeInsets.symmetric(horizontal: 20, vertical: 10),
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(15.r),
           color: colorBackground,
         ),
         child: Text(
