@@ -44,6 +44,8 @@ class AppDropdownSearch<T> extends StatefulWidget {
     this.filled = false,
     this.fillColor,
     this.borderColor,
+    this.baseStyle,
+    this.contentPadding,
   });
 
   ///offline items list
@@ -130,10 +132,11 @@ class AppDropdownSearch<T> extends StatefulWidget {
 
   final String? hintText;
   final String? hintSearch;
-
+  final EdgeInsetsGeometry? contentPadding;
   final bool filled;
   final Color? fillColor;
   final Color? borderColor;
+  final TextStyle? baseStyle;
 
   @override
   State<AppDropdownSearch<T>> createState() => _AppDropdownSearchState<T>();
@@ -192,13 +195,14 @@ class _AppDropdownSearchState<T> extends State<AppDropdownSearch<T>> {
                     BorderSide(color: widget.borderColor ?? colorScheme.error),
                 borderRadius: BorderRadius.circular(15.r),
               ),
-              contentPadding: HWEdgeInsetsDirectional.only(start: 12, end: 12),
+              contentPadding: widget.contentPadding ??
+                  HWEdgeInsetsDirectional.only(start: 12, end: 12),
               suffixIcon: Icon(Icons.arrow_drop_down_rounded,
                   color: widget.items.isEmpty
                       ? colorScheme.primary.withOpacity(0.3)
                       : colorScheme.primary),
             ),
-            baseStyle:
+            baseStyle: widget.baseStyle ??
                 context.textTheme.titleSmall.b.withColor(AppColors.blackLight));
 
     final popupProps = widget.popupProps ??

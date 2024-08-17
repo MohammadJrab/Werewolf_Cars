@@ -109,14 +109,13 @@ class AuthDatasource {
   }
 
   Future<Result<ResponseWrapper<bool>>> resetPassword(
-      Map<String, dynamic> data, Map<String, dynamic> queryParameters) async {
+      Map<String, dynamic> data) async {
     fun() async {
       final response = await _clientApi.request(
         RequestConfig(
           endpoint: EndPoints.auth.resetPasswordReset,
           clientMethod: ClientMethod.post,
           responseType: ResponseType.json,
-          queryParameters: queryParameters,
           data: data,
         ),
       );

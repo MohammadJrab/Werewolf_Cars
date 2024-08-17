@@ -108,13 +108,20 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final String kFromPassword = 'password';
   final String kFromConfirmationPassword = 'confirmationPassword';
   final String kFromName = 'name';
+  final String kFromEmail = 'email';
   final String kFromCountryCode = 'countryCode';
 
-  static final initCountry = CountryParser.parsePhoneCode('966');
+  static final initCountry = CountryParser.parsePhoneCode('971');
   late final singUpForm = FormGroup(
     {
       kFromName: FormControl<String>(
         validators: [
+          Validators.required,
+        ],
+      ),
+      kFromEmail: FormControl<String>(
+        validators: [
+          Validators.email,
           Validators.required,
         ],
       ),
@@ -149,42 +156,33 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       PhoneNumberValidator(kFromPhone, kFromCountryCode),
     ],
   );
-  late final loginForm = FormGroup({
-    kFromPhone: FormControl<String>(
-      validators: [
-        Validators.required,
-        // const PhoneNumberValidator(),
-      ],
-    ),
-    kFromPassword: FormControl<String>(
-      validators: [
-        Validators.required,
-        Validators.minLength(8),
-      ],
-    ),
-    kFromCountryCode: FormControl<String>(validators: [Validators.required]),
-  }, validators: [
-    PhoneNumberValidator(kFromPhone, kFromCountryCode),
-  ]);
-
-  late final resetPasswordForm = FormGroup(
+  late final loginForm = FormGroup(
     {
+      kFromEmail: FormControl<String>(
+        validators: [
+          Validators.email,
+          Validators.required,
+          // const PhoneNumberValidator(),
+        ],
+      ),
       kFromPassword: FormControl<String>(
         validators: [
           Validators.required,
           Validators.minLength(8),
         ],
       ),
-      kFromConfirmationPassword: FormControl<String>(
+    },
+  );
+
+  late final resetPasswordForm = FormGroup(
+    {
+      kFromEmail: FormControl<String>(
         validators: [
           Validators.required,
-          Validators.minLength(8),
+          Validators.email,
         ],
       ),
     },
-    validators: [
-      Validators.mustMatch(kFromPassword, kFromConfirmationPassword),
-    ],
   );
 
   FutureOr<void> _onRegisterEvent(
@@ -331,14 +329,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   FutureOr<void> _onResetPasswordEvent(
       ResetPasswordEvent event, Emitter<AuthState> emit) async {
+    if (resetPasswordForm.invalid) {
+      resetPasswordForm.markAllAsTouched();
+      return;
+    }
     emit(state.copyWith(resetPasswordStatus: const BlocStatus.loading()));
 
     final response = await _resetPasswordUsecase(ResetPasswordParams(
-        password: resetPasswordForm.control(kFromPassword).value,
-        passwordConfirmation:
-            resetPasswordForm.control(kFromConfirmationPassword).value,
-        authorizationResponse: state.authorizationResponse!));
-    print(state.authorizationResponse!.signature);
+      email: resetPasswordForm.control(kFromEmail).value,
+    ));
 
     response.fold(
       (exception, message) => emit(

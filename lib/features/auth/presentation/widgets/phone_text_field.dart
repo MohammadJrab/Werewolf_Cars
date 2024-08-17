@@ -59,6 +59,8 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
                   countryListTheme: CountryListThemeData(
                     flagSize: 25,
                     backgroundColor: Colors.white,
+                    searchTextStyle: context.textTheme.titleMedium
+                        .withColor(AppColors.blackLight),
                     textStyle: context.textTheme.titleMedium
                         .withColor(AppColors.blackLight),
                     bottomSheetHeight: MediaQuery.sizeOf(context).height * 0.75,
@@ -99,7 +101,6 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    10.horizontalSpace,
                     AppText(country.flagEmoji,
                         style: context.textTheme.titleLarge),
                     10.horizontalSpace,
@@ -108,6 +109,7 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
                       style: context.textTheme.titleSmall
                           .withColor(AppColors.blackLight),
                     ),
+                    4.horizontalSpace,
                     VerticalDivider(
                       indent: 10.r,
                       endIndent: 10.r,
@@ -115,7 +117,7 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
                       width: 10.w,
                       thickness: 0.7,
                     ),
-                    10.horizontalSpace,
+                    // 10.horizontalSpace,
                   ],
                 ),
               ),

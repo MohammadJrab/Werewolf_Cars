@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:werewolf_cars/core/config/theme/colors_app.dart';
 import 'package:werewolf_cars/core/config/theme/my_color_scheme.dart';
+import 'package:werewolf_cars/core/config/theme/typography.dart';
+import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
 import 'package:werewolf_cars/core/utils/extensions/num.dart';
 import 'package:werewolf_cars/generated/locale_keys.g.dart';
 import '../../../../core/utils/theme_state.dart';
@@ -89,7 +91,11 @@ class _AppElevatedButtonState extends ThemeState<AppElevatedButton> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const AppText(LocaleKeys.requestIsInProgress),
+            AppText(
+              LocaleKeys.requestIsInProgress,
+              style: context.textTheme.bodySmall!.s20.xb
+                  .withColor(AppColors.blackLight),
+            ),
             if (widget.isLoading) ...{
               8.horizontalSpace,
               const LoadingIndicator(),
@@ -115,7 +121,7 @@ class _AppElevatedButtonState extends ThemeState<AppElevatedButton> {
       style: ElevatedButton.styleFrom(
           shape: defaultElevatedTheme.style?.shape?.resolve({}),
           backgroundColor: Colors.transparent,
-          foregroundColor: colorScheme.onBackground,
+          foregroundColor: colorScheme.onSurface,
           elevation: 0.0,
           shadowColor: colorScheme.white.withOpacity(0.1),
           textStyle: widget.textStyle,

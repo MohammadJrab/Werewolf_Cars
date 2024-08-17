@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:werewolf_cars/core/config/routing/router.dart';
+import 'package:werewolf_cars/core/config/theme/colors_app.dart';
 import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
 import 'package:werewolf_cars/core/utils/responsive_padding.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/animated_dialog.dart';
@@ -108,18 +109,21 @@ class _BasePageState extends State<BasePage> {
       },
       canPop: false,
       child: AppScaffold(
-        backgroundColor: const Color(0xfff8fbfd),
+        backgroundColor: AppColors.blackLight,
         scaffoldKey: BasePage._scaffoldKey,
         body: Stack(children: [
           Padding(
             padding: HWEdgeInsets.only(bottom: 75),
             child: widget.child,
           ),
-          const Positioned(bottom: 0, left: 0, right: 0, child: SizedBox()
-              // CustomNavigationBar(
-              //   child: widget.child,
-              // )
-              )
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: CustomNavigationBar(
+              child: widget.child,
+            ),
+          ),
         ]),
         resizeToAvoidBottomInset: false,
         // bottomNavigationBar: ,

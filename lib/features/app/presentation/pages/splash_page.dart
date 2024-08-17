@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
       ..userInteractions = false
       ..dismissOnTap = false;
     Timer(
-      const Duration(microseconds: 1200),
+      const Duration(milliseconds: 1200),
       () {
         GRouter.router.goNamed(GRouter.config.krpOnboardingRoutePath);
 

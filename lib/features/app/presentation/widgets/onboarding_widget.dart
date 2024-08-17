@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,9 +12,7 @@ import 'package:werewolf_cars/features/app/presentation/widgets/app_elvated_butt
 import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
 import 'package:werewolf_cars/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:werewolf_cars/generated/assets.dart';
-
 import 'package:werewolf_cars/generated/locale_keys.g.dart';
-
 import '../../../../core/utils/responsive_padding.dart';
 
 class OnboardingPage extends StatelessWidget {
@@ -34,13 +31,13 @@ class OnboardingPage extends StatelessWidget {
         value: GetIt.I<AuthBloc>(),
         child: Column(
           children: [
-            60.verticalSpace,
+            55.verticalSpace,
             Padding(
               padding: HWEdgeInsets.symmetric(horizontal: 28),
               child: SimpleShadow(
                 color: AppColors.orange,
                 offset: const Offset(0, 4),
-                opacity: 0.3,
+                opacity: 0.2,
                 sigma: 4,
                 child: AppText(
                   LocaleKeys.onboarding_welcomeToWerewolfCars,
@@ -49,11 +46,11 @@ class OnboardingPage extends StatelessWidget {
                 ),
               ),
             ),
-            100.verticalSpace,
+            80.verticalSpace,
             Image.asset(
               Assets.imagesOnboarding,
             ),
-            80.verticalSpace,
+            50.verticalSpace,
             Padding(
               padding: HWEdgeInsets.symmetric(horizontal: 28),
               child: AppText(
@@ -70,15 +67,29 @@ class OnboardingPage extends StatelessWidget {
                 style: context.textTheme.bodyLarge?.s20.sb,
               ),
             ),
-            77.verticalSpace,
+            50.verticalSpace,
             AppElevatedButton(
               appButtonStyle: AppButtonStyle.primary,
               style: ButtonStyle(
                   backgroundColor:
                       const WidgetStatePropertyAll(AppColors.white),
                   minimumSize: WidgetStatePropertyAll(Size(319.w, 54.h))),
-              onPressed: () => context.goNamed(GRouter.config.mainRoutes.home),
-              text: LocaleKeys.letsgo,
+              onPressed: () =>
+                  context.push(GRouter.config.authRoutes.signupPage),
+              text: LocaleKeys.auth_createAccount,
+              textStyle: context.textTheme.titleLarge.xb
+                  .withColor(AppColors.blackLight),
+            ),
+            40.verticalSpace,
+            AppElevatedButton(
+              appButtonStyle: AppButtonStyle.primary,
+              style: ButtonStyle(
+                  backgroundColor:
+                      const WidgetStatePropertyAll(AppColors.white),
+                  minimumSize: WidgetStatePropertyAll(Size(319.w, 54.h))),
+              onPressed: () =>
+                  context.push(GRouter.config.authRoutes.loginPage),
+              text: LocaleKeys.auth_login,
               textStyle: context.textTheme.titleLarge.xb
                   .withColor(AppColors.blackLight),
             ),

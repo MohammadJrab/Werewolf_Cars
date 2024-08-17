@@ -3,7 +3,6 @@ import 'package:werewolf_cars/common/models/response_wrapper/response_wrapper.da
 import 'package:werewolf_cars/core/api/result.dart';
 import 'package:werewolf_cars/core/use_case/use_case.dart';
 import 'package:werewolf_cars/features/auth/data/data_sources/auth_datasource.dart';
-import 'package:werewolf_cars/features/auth/data/models/authorization_response.dart';
 
 @injectable
 class ResetPasswordUsecase
@@ -12,29 +11,18 @@ class ResetPasswordUsecase
   final AuthDatasource _datasource;
   @override
   Future<Result<ResponseWrapper<bool>>> call(ResetPasswordParams params) {
-    return _datasource.resetPassword(
-        params.data, params.authorizationResponseData);
+    return _datasource.resetPassword(params.data);
   }
 }
 
 class ResetPasswordParams {
   const ResetPasswordParams({
-    required this.password,
-    required this.passwordConfirmation,
-    required this.authorizationResponse,
+    required this.email,
   });
 
-  final String password;
-  final String passwordConfirmation;
-  final AuthorizationResponse authorizationResponse;
+  final String email;
 
   Map<String, dynamic> get data => {
-        'password': password,
-        'password_confirmation': passwordConfirmation,
-      };
-  Map<String, dynamic> get authorizationResponseData => {
-        "customer_id": authorizationResponse.customerId.toString(),
-        "expires": authorizationResponse.expires,
-        "signature": authorizationResponse.signature
+        'email': email,
       };
 }

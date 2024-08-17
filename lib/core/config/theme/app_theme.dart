@@ -42,7 +42,7 @@ class AppTheme {
     final textTheme = appTextTheme(
       context,
       _builtInLightTheme.textTheme,
-      _lightColorScheme.onBackground,
+      _lightColorScheme.onSurface,
     );
 
     return _builtInLightTheme.copyWith(
@@ -53,7 +53,7 @@ class AppTheme {
         typography: Typography.material2018(),
         elevatedButtonTheme: _elevatedButtonTheme(_lightColorScheme, textTheme),
         textButtonTheme: _textButtonTheme(_lightColorScheme, textTheme),
-        scaffoldBackgroundColor: _lightColorScheme.background,
+        scaffoldBackgroundColor: _lightColorScheme.surface,
         appBarTheme: _appBarTheme(
             _builtInLightTheme, _lightColorScheme, textTheme, ThemeMode.light),
         dividerTheme: _dividerTheme(_builtInLightTheme, _lightColorScheme),
@@ -65,7 +65,7 @@ class AppTheme {
     final textTheme = appTextTheme(
       context,
       _builtInDarkTheme.textTheme,
-      _darkColorScheme.onBackground,
+      _darkColorScheme.onSurface,
     );
 
     return _builtInDarkTheme.copyWith(
@@ -74,7 +74,7 @@ class AppTheme {
       typography: Typography.material2018(),
       elevatedButtonTheme: _elevatedButtonTheme(_darkColorScheme, textTheme),
       textButtonTheme: _textButtonTheme(_darkColorScheme, textTheme),
-      scaffoldBackgroundColor: _darkColorScheme.background,
+      scaffoldBackgroundColor: _darkColorScheme.surface,
       appBarTheme: _appBarTheme(
           _builtInDarkTheme, _darkColorScheme, textTheme, ThemeMode.dark),
       dividerTheme: _dividerTheme(_builtInDarkTheme, _darkColorScheme),

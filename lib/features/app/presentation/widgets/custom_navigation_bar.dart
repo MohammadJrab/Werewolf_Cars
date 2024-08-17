@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:werewolf_cars/core/config/theme/colors_app.dart';
-import 'package:werewolf_cars/core/utils/responsive_padding.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/nav_bar_item.dart';
+import 'package:werewolf_cars/features/app/presentation/widgets/nav_bar_item_circular.dart';
 import 'package:werewolf_cars/generated/assets.dart';
+import 'package:werewolf_cars/generated/locale_keys.g.dart';
 
 class CustomNavigationBar extends StatefulWidget {
   final StatefulNavigationShell child;
@@ -54,44 +55,62 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: HWEdgeInsets.symmetric(horizontal: 8, vertical: 14),
-      height: 70.h,
+      height: 100.h,
       width: 413.w,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: AppColors.blackLight,
-        borderRadius: BorderRadius.circular(8).r,
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x3E75AB2B),
-            offset: Offset(0, 6),
-            blurRadius: 17.8,
-            spreadRadius: -1,
-          ),
-        ],
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(5), topRight: Radius.circular(5)),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.center,
+      child: Stack(
         children: [
-          NavBarItem(
-            svgAsset: Assets.svgNavHome,
-            isSelected: widget.child.currentIndex == 0,
-            onTap: () => _animateCursor(0),
+          Positioned(
+            top: 0,
+            right: 0,
+            left: 0,
+            child: Center(
+              child: NavBarItemCircular(
+                svgAsset: Assets.svgNavCarSell,
+                isSelected: widget.child.currentIndex == 2,
+                onTap: () => _animateCursor(2),
+              ),
+            ),
           ),
-          NavBarItem(
-            svgAsset: Assets.svgSearch,
-            isSelected: widget.child.currentIndex == 1,
-            onTap: () => _animateCursor(1),
-          ),
-          NavBarItem(
-            svgAsset: Assets.svgNavSearch,
-            isSelected: widget.child.currentIndex == 2,
-            onTap: () => _animateCursor(2),
-          ),
-          NavBarItem(
-            svgAsset: Assets.svgNavFavorite,
-            isSelected: widget.child.currentIndex == 3,
-            onTap: () => _animateCursor(3),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                NavBarItem(
+                  title: LocaleKeys.home,
+                  svgAsset: Assets.svgNavHome,
+                  isSelected: widget.child.currentIndex == 0,
+                  onTap: () => _animateCursor(0),
+                ),
+                NavBarItem(
+                  title: LocaleKeys.search,
+                  svgAsset: Assets.svgNavSearch,
+                  isSelected: widget.child.currentIndex == 1,
+                  onTap: () => _animateCursor(1),
+                ),
+                40.horizontalSpace,
+                NavBarItem(
+                  title: LocaleKeys.favorite,
+                  svgAsset: Assets.svgNavFavorite,
+                  isSelected: widget.child.currentIndex == 3,
+                  onTap: () => _animateCursor(3),
+                ),
+                NavBarItem(
+                  title: "Chat",
+                  svgAsset: Assets.svgNavChat,
+                  isSelected: widget.child.currentIndex == 4,
+                  onTap: () => _animateCursor(4),
+                ),
+              ],
+            ),
           ),
         ],
       ),

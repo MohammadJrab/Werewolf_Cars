@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:werewolf_cars/core/config/theme/colors_app.dart';
 import 'package:werewolf_cars/core/config/theme/typography.dart';
 import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
+import 'package:werewolf_cars/core/utils/responsive_padding.dart';
 import 'package:werewolf_cars/generated/locale_keys.g.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:simple_shadow/simple_shadow.dart';
@@ -83,7 +84,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
               style: context.textTheme.bodySmall.s14!.m
                   ?.copyWith(color: AppColors.blackLight),
               decoration: InputDecoration(
-                prefixIcon: widget.prefixIcon,
+                prefixIcon: widget.prefixIcon != null
+                    ? Padding(
+                        padding: HWEdgeInsets.only(left: 26, right: 15),
+                        child: widget.prefixIcon,
+                      )
+                    : null,
                 // prefix: SizedBox(
                 //   width: 31.h,
                 // ),

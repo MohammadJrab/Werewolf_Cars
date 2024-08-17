@@ -8,7 +8,11 @@ import 'package:werewolf_cars/features/app/presentation/pages/error_page.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/onboarding_widget.dart';
 import 'package:werewolf_cars/features/auth/presentation/pages/congrate_page.dart';
 import 'package:werewolf_cars/features/auth/presentation/pages/login_page.dart';
+import 'package:werewolf_cars/features/auth/presentation/pages/reset_password_page.dart';
+import 'package:werewolf_cars/features/auth/presentation/pages/select_country_page.dart';
 import 'package:werewolf_cars/features/auth/presentation/pages/sigup_page.dart';
+import 'package:werewolf_cars/features/home/presentation/pages/home_page.dart';
+import 'package:werewolf_cars/features/search_and_filteration/presentation/pages/search_page.dart';
 
 import '../../../features/app/presentation/pages/base_page.dart';
 import '../../../features/app/presentation/pages/splash_page.dart';
@@ -75,12 +79,23 @@ class GRouter {
         },
       ),
       GoRoute(
+        path: _config.authRoutes.resetPasswordPage,
+        name: _config.authRoutes.resetPasswordPage,
+        // parentNavigatorKey: _rootNavigatorKey,
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          return _builderPage(
+            child: const ResetPassword(),
+            state: state,
+          );
+        },
+      ),
+      GoRoute(
         path: _config.authRoutes.selectCountryPage,
         name: _config.authRoutes.selectCountryPage,
         // parentNavigatorKey: _rootNavigatorKey,
         pageBuilder: (BuildContext context, GoRouterState state) {
           return _builderPage(
-            child: const SizedBox(),
+            child: const SelectCountyPage(),
             state: state,
           );
         },
@@ -158,6 +173,34 @@ class GRouter {
                 name: _config.mainRoutes.home,
                 pageBuilder: (BuildContext context, GoRouterState state) {
                   return _builderPage(
+                    child: const HomePage(),
+                    state: state,
+                  );
+                },
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: _config.mainRoutes.search,
+                name: _config.mainRoutes.search,
+                pageBuilder: (BuildContext context, GoRouterState state) {
+                  return _builderPage(
+                    child: const SearchPage(),
+                    state: state,
+                  );
+                },
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: _config.mainRoutes.sellMyCars,
+                name: _config.mainRoutes.sellMyCars,
+                pageBuilder: (BuildContext context, GoRouterState state) {
+                  return _builderPage(
                     child: Container(
                       color: AppColors.blackLight,
                     ),
@@ -170,8 +213,24 @@ class GRouter {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: _config.mainRoutes.search,
-                name: _config.mainRoutes.search,
+                path: _config.mainRoutes.favorites,
+                name: _config.mainRoutes.favorites,
+                pageBuilder: (BuildContext context, GoRouterState state) {
+                  return _builderPage(
+                    child: Container(
+                      color: AppColors.blackLight,
+                    ),
+                    state: state,
+                  );
+                },
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: _config.mainRoutes.chat,
+                name: _config.mainRoutes.chat,
                 pageBuilder: (BuildContext context, GoRouterState state) {
                   return _builderPage(
                     child: Container(

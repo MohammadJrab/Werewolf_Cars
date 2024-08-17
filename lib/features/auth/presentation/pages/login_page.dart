@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
@@ -10,11 +11,14 @@ import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
 import 'package:werewolf_cars/core/utils/responsive_padding.dart';
 import 'package:werewolf_cars/features/app/domin/repositories/prefs_repository.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_elvated_button.dart';
+import 'package:werewolf_cars/features/app/presentation/widgets/app_svg_picture.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
 import 'package:werewolf_cars/features/auth/presentation/widgets/custom_textfeild.dart';
+import 'package:werewolf_cars/generated/assets.dart';
 import 'package:werewolf_cars/generated/locale_keys.g.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:simple_shadow/simple_shadow.dart';
+import 'package:werewolf_cars/services/language_service.dart';
 import '../bloc/auth_bloc.dart';
 import '../widgets/phone_text_field.dart';
 
@@ -43,7 +47,6 @@ class _LoginPageState extends State<LoginPage> {
       value: _authBloc,
       child: SafeArea(
         child: Scaffold(
-          backgroundColor: const Color(0xfff7fafc),
           body: ReactiveForm(
             formGroup: _authBloc.loginForm,
             child: SingleChildScrollView(
@@ -61,48 +64,28 @@ class _LoginPageState extends State<LoginPage> {
                         opacity: 0.15,
                         offset: const Offset(0, 4),
                         sigma: 4,
-                        child: AppText(
-                          LocaleKeys.auth_login,
-                          textAlign: TextAlign.center,
-                          style: context.textTheme.headlineSmall.xb.withColor(
-                            AppColors.blackLight.withOpacity(0.85),
-                          ),
-                        ),
+                        child: AppText(LocaleKeys.auth_login,
+                            textAlign: TextAlign.center,
+                            style: context.textTheme.headlineSmall.xb),
                       ),
                     ),
-                    117.verticalSpace,
-                    AppText(
-                      LocaleKeys.ProfileDetials_phoneNumber,
-                      textAlign: TextAlign.right,
-                      textDirection: TextDirection.rtl,
-                      style: context.textTheme.titleMedium.m.withColor(
-                        AppColors.blackLight,
+                    120.verticalSpace,
+                    CustomTextField(
+                      hint: "Enter email",
+                      formControlName: _authBloc.kFromEmail,
+                      textInputAction: TextInputAction.next,
+                      prefixIcon: const AppSvgPicture(
+                        Assets.svgEmail,
                       ),
                     ),
-                    18.verticalSpace,
-                    PhoneTextField(
-                      controlName: _authBloc.kFromPhone,
-                      onSelect: (value) => _authBloc.loginForm
-                          .control(_authBloc.kFromCountryCode)
-                          .value = value.phoneCode,
-                      onInit: (value) => _authBloc.loginForm
-                          .control(_authBloc.kFromCountryCode)
-                          .value = value.phoneCode,
-                    ),
-                    23.verticalSpace,
-                    AppText(
-                      LocaleKeys.auth_password,
-                      textAlign: TextAlign.right,
-                      textDirection: TextDirection.rtl,
-                      style: context.textTheme.titleMedium.m.withColor(
-                        AppColors.blackLight,
-                      ),
-                    ),
-                    18.verticalSpace,
+                    30.verticalSpace,
                     CustomTextField(
                       hint: LocaleKeys.enterPasswordHint,
                       isObscureText: true,
                       formControlName: _authBloc.kFromPassword,
+                      prefixIcon: const AppSvgPicture(
+                        Assets.svgLock,
+                      ),
                       textInputAction: TextInputAction.done,
                       onSubmitted: (control) => _onLogin(),
                     ),
@@ -130,6 +113,9 @@ class _LoginPageState extends State<LoginPage> {
                                   visualDensity: const VisualDensity(
                                       horizontal: -4.0, vertical: -4.0),
                                   splashRadius: 0,
+                                  checkColor: AppColors.white,
+                                  fillColor: const WidgetStatePropertyAll(
+                                      AppColors.primary),
                                   side: BorderSide.none,
                                   shape: RoundedRectangleBorder(
                                       side: BorderSide.none,
@@ -141,60 +127,20 @@ class _LoginPageState extends State<LoginPage> {
                                   }),
                                 ),
                               ),
-                              AppText(
-                                LocaleKeys.auth_rememberMe,
-                                style: context.textTheme.bodySmall!.s14.m
-                                    .withColor(AppColors.blackLight),
-                              ),
+                              AppText(LocaleKeys.auth_rememberMe,
+                                  style: context.textTheme.bodySmall!.s14.m),
                             ],
                           ),
                         ),
                         TextButton(
                           style: const ButtonStyle(
                               overlayColor:
-                                  MaterialStatePropertyAll(Colors.transparent),
-                              padding:
-                                  MaterialStatePropertyAll(EdgeInsets.zero)),
-                          onPressed: () async {
-                            if (!_authBloc.loginForm
-                                .control(_authBloc.kFromPhone)
-                                .valid) {
-                              _authBloc.loginForm
-                                  .control(_authBloc.kFromPhone)
-                                  .markAsTouched();
-                              return;
-                            }
-                            final isVerified = await GoRouter.of(context).push(
-                                GRouter.config.authRoutes.confirmAccountPage,
-                                extra: true);
-
-                            if (isVerified == true) {
-                              if (mounted) {
-                                _authBloc.resetPasswordForm
-                                        .control(_authBloc.kFromPhone)
-                                        .value =
-                                    _authBloc.loginForm
-                                        .control(_authBloc.kFromPhone)
-                                        .value;
-                                final isSucceededReset =
-                                    await GoRouter.of(context).push(GRouter
-                                        .config.authRoutes.resetPasswordPage);
-                                if (isSucceededReset == true) {
-                                  _authBloc.loginForm
-                                          .control(_authBloc.kFromPassword)
-                                          .value =
-                                      _authBloc.resetPasswordForm
-                                          .control(_authBloc.kFromPassword)
-                                          .value;
-                                }
-                              }
-                            }
-                          },
-                          child: AppText(
-                            LocaleKeys.auth_forgetPassword,
-                            style: context.textTheme.bodySmall!.s14.m
-                                .withColor(AppColors.blackLight),
-                          ),
+                                  WidgetStatePropertyAll(Colors.transparent),
+                              padding: WidgetStatePropertyAll(EdgeInsets.zero)),
+                          onPressed: () => GoRouter.of(context).push(
+                              GRouter.config.authRoutes.resetPasswordPage),
+                          child: AppText(LocaleKeys.auth_forgetPassword,
+                              style: context.textTheme.bodySmall!.s14.m),
                         ),
                       ],
                     ),
@@ -206,16 +152,16 @@ class _LoginPageState extends State<LoginPage> {
                           height: 54.h,
                           child: AppElevatedButton(
                             style: ButtonStyle(
-                                shape: MaterialStatePropertyAll(
+                                shape: WidgetStatePropertyAll(
                                     RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(5).r)),
-                                textStyle: MaterialStatePropertyAll(
-                                  context.textTheme.bodySmall!.s18.b
-                                      .withColor(AppColors.white),
+                                textStyle: WidgetStatePropertyAll(
+                                  context.textTheme.bodyMedium!.s20.b
+                                      .withColor(AppColors.blackLight),
                                 ),
-                                backgroundColor: const MaterialStatePropertyAll(
-                                    AppColors.primary)),
+                                backgroundColor: const WidgetStatePropertyAll(
+                                    AppColors.white)),
                             text: LocaleKeys.auth_login,
                             isLoading: state.loginStatus.isLoading(),
                             onPressed: _onLogin,
@@ -223,6 +169,32 @@ class _LoginPageState extends State<LoginPage> {
                         );
                       },
                     ),
+                    85.verticalSpace,
+                    InkWell(
+                      overlayColor:
+                          const WidgetStatePropertyAll(Colors.transparent),
+                      onTap: () => GRouter.router.pushReplacement(
+                          GRouter.config.authRoutes.signupPage),
+                      child: Row(
+                        textDirection: LanguageService.rtl
+                            ? TextDirection.rtl
+                            : TextDirection.ltr,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          AppText(
+                            "Don’t have an account?",
+                            style: context.textTheme.titleMedium!.b
+                                .withColor(AppColors.whiteLess),
+                          ),
+                          8.horizontalSpace,
+                          AppText(
+                            "Sign Up",
+                            style: context.textTheme.titleMedium!.b
+                                .withColor(AppColors.orange),
+                          ),
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -234,24 +206,26 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _onLogin() {
-    FocusScope.of(context).unfocus();
-    _authBloc.add(LoginEvent(
-      onSuccess: (user) async {
-        final bool isPhoneVerified = user.customer.phoneVerifiedAt != null;
-        if (isPhoneVerified) {
-          GRouter.router.goNamed(GRouter.config.authRoutes.selectCountryPage);
-        } else {
-          // _authBloc.add(ResendCodeEvent());
-          final isVerified = await GoRouter.of(context)
-              .push(GRouter.config.authRoutes.confirmAccountPage);
-          if (isVerified == true) {
-            await GetIt.I<PrefsRepository>().setCustomer(user.copyWith(
-                customer:
-                    user.customer.copyWith(phoneVerifiedAt: DateTime.now())));
-            GRouter.router.goNamed(GRouter.config.authRoutes.selectCountryPage);
-          }
-        }
-      },
-    ));
+    GRouter.router.goNamed(GRouter.config.authRoutes.selectCountryPage);
+
+    // FocusScope.of(context).unfocus();
+    // _authBloc.add(LoginEvent(
+    //   onSuccess: (user) async {
+    //     final bool isPhoneVerified = user.customer.phoneVerifiedAt != null;
+    //     if (isPhoneVerified) {
+    //       GRouter.router.goNamed(GRouter.config.authRoutes.selectCountryPage);
+    //     } else {
+    //       // _authBloc.add(ResendCodeEvent());
+    //       final isVerified = await GoRouter.of(context)
+    //           .push(GRouter.config.authRoutes.confirmAccountPage);
+    //       if (isVerified == true) {
+    //         await GetIt.I<PrefsRepository>().setCustomer(user.copyWith(
+    //             customer:
+    //                 user.customer.copyWith(phoneVerifiedAt: DateTime.now())));
+    //         GRouter.router.goNamed(GRouter.config.authRoutes.selectCountryPage);
+    //       }
+    //     }
+    //   },
+    // ));
   }
 }

@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:werewolf_cars/core/config/theme/colors_app.dart';
+import 'package:werewolf_cars/core/config/theme/typography.dart';
+import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
+import 'package:werewolf_cars/core/utils/responsive_padding.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_svg_picture.dart';
-import 'package:werewolf_cars/features/app/presentation/widgets/custom_rectangle_shape.dart';
+import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
 
 class NavBarItem extends StatelessWidget {
   final String svgAsset;
+  final String title;
   final bool isSelected;
   final VoidCallback onTap;
 
@@ -14,6 +18,7 @@ class NavBarItem extends StatelessWidget {
     required this.svgAsset,
     required this.isSelected,
     required this.onTap,
+    required this.title,
   });
 
   @override
@@ -21,29 +26,27 @@ class NavBarItem extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: SizedBox(
-        width: 65.w,
-        height: 85.h,
-        child: Stack(
-          alignment: Alignment.center,
+        width: 60.w,
+        height: 70.h,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             AppSvgPicture(
               svgAsset,
-              width: 23,
-              height: 24.h,
-              alignment: Alignment.center,
-              color: AppColors.white,
+              width: 24.w,
+              height: 26.h,
+              color: isSelected ? AppColors.orange : AppColors.greyStroke,
               fit: BoxFit.cover,
             ),
-            isSelected
-                ? Padding(
-                    padding: const EdgeInsets.only(top: 4),
-                    child: CustomPaint(
-                      painter: NavCustomPainter(),
-                      foregroundPainter: null,
-                      size: Size(75.w, 100.h),
-                    ),
-                  )
-                : const SizedBox(),
+            10.verticalSpace,
+            Padding(
+              padding: HWEdgeInsetsDirectional.only(start: 2),
+              child: AppText(
+                title,
+                style: context.textTheme.bodyMedium.m.withColor(
+                    isSelected ? AppColors.orange : AppColors.greyStroke),
+              ),
+            )
           ],
         ),
       ),
