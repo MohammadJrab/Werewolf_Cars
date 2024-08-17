@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
+import 'package:werewolf_cars/core/config/routing/router.dart';
 import 'package:werewolf_cars/core/config/theme/colors_app.dart';
 import 'package:werewolf_cars/core/config/theme/typography.dart';
 import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
@@ -49,6 +50,22 @@ class _SearcgPageState extends State<SearchPage> {
                       style: context.textTheme.bodyMedium.s20.sb,
                     ),
                   ),
+                  50.verticalSpace,
+                  Center(
+                    child: ElevatedButton(
+                        style: ButtonStyle(
+                            minimumSize:
+                                WidgetStatePropertyAll(Size(200.w, 50.h)),
+                            backgroundColor:
+                                const WidgetStatePropertyAll(AppColors.white),
+                            textStyle: WidgetStatePropertyAll(
+                                context.textTheme.bodyLarge.b)),
+                        onPressed: () {
+                          GRouter.router
+                              .pushNamed(GRouter.config.filterRoutes.filter);
+                        },
+                        child: const AppText("Go to Filter page")),
+                  )
                 ],
               ),
             ),

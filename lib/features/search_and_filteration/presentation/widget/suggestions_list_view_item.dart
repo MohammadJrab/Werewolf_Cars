@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werewolf_cars/features/home/presentation/widgets/suggestions_item.dart';
+import 'package:werewolf_cars/features/search_and_filteration/presentation/widget/suggestions_item.dart';
 
 class SuggestionsListViewItem extends StatelessWidget {
   const SuggestionsListViewItem({

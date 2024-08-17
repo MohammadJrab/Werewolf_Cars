@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:werewolf_cars/features/home/presentation/pages/filter_page.dart';
-import 'package:werewolf_cars/features/home/presentation/widgets/transmission_item_widget.dart';
+import 'package:werewolf_cars/features/search_and_filteration/presentation/pages/filter_page.dart';
+import 'package:werewolf_cars/features/search_and_filteration/presentation/widget/transmission_item_widget.dart';
 
 class TransmissionListView extends StatefulWidget {
   const TransmissionListView({super.key});

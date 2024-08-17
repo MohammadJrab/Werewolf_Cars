@@ -5,7 +5,7 @@ import 'package:werewolf_cars/core/config/theme/typography.dart';
 import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/year_picker_dialog.dart';
-import 'package:werewolf_cars/features/home/presentation/pages/filter_page.dart';
+import 'package:werewolf_cars/features/search_and_filteration/presentation/pages/filter_page.dart';
 
 class YearItemWidget extends StatefulWidget {
   const YearItemWidget({

@@ -5,11 +5,10 @@ import 'package:werewolf_cars/core/config/theme/typography.dart';
 import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
 import 'package:werewolf_cars/core/utils/responsive_padding.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
-import 'package:werewolf_cars/features/chat/presentation/widgets/white_divider.dart';
-import 'package:werewolf_cars/features/home/presentation/widgets/transmission_list_view_state.dart';
+import 'package:werewolf_cars/features/search_and_filteration/presentation/widget/colors_list_view_state.dart';
 
-class TransmissionSection extends StatelessWidget {
-  const TransmissionSection({
+class ColorsSection extends StatelessWidget {
+  const ColorsSection({
     super.key,
   });
 
@@ -21,24 +20,17 @@ class TransmissionSection extends StatelessWidget {
         Padding(
           padding: HWEdgeInsets.only(left: 25),
           child: AppText(
-            'Transmission',
+            "Colors",
             style:
                 context.textTheme.bodyLarge?.xb.s21.withColor(AppColors.white),
           ),
         ),
         20.verticalSpace,
         SizedBox(
-          height: 46.h,
-          child: const TransmissionListView(),
+          height: 82.h,
+          child: const ColorsListView(),
         ),
-        20.verticalSpace,
-        const WhiteDivider(
-          color: AppColors.whiteLess,
-          thickness: .5,
-          endIndent: 15,
-          indent: 15,
-        ),
-        10.verticalSpace,
+        30.verticalSpace,
       ],
     );
   }

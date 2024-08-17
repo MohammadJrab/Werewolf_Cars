@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:werewolf_cars/common/constants/constants.dart';
-import 'package:werewolf_cars/features/home/presentation/widgets/car_type_item.dart';
+import 'package:werewolf_cars/features/search_and_filteration/presentation/widget/car_type_item.dart';
+
 class CarTypeListView extends StatefulWidget {
   const CarTypeListView({super.key});
 

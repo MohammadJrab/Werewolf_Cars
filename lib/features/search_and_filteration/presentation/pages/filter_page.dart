@@ -9,27 +9,27 @@ import 'package:werewolf_cars/features/app/presentation/widgets/app_svg_picture.
 import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/custom_appbar.dart';
 import 'package:werewolf_cars/features/chat/presentation/widgets/white_divider.dart';
-import 'package:werewolf_cars/features/home/presentation/widgets/makers_section_filter.dart';
-import 'package:werewolf_cars/features/home/presentation/widgets/year_section_filter.dart';
+import 'package:werewolf_cars/features/search_and_filteration/presentation/widget/makers_section_filter.dart';
+import 'package:werewolf_cars/features/search_and_filteration/presentation/widget/year_section_filter.dart';
 
-import '../widgets/car_type_item.dart';
-import '../widgets/car_type_list_view_state.dart';
-import '../widgets/car_type_section.dart';
-import '../widgets/color_item.dart';
-import '../widgets/colors_list_view_state.dart';
-import '../widgets/colors_section.dart';
-import '../widgets/condition_list_view_state.dart';
-import '../widgets/condition_section.dart';
-import '../widgets/custom_slider_widget_state.dart';
-import '../widgets/cylinders_and_doors_list_view_state.dart';
-import '../widgets/cylinders_and_doors_section.dart';
-import '../widgets/fuel_type_list_view_state.dart';
-import '../widgets/fuel_type_section.dart';
-import '../widgets/price_section.dart';
-import '../widgets/suggestions_item.dart';
-import '../widgets/transmission_item_widget.dart';
-import '../widgets/transmission_list_view_state.dart';
-import '../widgets/transmission_section.dart';
+import '../widget/car_type_item.dart';
+import '../widget/car_type_list_view_state.dart';
+import '../widget/car_type_section.dart';
+import '../widget/color_item.dart';
+import '../widget/colors_list_view_state.dart';
+import '../widget/colors_section.dart';
+import '../widget/condition_list_view_state.dart';
+import '../widget/condition_section.dart';
+import '../widget/custom_slider_widget_state.dart';
+import '../widget/cylinders_and_doors_list_view_state.dart';
+import '../widget/cylinders_and_doors_section.dart';
+import '../widget/fuel_type_list_view_state.dart';
+import '../widget/fuel_type_section.dart';
+import '../widget/price_section.dart';
+import '../widget/suggestions_item.dart';
+import '../widget/transmission_item_widget.dart';
+import '../widget/transmission_list_view_state.dart';
+import '../widget/transmission_section.dart';
 
 class FilterPage extends StatelessWidget {
   const FilterPage({super.key});

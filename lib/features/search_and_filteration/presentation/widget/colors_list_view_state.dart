@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:werewolf_cars/core/config/theme/colors_app.dart';
-import 'package:werewolf_cars/features/home/presentation/widgets/color_item.dart';
+import 'package:werewolf_cars/features/search_and_filteration/presentation/widget/color_item.dart';
 
 class ColorsListView extends StatefulWidget {
   const ColorsListView({super.key});
@@ -71,4 +71,3 @@ class _ColorsListViewState extends State<ColorsListView> {
     });
   }
 }
-

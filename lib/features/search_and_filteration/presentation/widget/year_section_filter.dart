@@ -6,7 +6,7 @@ import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
 import 'package:werewolf_cars/core/utils/responsive_padding.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
 import 'package:werewolf_cars/features/chat/presentation/widgets/white_divider.dart';
-import 'package:werewolf_cars/features/home/presentation/widgets/year_item_widget_state.dart';
+import 'package:werewolf_cars/features/search_and_filteration/presentation/widget/year_item_widget_state.dart';
 
 class YearSectionFilter extends StatelessWidget {
   const YearSectionFilter({

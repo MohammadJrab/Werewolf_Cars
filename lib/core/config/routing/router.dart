@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:werewolf_cars/core/config/routing/router_config.dart';
 import 'package:werewolf_cars/core/config/theme/colors_app.dart';
 import 'package:werewolf_cars/features/app/presentation/pages/splash_page.dart';
-import 'package:werewolf_cars/features/home/presentation/pages/filter_page.dart';
+import 'package:werewolf_cars/features/search_and_filteration/presentation/pages/filter_page.dart';
 import 'package:werewolf_cars/features/profile/presentation/pages/edit_profile_page.dart';
 import 'package:werewolf_cars/features/profile/presentation/pages/privacy_policy_page.dart';
 import 'package:werewolf_cars/features/profile/presentation/pages/about_us_page.dart';
@@ -40,6 +40,8 @@ class GRouter {
   static final GlobalKey<NavigatorState> _rootNavigatorKey =
       GlobalKey<NavigatorState>();
   static final GlobalKey<NavigatorState> _homeNavigatorKey =
+      GlobalKey<NavigatorState>();
+  static final GlobalKey<NavigatorState> _searchNavigatorKey =
       GlobalKey<NavigatorState>();
 
   static final GoRouter _router = GoRouter(
@@ -190,17 +192,30 @@ class GRouter {
             ],
           ),
           StatefulShellBranch(
+            navigatorKey: _searchNavigatorKey,
             routes: [
               GoRoute(
-                path: _config.mainRoutes.search,
-                name: _config.mainRoutes.search,
-                pageBuilder: (BuildContext context, GoRouterState state) {
-                  return _builderPage(
-                    child: const SearchPage(),
-                    state: state,
-                  );
-                },
-              ),
+                  path: _config.mainRoutes.search,
+                  name: _config.mainRoutes.search,
+                  pageBuilder: (BuildContext context, GoRouterState state) {
+                    return _builderPage(
+                      child: const SearchPage(),
+                      state: state,
+                    );
+                  },
+                  routes: [
+                    GoRoute(
+                      path: _config.filterRoutes.filter,
+                      name: _config.filterRoutes.filter,
+                      parentNavigatorKey: _rootNavigatorKey,
+                      pageBuilder: (BuildContext context, GoRouterState state) {
+                        return _builderPage(
+                          child: const FilterPage(),
+                          state: state,
+                        );
+                      },
+                    )
+                  ]),
             ],
           ),
           StatefulShellBranch(

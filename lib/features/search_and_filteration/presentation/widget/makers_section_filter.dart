@@ -5,12 +5,15 @@ import 'package:werewolf_cars/core/config/theme/typography.dart';
 import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
 import 'package:werewolf_cars/core/utils/responsive_padding.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
-import 'package:werewolf_cars/features/home/presentation/widgets/condition_list_view_state.dart';
+import 'package:werewolf_cars/features/chat/presentation/widgets/white_divider.dart';
+import 'package:werewolf_cars/features/search_and_filteration/presentation/widget/makers_list_view.dart';
+import 'package:werewolf_cars/features/search_and_filteration/presentation/widget/see_full_list_button_widget.dart';
 
-class ConditionSection extends StatelessWidget {
-  const ConditionSection({
+class MakersSectionFilter extends StatelessWidget {
+  const MakersSectionFilter({
     super.key,
   });
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -19,17 +22,26 @@ class ConditionSection extends StatelessWidget {
         Padding(
           padding: HWEdgeInsets.only(left: 25),
           child: AppText(
-            'Condition',
+            'Make',
             style:
                 context.textTheme.bodyLarge?.xb.s21.withColor(AppColors.white),
           ),
         ),
         20.verticalSpace,
-        SizedBox(
-          height: 46.h,
-          child: const ConditionListView(),
+        const MakersListView(),
+        25.verticalSpace,
+        const Align(
+          alignment: Alignment.center,
+          child: SeeFullListButtonWidget(),
         ),
-        30.verticalSpace,
+        10.verticalSpace,
+        const WhiteDivider(
+          color: AppColors.whiteLess,
+          thickness: .5,
+          endIndent: 15,
+          indent: 15,
+        ),
+        10.verticalSpace,
       ],
     );
   }

@@ -6,11 +6,12 @@ import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
 import 'package:werewolf_cars/core/utils/responsive_padding.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
 import 'package:werewolf_cars/features/chat/presentation/widgets/white_divider.dart';
-import 'package:werewolf_cars/features/home/presentation/widgets/makers_list_view.dart';
-import 'package:werewolf_cars/features/home/presentation/widgets/see_full_list_button_widget.dart';
+import 'package:werewolf_cars/features/search_and_filteration/presentation/widget/custom_slider_widget_state.dart';
 
-class MakersSectionFilter extends StatelessWidget {
-  const MakersSectionFilter({
+import 'suggestions_list_view_item.dart';
+
+class PriceSection extends StatelessWidget {
+  const PriceSection({
     super.key,
   });
 
@@ -22,19 +23,31 @@ class MakersSectionFilter extends StatelessWidget {
         Padding(
           padding: HWEdgeInsets.only(left: 25),
           child: AppText(
-            'Make',
+            'Price',
             style:
                 context.textTheme.bodyLarge?.xb.s21.withColor(AppColors.white),
           ),
         ),
         20.verticalSpace,
-        const MakersListView(),
-        25.verticalSpace,
-        const Align(
-          alignment: Alignment.center,
-          child: SeeFullListButtonWidget(),
+        Padding(
+          padding: HWEdgeInsets.symmetric(horizontal: 20),
+          // TODO we must change this slider
+          child: const CustomSliderWidget(),
         ),
-        10.verticalSpace,
+        20.verticalSpace,
+        Padding(
+          padding: HWEdgeInsets.only(left: 25),
+          child: AppText(
+            'Suggestions',
+            style: context.textTheme.bodyLarge?.s15.withColor(AppColors.white),
+          ),
+        ),
+        20.verticalSpace,
+        SizedBox(
+          height: 66.h,
+          child: const SuggestionsListViewItem(),
+        ),
+        20.verticalSpace,
         const WhiteDivider(
           color: AppColors.whiteLess,
           thickness: .5,
@@ -42,7 +55,6 @@ class MakersSectionFilter extends StatelessWidget {
           indent: 15,
         ),
         10.verticalSpace,
-
       ],
     );
   }

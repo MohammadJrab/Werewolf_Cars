@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:werewolf_cars/features/home/presentation/widgets/transmission_item_widget.dart';
+import 'package:werewolf_cars/features/search_and_filteration/presentation/widget/transmission_item_widget.dart';
+
 class ConditionListView extends StatefulWidget {
   const ConditionListView({super.key});
 

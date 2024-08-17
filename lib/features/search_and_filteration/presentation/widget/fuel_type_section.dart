@@ -5,10 +5,10 @@ import 'package:werewolf_cars/core/config/theme/typography.dart';
 import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
 import 'package:werewolf_cars/core/utils/responsive_padding.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
-import 'package:werewolf_cars/features/home/presentation/widgets/colors_list_view_state.dart';
+import 'package:werewolf_cars/features/search_and_filteration/presentation/widget/fuel_type_list_view_state.dart';
 
-class ColorsSection extends StatelessWidget {
-  const ColorsSection({
+class FuelTypeSection extends StatelessWidget {
+  const FuelTypeSection({
     super.key,
   });
 
@@ -20,15 +20,15 @@ class ColorsSection extends StatelessWidget {
         Padding(
           padding: HWEdgeInsets.only(left: 25),
           child: AppText(
-            "Colors",
+            'Fuel type',
             style:
                 context.textTheme.bodyLarge?.xb.s21.withColor(AppColors.white),
           ),
         ),
         20.verticalSpace,
         SizedBox(
-          height: 82.h,
-          child: const ColorsListView(),
+          height: 46.h,
+          child: const FuelTypeListView(),
         ),
         30.verticalSpace,
       ],
