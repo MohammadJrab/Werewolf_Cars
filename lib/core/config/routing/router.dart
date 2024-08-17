@@ -4,6 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:werewolf_cars/core/config/routing/router_config.dart';
 import 'package:werewolf_cars/core/config/theme/colors_app.dart';
+import 'package:werewolf_cars/features/app/presentation/pages/splash_page.dart';
+import 'package:werewolf_cars/features/home/presentation/pages/filter_page.dart';
+import 'package:werewolf_cars/features/profile/presentation/pages/edit_profile_page.dart';
+import 'package:werewolf_cars/features/profile/presentation/pages/privacy_policy_page.dart';
+import 'package:werewolf_cars/features/profile/presentation/pages/about_us_page.dart';
 import 'package:werewolf_cars/features/app/presentation/pages/error_page.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/onboarding_widget.dart';
 import 'package:werewolf_cars/features/auth/presentation/pages/congrate_page.dart';
@@ -13,9 +18,13 @@ import 'package:werewolf_cars/features/auth/presentation/pages/select_country_pa
 import 'package:werewolf_cars/features/auth/presentation/pages/sigup_page.dart';
 import 'package:werewolf_cars/features/home/presentation/pages/home_page.dart';
 import 'package:werewolf_cars/features/search_and_filteration/presentation/pages/search_page.dart';
+import 'package:werewolf_cars/features/chat/presentation/pages/chat_page.dart';
+import 'package:werewolf_cars/features/faviorate/presentation/pages/faviorate_page.dart';
+import 'package:werewolf_cars/features/my_car/presentation/pages/my_cars_page.dart';
+import 'package:werewolf_cars/features/notifications/presentation/pages/notifications_page.dart';
+import 'package:werewolf_cars/features/profile/presentation/pages/profile_page.dart';
 
 import '../../../features/app/presentation/pages/base_page.dart';
-import '../../../features/app/presentation/pages/splash_page.dart';
 
 class GRouter {
   static GRouter? _instance;

@@ -67,6 +67,9 @@ abstract class AppColors {
   static const Color blue = Color(0xffcdecfa);
   static const Color greyStroke = Color(0xffA2A2A2);
   static const Color purple = Color(0xff7367F0);
+  static const Color burgundy = Color(0xff800020);
+  static const Color brown = Color(0xff914800);
+  
 }
 
 Color darken(Color color, [double amount = .1]) {
