@@ -18,6 +18,7 @@ class CarMiniDetailsCardWidget extends StatelessWidget {
     double h = isStatus ? 240.h + 50.h : 240.h;
     return Container(
       height: h,
+      width: 320.w,
       margin: HWEdgeInsets.symmetric(horizontal: 14, vertical: 10),
       decoration: BoxDecoration(
         color: AppColors.blackLight,

@@ -15,9 +15,11 @@ import 'package:werewolf_cars/core/utils/responsive_padding.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_dropdown_search.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_svg_picture.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
+import 'package:werewolf_cars/features/app/presentation/widgets/car_mini_details_card_widget.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/custom_drop_down_button.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/refresh_list_widget.dart';
 import 'package:werewolf_cars/features/home/presentation/manager/home_cubit/home_cubit.dart';
+import 'package:werewolf_cars/features/search_and_filteration/presentation/widget/car_type_list_view_state.dart';
 import 'package:werewolf_cars/generated/assets.dart';
 import 'package:werewolf_cars/generated/locale_keys.g.dart';
 
@@ -81,13 +83,14 @@ class _HomePageState extends State<HomePage>
                       style: context.textTheme.bodyMedium.s20.sb,
                     ),
                   ),
-                  Container(
-                    height: 246.h,
-                    width: 320.w,
-                    margin: HWEdgeInsets.only(left: 24),
-                    decoration: BoxDecoration(
-                        color: AppColors.whiteLess,
-                        borderRadius: BorderRadius.circular(16).r),
+                  SizedBox(
+                    height: 260.h,
+                    width: double.infinity,
+                    child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 4,
+                        itemBuilder: (context, index) =>
+                            const CarMiniDetailsCardWidget()),
                   ),
                   Padding(
                     padding: HWEdgeInsetsDirectional.only(
@@ -97,22 +100,12 @@ class _HomePageState extends State<HomePage>
                       style: context.textTheme.bodyMedium.s20.sb,
                     ),
                   ),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 50,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 5,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          height: 50.h,
-                          width: 75.w,
-                          margin: HWEdgeInsets.only(left: 24),
-                          decoration: BoxDecoration(
-                              color: AppColors.whiteLess,
-                              borderRadius: BorderRadius.circular(8).r),
-                        );
-                      },
+                  Padding(
+                    padding: HWEdgeInsetsDirectional.only(start: 14),
+                    child: const SizedBox(
+                      width: double.infinity,
+                      height: 50,
+                      child: CarTypeListView(),
                     ),
                   ),
                   Padding(
