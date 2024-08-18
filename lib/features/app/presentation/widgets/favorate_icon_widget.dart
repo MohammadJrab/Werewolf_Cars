@@ -5,22 +5,83 @@ import 'package:werewolf_cars/core/utils/responsive_padding.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_svg_picture.dart';
 import 'package:werewolf_cars/generated/assets.dart';
 
-class FavorateIconWidget extends StatelessWidget {
-  const FavorateIconWidget({
-    super.key,
-  });
+class FavorateIconWidget extends StatefulWidget {
+  const FavorateIconWidget({super.key});
+
+  @override
+  State<FavorateIconWidget> createState() => _FavorateIconWidgetState();
+}
+
+class _FavorateIconWidgetState extends State<FavorateIconWidget>
+    with SingleTickerProviderStateMixin {
+  bool _isRed = true;
+  late AnimationController _controller;
+  late Animation<double> _scaleAnimation;
+  late Animation<double> _rotationAnimation;
+  late Animation<double> _fadeAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 400),
+      vsync: this,
+    );
+
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 1.2).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
+    );
+
+    _rotationAnimation = Tween<double>(begin: 0.0, end: 0.1).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
+    );
+
+    _fadeAnimation = Tween<double>(begin: 1.0, end: 0.0).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
+    );
+  }
+
+  void _toggleColor() {
+    setState(() {
+      _isRed = !_isRed;
+    });
+    _controller.forward().then((_) => _controller.reverse());
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: HWEdgeInsets.all(14),
-      child: CircleAvatar(
-        backgroundColor: AppColors.blackLight.withOpacity(0.7),
-        child: AppSvgPicture(
-          Assets.svgHeart,
-          height: 22.h,
-          width: 22.w,
-          color: AppColors.red,
+      child: GestureDetector(
+        onTap: _toggleColor,
+        child: AnimatedBuilder(
+          animation: _controller,
+          builder: (context, child) {
+            return Transform.scale(
+              scale: _scaleAnimation.value,
+              child: Transform.rotate(
+                angle: _rotationAnimation.value,
+                child: Opacity(
+                  opacity: _isRed ? 1.0 : _fadeAnimation.value,
+                  child: CircleAvatar(
+                    backgroundColor: AppColors.blackLight.withOpacity(0.7),
+                    child: AppSvgPicture(
+                      Assets.svgHeart,
+                      height: 22.h,
+                      width: 22.w,
+                      color: _isRed ? AppColors.red : AppColors.white,
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
         ),
       ),
     );

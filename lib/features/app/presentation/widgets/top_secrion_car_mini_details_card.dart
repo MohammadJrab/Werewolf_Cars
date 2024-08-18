@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:werewolf_cars/core/config/theme/colors_app.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/favorate_icon_widget.dart';
 import 'package:werewolf_cars/generated/assets.dart';
 
@@ -16,11 +17,17 @@ class TopSecrionCarMiniDetailsCard extends StatelessWidget {
     return Container(
       height: 130.h,
       alignment: Alignment.topRight,
-      decoration: const BoxDecoration(
-          image: DecorationImage(
-        image: AssetImage(Assets.imagesWelcomeFerrari),
-        fit: BoxFit.cover,
-      )),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(12.r),
+            topRight: Radius.circular(12.r),
+          ),
+          border:
+              Border(bottom: BorderSide(color: AppColors.white, width: 1.w)),
+          image: const DecorationImage(
+            image: AssetImage(Assets.imagesAppIcon),
+            fit: BoxFit.cover,
+          )),
       child: isFaviorateIcon ? const FavorateIconWidget() : const SizedBox(),
     );
   }

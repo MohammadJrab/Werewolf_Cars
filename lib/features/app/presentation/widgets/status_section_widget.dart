@@ -13,20 +13,20 @@ class StatusSectionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        isStatus ? const Divider() : const SizedBox(),
-        isStatus
-            ? Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-                child: Text(
-                  'Status : Under reviewing',
-                  style: context.textTheme.bodyLarge!.s18.xb
-                      .withColor(AppColors.white),
-                ))
-            : const SizedBox()
-      ],
-    );
+    return isStatus
+        ? Column(
+            children: [
+              const Divider(),
+              Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                  child: Text(
+                    'Status : Under reviewing',
+                    style: context.textTheme.bodyLarge!.s18.xb
+                        .withColor(AppColors.white),
+                  ))
+            ],
+          )
+        : const SizedBox();
   }
 }

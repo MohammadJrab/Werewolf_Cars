@@ -8,6 +8,8 @@ import 'package:werewolf_cars/features/app/presentation/widgets/app_svg_picture.
 import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
 import 'package:werewolf_cars/generated/assets.dart';
 
+import 'space_text_widget.dart';
+
 class BottomSectionCarMiniDetailsCard extends StatelessWidget {
   const BottomSectionCarMiniDetailsCard({
     super.key,
@@ -16,11 +18,12 @@ class BottomSectionCarMiniDetailsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: HWEdgeInsets.symmetric(horizontal: 12, vertical: 4),
+      padding: HWEdgeInsets.only(right: 12, left: 12, top: 14),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AppText(
@@ -36,40 +39,30 @@ class BottomSectionCarMiniDetailsCard extends StatelessWidget {
                     style: context.textTheme.bodyLarge!.s15.xb
                         .withColor(AppColors.white),
                   ),
-                  AppText(
-                    ' | ',
-                    style: context.textTheme.bodyLarge!.s15.xb
-                        .withColor(AppColors.white),
-                  ),
+                  const SpaceTextWidget(),
                   AppText(
                     'Manual',
-                    style: context.textTheme.bodyLarge!.s15.xb
+                    style: context.textTheme.bodyLarge!.s13.sb
                         .withColor(AppColors.white),
                   ),
                 ],
               ),
+              4.verticalSpace,
               Row(
                 children: [
                   AppText(
                     '99,488 KM',
-                    style: context.textTheme.bodyLarge!.s15.xb
+                    style: context.textTheme.bodyLarge!.s13.sb
                         .withColor(AppColors.white),
                   ),
-                  AppText(
-                    ' | ',
-                    style: context.textTheme.bodyLarge!.s15.xb
-                        .withColor(AppColors.white),
-                  ),
+                  const SpaceTextWidget(),
+
                   AppText(
                     'Petrol',
-                    style: context.textTheme.bodyLarge!.s15.xb
+                    style: context.textTheme.bodyLarge!.s13.sb
                         .withColor(AppColors.white),
                   ),
-                  AppText(
-                    ' | ',
-                    style: context.textTheme.bodyLarge!.s15.xb
-                        .withColor(AppColors.white),
-                  ),
+                  const SpaceTextWidget(),
                   // ToDo check
                   AppSvgPicture(
                     Assets.svgLocationPin,
@@ -77,8 +70,8 @@ class BottomSectionCarMiniDetailsCard extends StatelessWidget {
                     width: 15.w,
                   ),
                   AppText(
-                    'Germany',
-                    style: context.textTheme.bodyLarge!.s15.xb
+                    ' Germany',
+                    style: context.textTheme.bodyLarge!.s13.sb
                         .withColor(AppColors.white),
                   ),
                 ],

@@ -26,9 +26,9 @@ class CarMiniDetailsCardWidget extends StatelessWidget {
         border: Border.all(color: AppColors.white, width: 1.w),
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           TopSecrionCarMiniDetailsCard(isFaviorateIcon: isFaviorateIcon),
-          const Divider(),
           const BottomSectionCarMiniDetailsCard(),
           StatusSectionWidget(isStatus: isStatus)
         ],
