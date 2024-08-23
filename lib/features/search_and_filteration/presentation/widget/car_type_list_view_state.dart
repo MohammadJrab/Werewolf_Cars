@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:werewolf_cars/common/constants/constants.dart';
+import 'package:werewolf_cars/common/enums/car_types.dart';
 import 'package:werewolf_cars/features/search_and_filteration/presentation/widget/car_type_item.dart';
 
 class CarTypeListView extends StatefulWidget {
@@ -16,7 +16,7 @@ class _CarTypeListViewState extends State<CarTypeListView> {
   Widget build(BuildContext context) {
     return ListView.builder(
       scrollDirection: Axis.horizontal,
-      itemCount: svgCarType.length,
+      itemCount: CarType.values.length,
       itemBuilder: (BuildContext context, int index) {
         return GestureDetector(
           onTap: () {
@@ -26,7 +26,8 @@ class _CarTypeListViewState extends State<CarTypeListView> {
           },
           child: CarTypeItem(
             isSelected: selectedIndex == index,
-            svg: svgCarType[index],
+            svg: CarType.values[index].asset,
+            name: CarType.values[index].name,
           ),
         );
       },

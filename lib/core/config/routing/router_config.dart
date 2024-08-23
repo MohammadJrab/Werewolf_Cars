@@ -5,6 +5,7 @@ class RouterConfiguration {
   final String krpOnboardingRoutePath = '/onboarding';
   final mainRoutes = const _MainRoutes._();
   final homeRoutes = const _HomeRoutes._();
+  final carRoutes = const _CarRoutes._();
   final filterRoutes = const _FilterRoutes._();
   final myCarsRoutes = const _MyCarsRoutes._();
   final profileRoutes = const _ProfileRoutes._();
@@ -26,14 +27,20 @@ class _MainRoutes {
 
 class _HomeRoutes {
   const _HomeRoutes._();
-  final String home = '/home';
 
-  final String carDetails = '/carDetails';
+  final String carDetails = 'carDetails';
 }
 
 class _FilterRoutes {
   const _FilterRoutes._();
+
   final String filter = 'filter';
+}
+
+class _CarRoutes {
+  const _CarRoutes._();
+
+  final String carDetials = 'carDetials';
 }
 
 class _ProfileRoutes {

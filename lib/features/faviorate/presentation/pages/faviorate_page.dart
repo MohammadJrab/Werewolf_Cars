@@ -1,9 +1,10 @@
-
-
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:werewolf_cars/core/config/theme/colors_app.dart';
-import 'package:werewolf_cars/features/app/presentation/widgets/car_mini_details_card_widget.dart';
+import 'package:werewolf_cars/core/utils/responsive_padding.dart';
+import 'package:werewolf_cars/features/home/presentation/widgets/car_mini_details_card_widget.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/custom_appbar.dart';
+import 'package:werewolf_cars/features/home/presentation/widgets/cars_list_view_builder.dart';
 
 class FavioratePage extends StatelessWidget {
   const FavioratePage({
@@ -11,24 +12,21 @@ class FavioratePage extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: AppColors.blackLight,
-      appBar: CustomAppbar(
+    return Scaffold(
+      appBar: const CustomAppbar(
         text: 'Faviorate',
         automaticallyImplyLeading: true,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            CarMiniDetailsCardWidget(),
-            CarMiniDetailsCardWidget(),
-            CarMiniDetailsCardWidget(),
-            CarMiniDetailsCardWidget(),
-            CarMiniDetailsCardWidget(),
-            CarMiniDetailsCardWidget(),
-            CarMiniDetailsCardWidget(),
-          ],
-        ),
+      body: Column(
+        children: [
+          Expanded(
+            child: CarsListViewBuilder(
+              scrollDirection: Axis.vertical,
+              padding:
+                  HWEdgeInsetsDirectional.only(start: 14, end: 14, top: 20),
+            ),
+          ),
+        ],
       ),
     );
   }

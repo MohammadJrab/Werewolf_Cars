@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:werewolf_cars/core/config/theme/colors_app.dart';
-import 'package:werewolf_cars/core/config/theme/typography.dart';
-import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
-import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
+import 'package:werewolf_cars/core/utils/responsive_padding.dart';
 
 class SpaceTextWidget extends StatelessWidget {
   const SpaceTextWidget({
@@ -11,9 +10,11 @@ class SpaceTextWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppText(
-      ' | ',
-      style: context.textTheme.bodyLarge!.s15.xb.withColor(AppColors.white),
+    return Container(
+      height: 14.h,
+      width: 1.w,
+      color: AppColors.white,
+      margin: HWEdgeInsets.symmetric(horizontal: 6),
     );
   }
 }

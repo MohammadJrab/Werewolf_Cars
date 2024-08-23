@@ -28,7 +28,7 @@ class MakersSectionFilter extends StatelessWidget {
           ),
         ),
         20.verticalSpace,
-        const MakersListView(),
+        SizedBox(height: 70.h, child: const MakersListView()),
         25.verticalSpace,
         const Align(
           alignment: Alignment.center,

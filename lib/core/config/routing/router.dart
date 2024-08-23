@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:werewolf_cars/core/config/routing/router_config.dart';
 import 'package:werewolf_cars/core/config/theme/colors_app.dart';
 import 'package:werewolf_cars/features/app/presentation/pages/splash_page.dart';
+import 'package:werewolf_cars/features/cars/presentation/pages/car_details_page.dart';
 import 'package:werewolf_cars/features/search_and_filteration/presentation/pages/filter_page.dart';
 import 'package:werewolf_cars/features/profile/presentation/pages/edit_profile_page.dart';
 import 'package:werewolf_cars/features/profile/presentation/pages/privacy_policy_page.dart';
@@ -125,25 +126,21 @@ class GRouter {
       GoRoute(
         path: _config.notificationsRoutes.notifications,
         name: _config.notificationsRoutes.notifications,
-        // parentNavigatorKey: _rootNavigatorKey,
+        parentNavigatorKey: _rootNavigatorKey,
         pageBuilder: (BuildContext context, GoRouterState state) {
           return _builderPage(
-            child: Container(
-              color: AppColors.blackLight,
-            ),
+            child: const NotificationsPage(),
             state: state,
           );
         },
       ),
       GoRoute(
-        path: _config.settingsRoutes.settings,
-        name: _config.settingsRoutes.settings,
-        // parentNavigatorKey: _rootNavigatorKey,
+        path: _config.profileRoutes.profile,
+        name: _config.profileRoutes.profile,
+        parentNavigatorKey: _rootNavigatorKey,
         pageBuilder: (BuildContext context, GoRouterState state) {
           return _builderPage(
-            child: Container(
-              color: AppColors.blackLight,
-            ),
+            child: const ProfilePage(),
             state: state,
           );
         },
@@ -180,19 +177,36 @@ class GRouter {
             navigatorKey: _homeNavigatorKey,
             routes: [
               GoRoute(
-                path: _config.mainRoutes.home,
-                name: _config.mainRoutes.home,
-                pageBuilder: (BuildContext context, GoRouterState state) {
-                  return _builderPage(
-                    child: const HomePage(),
-                    state: state,
-                  );
-                },
-              ),
+                  path: _config.mainRoutes.home,
+                  name: _config.mainRoutes.home,
+                  pageBuilder: (BuildContext context, GoRouterState state) {
+                    return _builderPage(
+                      child: const HomePage(),
+                      state: state,
+                    );
+                  },
+                  routes: [
+                    GoRoute(
+                      path: _config.homeRoutes.carDetails,
+                      name: _config.homeRoutes.carDetails,
+                      parentNavigatorKey: _rootNavigatorKey,
+                      pageBuilder: (BuildContext context, GoRouterState state) {
+                        return CustomTransitionPage(
+                          transitionDuration: const Duration(milliseconds: 700),
+                          reverseTransitionDuration:
+                              const Duration(milliseconds: 700),
+                          transitionsBuilder: (context, animation,
+                                  secondaryAnimation, child) =>
+                              FadeTransition(opacity: animation, child: child),
+                          child: const CarDetailsPage(),
+                        );
+                      },
+                    ),
+                  ]),
             ],
           ),
           StatefulShellBranch(
-            navigatorKey: _searchNavigatorKey,
+            // navigatorKey: _rootNavigatorKey,
             routes: [
               GoRoute(
                   path: _config.mainRoutes.search,
@@ -225,9 +239,7 @@ class GRouter {
                 name: _config.mainRoutes.sellMyCars,
                 pageBuilder: (BuildContext context, GoRouterState state) {
                   return _builderPage(
-                    child: Container(
-                      color: AppColors.blackLight,
-                    ),
+                    child: const MyCarsPage(),
                     state: state,
                   );
                 },
@@ -241,9 +253,7 @@ class GRouter {
                 name: _config.mainRoutes.favorites,
                 pageBuilder: (BuildContext context, GoRouterState state) {
                   return _builderPage(
-                    child: Container(
-                      color: AppColors.blackLight,
-                    ),
+                    child: const FavioratePage(),
                     state: state,
                   );
                 },
@@ -257,9 +267,7 @@ class GRouter {
                 name: _config.mainRoutes.chat,
                 pageBuilder: (BuildContext context, GoRouterState state) {
                   return _builderPage(
-                    child: Container(
-                      color: AppColors.blackLight,
-                    ),
+                    child: const ChatPage(),
                     state: state,
                   );
                 },

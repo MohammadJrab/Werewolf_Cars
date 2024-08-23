@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:werewolf_cars/core/config/routing/router.dart';
 import 'package:werewolf_cars/core/config/theme/colors_app.dart';
 import 'package:werewolf_cars/core/utils/responsive_padding.dart';
@@ -10,9 +11,13 @@ import 'package:werewolf_cars/generated/assets.dart';
 class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   final String text;
   final bool automaticallyImplyLeading;
+  final bool? goToHome;
 
   const CustomAppbar(
-      {super.key, required this.text, this.automaticallyImplyLeading = false});
+      {super.key,
+      required this.text,
+      this.automaticallyImplyLeading = false,
+      this.goToHome});
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
@@ -31,13 +36,13 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
                 ? Padding(
                     padding: HWEdgeInsets.all(10),
                     child: GestureDetector(
-                      onTap: () => GRouter.router.pop(),
+                      onTap: () => GoRouter.of(context).pop(),
                       child: SizedBox(
-                        height: 24.h, // Change these values as needed
+                        height: 24.h,
                         width: 24.w,
                         child: AppSvgPicture(
                           Assets.svgArrowLeft,
-                          height: 24.h, // Match these to Container height/width
+                          height: 24.h,
                           width: 24.w,
                         ),
                       ),

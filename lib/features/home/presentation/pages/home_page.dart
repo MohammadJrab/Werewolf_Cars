@@ -1,11 +1,8 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
-import 'package:go_router/go_router.dart';
-import 'package:simple_shadow/simple_shadow.dart';
 import 'package:werewolf_cars/core/config/routing/router.dart';
 import 'package:werewolf_cars/core/config/theme/colors_app.dart';
 import 'package:werewolf_cars/core/config/theme/my_color_scheme.dart';
@@ -15,11 +12,13 @@ import 'package:werewolf_cars/core/utils/responsive_padding.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_dropdown_search.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_svg_picture.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
-import 'package:werewolf_cars/features/app/presentation/widgets/car_mini_details_card_widget.dart';
-import 'package:werewolf_cars/features/app/presentation/widgets/custom_drop_down_button.dart';
+import 'package:werewolf_cars/features/home/presentation/widgets/car_mini_details_card_widget.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/refresh_list_widget.dart';
 import 'package:werewolf_cars/features/home/presentation/manager/home_cubit/home_cubit.dart';
+import 'package:werewolf_cars/features/home/presentation/widgets/cars_list_view_builder.dart';
+import 'package:werewolf_cars/features/search_and_filteration/presentation/widget/budget_list_view.dart';
 import 'package:werewolf_cars/features/search_and_filteration/presentation/widget/car_type_list_view_state.dart';
+import 'package:werewolf_cars/features/search_and_filteration/presentation/widget/makers_list_view.dart';
 import 'package:werewolf_cars/generated/assets.dart';
 import 'package:werewolf_cars/generated/locale_keys.g.dart';
 
@@ -48,97 +47,131 @@ class _HomePageState extends State<HomePage>
         child: Scaffold(
           body: RefreshListWidget(
             onRefresh: _homeCubit.getHomeData,
-            child: SingleChildScrollView(
+            child: CustomScrollView(
               physics: const AlwaysScrollableScrollPhysics(),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  5.verticalSpace,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      AppSvgPicture(
-                        Assets.svgBell,
-                        width: 24.w,
-                        height: 24.w,
-                      ),
-                      _CityDropdown(
-                        onChanged: (m) {},
-                      ),
-                      CircleAvatar(
-                        backgroundImage: const AssetImage(Assets.imagesAppIcon),
-                        maxRadius: 28.r,
-                      )
-                    ],
-                  ),
-                  30.verticalSpace,
-                  SearchBar(
-                    onTap: () {},
-                  ),
-                  Padding(
-                    padding: HWEdgeInsetsDirectional.only(
-                        start: 24, top: 20, bottom: 20),
-                    child: AppText(
-                      "Recommended",
-                      style: context.textTheme.bodyMedium.s20.sb,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 260.h,
-                    width: double.infinity,
-                    child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 4,
-                        itemBuilder: (context, index) =>
-                            const CarMiniDetailsCardWidget()),
-                  ),
-                  Padding(
-                    padding: HWEdgeInsetsDirectional.only(
-                        start: 24, top: 20, bottom: 20),
-                    child: AppText(
-                      "Browse by body type",
-                      style: context.textTheme.bodyMedium.s20.sb,
-                    ),
-                  ),
-                  Padding(
-                    padding: HWEdgeInsetsDirectional.only(start: 14),
-                    child: const SizedBox(
-                      width: double.infinity,
-                      height: 50,
-                      child: CarTypeListView(),
-                    ),
-                  ),
-                  Padding(
-                    padding: HWEdgeInsetsDirectional.only(
-                        start: 24, top: 20, bottom: 20),
-                    child: AppText(
-                      "Browse by Budget",
-                      style: context.textTheme.bodyMedium.s20.sb,
-                    ),
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 50,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 5,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          height: 50.h,
-                          width: 75.w,
-                          margin: HWEdgeInsets.only(left: 24),
-                          decoration: BoxDecoration(
-                              color: AppColors.whiteLess,
-                              borderRadius: BorderRadius.circular(8).r),
-                        );
-                      },
-                    ),
-                  ),
-                  80.verticalSpace,
-                ],
-              ),
+              slivers: [
+                homeSliverAppBar(),
+                // Home Body
+                homeBody(context),
+              ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  SliverList homeBody(BuildContext context) {
+    return SliverList(
+      delegate: SliverChildListDelegate([
+        10.verticalSpace,
+        // SearchBar Section
+        _SearchBar(
+          onTap: () {},
+        ),
+        // Recommended Cars ListView section
+        Padding(
+          padding: HWEdgeInsetsDirectional.only(start: 24, top: 20, bottom: 20),
+          child: AppText(
+            "Recommended",
+            style: context.textTheme.bodyMedium.s20.sb,
+          ),
+        ),
+        Container(
+          height: 246.h,
+          margin: HWEdgeInsetsDirectional.only(start: 8, end: 14),
+          width: double.infinity,
+          child: CarsListViewBuilder(
+            scrollDirection: Axis.horizontal,
+            padding: HWEdgeInsetsDirectional.only(start: 14),
+          ),
+        ),
+        // Browse by body type Section
+        Padding(
+          padding: HWEdgeInsetsDirectional.only(start: 24, top: 20, bottom: 20),
+          child: AppText(
+            "Browse by body type",
+            style: context.textTheme.bodyMedium.s20.sb,
+          ),
+        ),
+        Container(
+          margin: HWEdgeInsetsDirectional.only(start: 12, end: 14),
+          width: double.infinity,
+          height: 60.h,
+          child: const CarTypeListView(),
+        ),
+        // Browse by budget section
+        Padding(
+          padding: HWEdgeInsetsDirectional.only(start: 24, top: 20, bottom: 20),
+          child: AppText(
+            "Browse by Budget",
+            style: context.textTheme.bodyMedium.s20.sb,
+          ),
+        ),
+        Container(
+          width: double.infinity,
+          height: 60.h,
+          margin: HWEdgeInsetsDirectional.only(start: 14, end: 14),
+          child: const BudgetListView(),
+        ),
+        // Browse by makers section
+        Padding(
+          padding: HWEdgeInsetsDirectional.only(start: 24, top: 20, bottom: 20),
+          child: AppText(
+            "Browse by Makers",
+            style: context.textTheme.bodyMedium.s20.sb,
+          ),
+        ),
+        Container(
+          width: double.infinity,
+          height: 80.h,
+          margin: HWEdgeInsetsDirectional.only(start: 14),
+          child: const MakersListView(),
+        ),
+        60.verticalSpace,
+      ]),
+    );
+  }
+
+  SliverAppBar homeSliverAppBar() {
+    return SliverAppBar(
+      pinned: true,
+      floating: false,
+      toolbarHeight: 65.0.h,
+      expandedHeight: 65.0.h,
+      backgroundColor: AppColors.blackLight,
+      flexibleSpace: FlexibleSpaceBar(
+        collapseMode: CollapseMode.none,
+        centerTitle: true,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            GestureDetector(
+              onTap: () {
+                GRouter.router.pushNamed(
+                    GRouter.config.notificationsRoutes.notifications);
+              },
+              child: AppSvgPicture(
+                Assets.svgBell,
+                width: 24.w,
+                height: 24.w,
+              ),
+            ),
+            _CityDropdown(
+              onChanged: (m) {},
+            ),
+            GestureDetector(
+              onTap: () {
+                GRouter.router.pushNamed(GRouter.config.profileRoutes.profile);
+              },
+              child: const CircleAvatar(
+                backgroundImage: AssetImage(Assets.imagesAppIcon),
+              ),
+            ),
+          ],
+        ),
+        background: Container(
+          color: AppColors.blackLight,
         ),
       ),
     );
@@ -184,6 +217,7 @@ class _CityDropdown extends StatelessWidget {
       baseStyle: context.textTheme.titleMedium.s17.b.withColor(AppColors.white),
       popupProps: PopupProps.menu(
         showSearchBox: true,
+        fit: FlexFit.loose,
         menuProps: MenuProps(
           borderRadius: BorderRadius.circular(15.r),
         ),
@@ -226,8 +260,8 @@ class _CityDropdown extends StatelessWidget {
   }
 }
 
-class SearchBar extends StatelessWidget {
-  const SearchBar({
+class _SearchBar extends StatelessWidget {
+  const _SearchBar({
     super.key,
     required this.onTap,
   });

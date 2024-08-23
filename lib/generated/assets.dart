@@ -3,6 +3,8 @@ class Assets {
   Assets._();
 
   static const String imagesAppIcon = 'assets/images/appIcon.png';
+  static const String imagesCar1 = 'assets/images/car1.jpg';
+  static const String imagesCar2 = 'assets/images/car2.jpg';
   static const String imagesLogo = 'assets/images/logo.png';
   static const String imagesNoItemsFound = 'assets/images/noItemsFound.json';
   static const String imagesOnboarding = 'assets/images/onboarding.png';
@@ -72,6 +74,7 @@ class Assets {
   static const String svgEye = 'assets/svg/eye.svg';
   static const String svgEyeCrossed = 'assets/svg/eye_crossed.svg';
   static const String svgFilter = 'assets/svg/filter.svg';
+  static const String svgFilterAcitve = 'assets/svg/FilterAcitve.svg';
   static const String svgGasStation = 'assets/svg/gas_station.svg';
   static const String svgGear = 'assets/svg/gear.svg';
   static const String svgGlobe = 'assets/svg/globe.svg';

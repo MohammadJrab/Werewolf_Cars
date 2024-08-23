@@ -23,12 +23,12 @@ class BottomSectionCarMiniDetailsCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AppText(
                 '2021 KIA SELTOS',
-                style: context.textTheme.bodyLarge!.s17.xb
+                style: context.textTheme.titleMedium!.xb
                     .withColor(AppColors.white),
               ),
               10.verticalSpace,
@@ -36,42 +36,45 @@ class BottomSectionCarMiniDetailsCard extends StatelessWidget {
                 children: [
                   AppText(
                     'GTX 1.4 GDI PETROL',
-                    style: context.textTheme.bodyLarge!.s15.xb
+                    style: context.textTheme.titleSmall!.b
                         .withColor(AppColors.white),
                   ),
                   const SpaceTextWidget(),
                   AppText(
                     'Manual',
-                    style: context.textTheme.bodyLarge!.s13.sb
+                    style: context.textTheme.titleSmall!.sb
                         .withColor(AppColors.white),
                   ),
                 ],
               ),
-              4.verticalSpace,
+              8.verticalSpace,
               Row(
                 children: [
                   AppText(
                     '99,488 KM',
-                    style: context.textTheme.bodyLarge!.s13.sb
+                    style: context.textTheme.titleSmall!.sb
                         .withColor(AppColors.white),
                   ),
                   const SpaceTextWidget(),
 
                   AppText(
                     'Petrol',
-                    style: context.textTheme.bodyLarge!.s13.sb
+                    style: context.textTheme.titleSmall!.sb
                         .withColor(AppColors.white),
                   ),
                   const SpaceTextWidget(),
                   // ToDo check
-                  AppSvgPicture(
-                    Assets.svgLocationPin,
-                    height: 15.h,
-                    width: 15.w,
+                  Padding(
+                    padding: HWEdgeInsets.only(right: 4),
+                    child: AppSvgPicture(
+                      Assets.svgLocationPin,
+                      height: 14.h,
+                      width: 12.w,
+                    ),
                   ),
                   AppText(
                     ' Germany',
-                    style: context.textTheme.bodyLarge!.s13.sb
+                    style: context.textTheme.titleSmall!.sb
                         .withColor(AppColors.white),
                   ),
                 ],
@@ -81,8 +84,8 @@ class BottomSectionCarMiniDetailsCard extends StatelessWidget {
           const Spacer(),
           AppText(
             r'34,999$',
-            style:
-                context.textTheme.bodyLarge!.s18.xb.withColor(AppColors.white),
+            style: context.textTheme.titleMedium!.s15.xb
+                .withColor(AppColors.white),
           )
         ],
       ),

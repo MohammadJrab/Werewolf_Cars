@@ -8,11 +8,9 @@ class MakerItemFilterWidget extends StatelessWidget {
   const MakerItemFilterWidget({
     super.key,
     required this.makersLogoPath,
-    required this.isSelected,
     this.onTap,
   });
   final String makersLogoPath;
-  final bool isSelected;
   final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
@@ -20,28 +18,14 @@ class MakerItemFilterWidget extends StatelessWidget {
       onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 400),
-        width: isSelected ? 90.w : 80.w,
+        width: 80.w,
         height: 80.h,
-        margin: HWEdgeInsets.only(left: 20.r),
+        margin: HWEdgeInsets.only(left: 8.r),
         alignment: Alignment.center,
         padding: HWEdgeInsets.all(20),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16.r),
-          gradient: const RadialGradient(
-            colors: [
-              AppColors.grey,
-              AppColors.greyStroke,
-            ],
-          ),
-          border: isSelected
-              ? Border.all(
-                  color: AppColors.white,
-                  width: 2,
-                )
-              : Border.all(
-                  color: Colors.transparent,
-                  width: 2,
-                ),
+          borderRadius: BorderRadius.circular(8).r,
+          color: AppColors.grey.shade600,
         ),
         child: AppSvgPicture(makersLogoPath),
       ),

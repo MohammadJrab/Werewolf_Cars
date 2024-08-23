@@ -15,7 +15,7 @@ class TopSecrionCarMiniDetailsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 130.h,
+      height: 140.h,
       alignment: Alignment.topRight,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
@@ -25,7 +25,7 @@ class TopSecrionCarMiniDetailsCard extends StatelessWidget {
           border:
               Border(bottom: BorderSide(color: AppColors.white, width: 1.w)),
           image: const DecorationImage(
-            image: AssetImage(Assets.imagesAppIcon),
+            image: AssetImage(Assets.imagesCar2),
             fit: BoxFit.cover,
           )),
       child: isFaviorateIcon ? const FavorateIconWidget() : const SizedBox(),
