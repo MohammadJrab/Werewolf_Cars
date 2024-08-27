@@ -12,12 +12,13 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   final String text;
   final bool automaticallyImplyLeading;
   final bool? goToHome;
-
+  final Widget? action;
   const CustomAppbar(
       {super.key,
       required this.text,
       this.automaticallyImplyLeading = false,
-      this.goToHome});
+      this.goToHome,
+      this.action});
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
@@ -49,6 +50,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                   )
                 : const SizedBox(),
+            actions: [action ?? const SizedBox()],
             automaticallyImplyLeading: automaticallyImplyLeading));
   }
 }
