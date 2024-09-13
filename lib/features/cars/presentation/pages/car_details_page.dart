@@ -19,19 +19,7 @@ class CarDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppbar(
-        text: 'Car Details',
-        automaticallyImplyLeading: true,
-        action: Padding(
-          padding: const EdgeInsets.only(right: 20),
-          // ToDo :  Heart must be empty not solid
-          child: AppSvgPicture(
-            Assets.svgHeart,
-            height: 24.h,
-            width: 24.w,
-          ),
-        ),
-      ),
+      appBar: const CarDetalisAppbar(),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -74,6 +62,30 @@ class CarDetailsPage extends StatelessWidget {
             ),
             const SimilarCar()
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class CarDetalisAppbar extends StatelessWidget implements PreferredSizeWidget {
+  const CarDetalisAppbar({
+    super.key,
+  });
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  @override
+  PreferredSizeWidget build(BuildContext context) {
+    return CustomAppbar(
+      text: 'Car Details',
+      automaticallyImplyLeading: true,
+      action: Padding(
+        padding: const EdgeInsets.only(right: 20),
+        // ToDo :  Heart must be empty not solid
+        child: AppSvgPicture(
+          Assets.svgHeart,
+          height: 24.h,
+          width: 24.w,
         ),
       ),
     );
@@ -273,6 +285,7 @@ class GridDetailesGridView extends StatelessWidget {
     return SizedBox(
       height: 170.h,
       child: GridView.builder(
+        physics: const NeverScrollableScrollPhysics(),
         addAutomaticKeepAlives: false,
         shrinkWrap: true,
         itemCount: 6,
