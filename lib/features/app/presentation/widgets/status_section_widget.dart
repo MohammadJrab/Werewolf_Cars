@@ -19,10 +19,10 @@ class StatusSectionWidget extends StatelessWidget {
               const Divider(),
               Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   child: Text(
                     'Status : Under reviewing',
-                    style: context.textTheme.bodyLarge!.s18.xb
+                    style: context.textTheme.bodyLarge!.xb
                         .withColor(AppColors.white),
                   ))
             ],
