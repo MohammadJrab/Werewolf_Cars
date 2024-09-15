@@ -24,8 +24,8 @@ class NavBarItemCircular extends StatelessWidget {
             border: Border.all(color: AppColors.white, width: 5.w),
             borderRadius: BorderRadius.circular(60).r,
             color: AppColors.orange),
-        width: 72.w,
-        height: 75.h,
+        width: 70.w,
+        height: 70.h,
         child: Center(
           child: AppSvgPicture(
             svgAsset,

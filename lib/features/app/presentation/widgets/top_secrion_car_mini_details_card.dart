@@ -15,7 +15,7 @@ class TopSecrionCarMiniDetailsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 140.h,
+      height: 120.h,
       alignment: Alignment.topRight,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.only(

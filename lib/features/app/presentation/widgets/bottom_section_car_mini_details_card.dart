@@ -18,7 +18,7 @@ class BottomSectionCarMiniDetailsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: HWEdgeInsets.only(right: 12, left: 12, top: 14),
+      padding: HWEdgeInsets.only(right: 12, left: 12, top: 10),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
@@ -28,38 +28,38 @@ class BottomSectionCarMiniDetailsCard extends StatelessWidget {
             children: [
               AppText(
                 '2021 KIA SELTOS',
-                style: context.textTheme.titleMedium!.xb
-                    .withColor(AppColors.white),
+                style:
+                    context.textTheme.titleSmall!.xb.withColor(AppColors.white),
               ),
               10.verticalSpace,
               Row(
                 children: [
                   AppText(
                     'GTX 1.4 GDI PETROL',
-                    style: context.textTheme.titleSmall!.b
+                    style: context.textTheme.titleSmall!.s13.b
                         .withColor(AppColors.white),
                   ),
                   const SpaceTextWidget(),
                   AppText(
                     'Manual',
-                    style: context.textTheme.titleSmall!.sb
+                    style: context.textTheme.titleSmall!.s13.sb
                         .withColor(AppColors.white),
                   ),
                 ],
               ),
-              8.verticalSpace,
+              4.verticalSpace,
               Row(
                 children: [
                   AppText(
                     '99,488 KM',
-                    style: context.textTheme.titleSmall!.sb
+                    style: context.textTheme.titleSmall!.s13.sb
                         .withColor(AppColors.white),
                   ),
                   const SpaceTextWidget(),
 
                   AppText(
                     'Petrol',
-                    style: context.textTheme.titleSmall!.sb
+                    style: context.textTheme.titleSmall!.s13.sb
                         .withColor(AppColors.white),
                   ),
                   const SpaceTextWidget(),
@@ -84,8 +84,7 @@ class BottomSectionCarMiniDetailsCard extends StatelessWidget {
           const Spacer(),
           AppText(
             r'34,999$',
-            style: context.textTheme.titleMedium!.s15.xb
-                .withColor(AppColors.white),
+            style: context.textTheme.titleSmall!.xb.withColor(AppColors.white),
           )
         ],
       ),

@@ -26,21 +26,22 @@ class NavBarItem extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: SizedBox(
-        width: 60.w,
-        height: 70.h,
+        height: 50.h,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             AppSvgPicture(
               svgAsset,
-              width: 24.w,
-              height: 26.h,
+              width: 20.w,
+              height: 22.h,
               color: isSelected ? AppColors.orange : AppColors.greyStroke,
               fit: BoxFit.cover,
             ),
-            10.verticalSpace,
+            5.verticalSpace,
             Padding(
-              padding: HWEdgeInsetsDirectional.only(start: 2),
+              padding: HWEdgeInsetsDirectional.only(
+                start: 2,
+              ),
               child: AppText(
                 title,
                 style: context.textTheme.bodyMedium.m.withColor(

@@ -55,15 +55,58 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100.h,
+      height: 85.h,
       width: 413.w,
       decoration: const BoxDecoration(
-        color: AppColors.blackLight,
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(5), topRight: Radius.circular(5)),
       ),
       child: Stack(
         children: [
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              height: 65.h,
+              decoration: const BoxDecoration(
+                color: AppColors.blackLight,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(5), topRight: Radius.circular(5)),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  NavBarItem(
+                    title: LocaleKeys.home,
+                    svgAsset: Assets.svgNavHome,
+                    isSelected: widget.child.currentIndex == 0,
+                    onTap: () => _animateCursor(0),
+                  ),
+                  NavBarItem(
+                    title: LocaleKeys.search,
+                    svgAsset: Assets.svgNavSearch,
+                    isSelected: widget.child.currentIndex == 1,
+                    onTap: () => _animateCursor(1),
+                  ),
+                  40.horizontalSpace,
+                  NavBarItem(
+                    title: LocaleKeys.favorite,
+                    svgAsset: Assets.svgNavFavorite,
+                    isSelected: widget.child.currentIndex == 3,
+                    onTap: () => _animateCursor(3),
+                  ),
+                  NavBarItem(
+                    title: "Chat",
+                    svgAsset: Assets.svgNavChat,
+                    isSelected: widget.child.currentIndex == 4,
+                    onTap: () => _animateCursor(4),
+                  ),
+                ],
+              ),
+            ),
+          ),
           Positioned(
             top: 0,
             right: 0,
@@ -74,42 +117,6 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
                 isSelected: widget.child.currentIndex == 2,
                 onTap: () => _animateCursor(2),
               ),
-            ),
-          ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                NavBarItem(
-                  title: LocaleKeys.home,
-                  svgAsset: Assets.svgNavHome,
-                  isSelected: widget.child.currentIndex == 0,
-                  onTap: () => _animateCursor(0),
-                ),
-                NavBarItem(
-                  title: LocaleKeys.search,
-                  svgAsset: Assets.svgNavSearch,
-                  isSelected: widget.child.currentIndex == 1,
-                  onTap: () => _animateCursor(1),
-                ),
-                40.horizontalSpace,
-                NavBarItem(
-                  title: LocaleKeys.favorite,
-                  svgAsset: Assets.svgNavFavorite,
-                  isSelected: widget.child.currentIndex == 3,
-                  onTap: () => _animateCursor(3),
-                ),
-                NavBarItem(
-                  title: "Chat",
-                  svgAsset: Assets.svgNavChat,
-                  isSelected: widget.child.currentIndex == 4,
-                  onTap: () => _animateCursor(4),
-                ),
-              ],
             ),
           ),
         ],

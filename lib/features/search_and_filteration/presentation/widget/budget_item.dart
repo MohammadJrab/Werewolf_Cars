@@ -20,11 +20,11 @@ class BudgetItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 60.h,
-        padding: HWEdgeInsets.symmetric(horizontal: 24, vertical: 7),
+        height: 50.h,
+        padding: HWEdgeInsets.symmetric(horizontal: 20, vertical: 6),
         margin: HWEdgeInsets.only(left: 8),
         decoration: BoxDecoration(
             border: Border.all(color: AppColors.greyStroke, width: 1.5.r),
@@ -33,11 +33,12 @@ class BudgetItem extends StatelessWidget {
           children: [
             AppText(
               title,
-              style: context.textTheme.titleSmall.b.withColor(AppColors.grey),
+              style:
+                  context.textTheme.titleSmall.s10.b.withColor(AppColors.grey),
             ),
-            5.verticalSpace,
+            6.verticalSpace,
             AppText(range,
-                style: context.textTheme.titleSmall?.sb
+                style: context.textTheme.titleSmall.s10.sb
                     .withColor(AppColors.white)),
           ],
         ),

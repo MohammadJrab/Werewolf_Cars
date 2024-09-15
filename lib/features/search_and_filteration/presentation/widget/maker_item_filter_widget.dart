@@ -19,10 +19,10 @@ class MakerItemFilterWidget extends StatelessWidget {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 400),
         width: 80.w,
-        height: 80.h,
+        height: 60.h,
         margin: HWEdgeInsets.only(left: 8.r),
         alignment: Alignment.center,
-        padding: HWEdgeInsets.all(20),
+        padding: HWEdgeInsets.all(8),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8).r,
           color: AppColors.grey.shade600,
