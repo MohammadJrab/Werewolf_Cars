@@ -21,5 +21,5 @@ Future<void> main() async {
     () => const App(),
     localizationConfig: LocalizationConfig(),
   );
-  // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);//
 }
