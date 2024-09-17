@@ -19,7 +19,7 @@ class _MainRoutes {
   const _MainRoutes._();
   final String home = '/home';
   final String search = '/search';
-  final String sellMyCars = '/myOrders';
+  final String myCars = '/myCars';
   final String favorites = '/favorites';
   final String chat = '/chat';
   final String profile = '/profile';
@@ -40,7 +40,7 @@ class _FilterRoutes {
 class _CarRoutes {
   const _CarRoutes._();
 
-  final String carDetials = 'carDetials';
+  final String carImagesPreviewer = 'carDetails/carImagesPreviewer';
 }
 
 class _ProfileRoutes {
@@ -78,7 +78,7 @@ class _AuthRoutes {
 
 class _MyCarsRoutes {
   const _MyCarsRoutes._();
-  final String myCarsPage = 'myCarsPage';
+  final String sellMyCarPage = 'sellMyCarPage';
 }
 
 class _ChatsRoutes {

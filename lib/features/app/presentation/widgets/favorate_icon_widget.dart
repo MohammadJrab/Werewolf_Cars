@@ -57,7 +57,7 @@ class _FavorateIconWidgetState extends State<FavorateIconWidget>
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: HWEdgeInsets.all(14),
+      padding: HWEdgeInsets.all(10),
       child: GestureDetector(
         onTap: _toggleColor,
         child: AnimatedBuilder(
@@ -73,8 +73,8 @@ class _FavorateIconWidgetState extends State<FavorateIconWidget>
                     backgroundColor: AppColors.blackLight.withOpacity(0.7),
                     child: AppSvgPicture(
                       Assets.svgHeart,
-                      height: 22.h,
-                      width: 22.w,
+                      height: 20.h,
+                      width: 20.w,
                       color: _isRed ? AppColors.red : AppColors.white,
                     ),
                   ),

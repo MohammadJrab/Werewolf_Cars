@@ -6,6 +6,8 @@ import 'package:werewolf_cars/core/config/routing/router_config.dart';
 import 'package:werewolf_cars/core/config/theme/colors_app.dart';
 import 'package:werewolf_cars/features/app/presentation/pages/splash_page.dart';
 import 'package:werewolf_cars/features/cars/presentation/pages/car_details_page.dart';
+import 'package:werewolf_cars/features/cars/presentation/pages/car_images_previewer.dart';
+import 'package:werewolf_cars/features/my_car/presentation/pages/sell_my_car_page.dart';
 import 'package:werewolf_cars/features/search_and_filteration/presentation/pages/filter_page.dart';
 import 'package:werewolf_cars/features/profile/presentation/pages/edit_profile_page.dart';
 import 'package:werewolf_cars/features/profile/presentation/pages/privacy_policy_page.dart';
@@ -71,7 +73,6 @@ class GRouter {
       GoRoute(
         path: _config.authRoutes.loginPage,
         name: _config.authRoutes.loginPage,
-        // parentNavigatorKey: _rootNavigatorKey,
         pageBuilder: (BuildContext context, GoRouterState state) {
           return _builderPage(
             child: const LoginPage(),
@@ -82,7 +83,6 @@ class GRouter {
       GoRoute(
         path: _config.authRoutes.signupPage,
         name: _config.authRoutes.signupPage,
-        // parentNavigatorKey: _rootNavigatorKey,
         pageBuilder: (BuildContext context, GoRouterState state) {
           return _builderPage(
             child: const SingUpPage(),
@@ -93,7 +93,6 @@ class GRouter {
       GoRoute(
         path: _config.authRoutes.resetPasswordPage,
         name: _config.authRoutes.resetPasswordPage,
-        // parentNavigatorKey: _rootNavigatorKey,
         pageBuilder: (BuildContext context, GoRouterState state) {
           return _builderPage(
             child: const ResetPassword(),
@@ -104,7 +103,6 @@ class GRouter {
       GoRoute(
         path: _config.authRoutes.selectCountryPage,
         name: _config.authRoutes.selectCountryPage,
-        // parentNavigatorKey: _rootNavigatorKey,
         pageBuilder: (BuildContext context, GoRouterState state) {
           return _builderPage(
             child: const SelectCountyPage(),
@@ -115,7 +113,6 @@ class GRouter {
       GoRoute(
         path: _config.authRoutes.congratsPage,
         name: _config.authRoutes.congratsPage,
-        // parentNavigatorKey: _rootNavigatorKey,
         pageBuilder: (BuildContext context, GoRouterState state) {
           return _builderPage(
             child: const CongratsPage(),
@@ -148,7 +145,6 @@ class GRouter {
       GoRoute(
         path: _config.settingsRoutes.privacyPolicy,
         name: _config.settingsRoutes.privacyPolicy,
-        // parentNavigatorKey: _rootNavigatorKey,
         pageBuilder: (BuildContext context, GoRouterState state) {
           return _builderPage(
             child: Container(
@@ -161,7 +157,6 @@ class GRouter {
       GoRoute(
         path: _config.settingsRoutes.aboutUs,
         name: _config.settingsRoutes.aboutUs,
-        // parentNavigatorKey: _rootNavigatorKey,
         pageBuilder: (BuildContext context, GoRouterState state) {
           return _builderPage(
             child: Container(
@@ -177,36 +172,50 @@ class GRouter {
             navigatorKey: _homeNavigatorKey,
             routes: [
               GoRoute(
-                  path: _config.mainRoutes.home,
-                  name: _config.mainRoutes.home,
-                  pageBuilder: (BuildContext context, GoRouterState state) {
-                    return _builderPage(
-                      child: const HomePage(),
-                      state: state,
-                    );
-                  },
-                  routes: [
-                    GoRoute(
-                      path: _config.homeRoutes.carDetails,
-                      name: _config.homeRoutes.carDetails,
-                      parentNavigatorKey: _rootNavigatorKey,
-                      pageBuilder: (BuildContext context, GoRouterState state) {
-                        return CustomTransitionPage(
-                          transitionDuration: const Duration(milliseconds: 700),
-                          reverseTransitionDuration:
-                              const Duration(milliseconds: 700),
-                          transitionsBuilder: (context, animation,
-                                  secondaryAnimation, child) =>
-                              FadeTransition(opacity: animation, child: child),
-                          child: const CarDetailsPage(),
-                        );
-                      },
-                    ),
-                  ]),
+                path: _config.mainRoutes.home,
+                name: _config.mainRoutes.home,
+                pageBuilder: (BuildContext context, GoRouterState state) {
+                  return _builderPage(
+                    child: const HomePage(),
+                    state: state,
+                  );
+                },
+                routes: [
+                  GoRoute(
+                    path: _config.homeRoutes.carDetails,
+                    name: _config.homeRoutes.carDetails,
+                    parentNavigatorKey: _rootNavigatorKey,
+                    pageBuilder: (BuildContext context, GoRouterState state) {
+                      return CustomTransitionPage(
+                        transitionDuration: const Duration(milliseconds: 200),
+                        reverseTransitionDuration:
+                            const Duration(milliseconds: 200),
+                        transitionsBuilder: (context, animation,
+                                secondaryAnimation, child) =>
+                            FadeTransition(opacity: animation, child: child),
+                        child: const CarDetailsPage(),
+                      );
+                    },
+                    routes: [
+                      GoRoute(
+                        path: _config.carRoutes.carImagesPreviewer,
+                        name: _config.carRoutes.carImagesPreviewer,
+                        parentNavigatorKey: _rootNavigatorKey,
+                        pageBuilder:
+                            (BuildContext context, GoRouterState state) {
+                          return _builderPage(
+                            child: const CarImagesPreviewer(),
+                            state: state,
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ],
           ),
           StatefulShellBranch(
-            // navigatorKey: _rootNavigatorKey,
             routes: [
               GoRoute(
                   path: _config.mainRoutes.search,
@@ -235,15 +244,27 @@ class GRouter {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: _config.mainRoutes.sellMyCars,
-                name: _config.mainRoutes.sellMyCars,
-                pageBuilder: (BuildContext context, GoRouterState state) {
-                  return _builderPage(
-                    child: const MyCarsPage(),
-                    state: state,
-                  );
-                },
-              ),
+                  path: _config.mainRoutes.myCars,
+                  name: _config.mainRoutes.myCars,
+                  pageBuilder: (BuildContext context, GoRouterState state) {
+                    return _builderPage(
+                      child: const MyCarsPage(),
+                      state: state,
+                    );
+                  },
+                  routes: [
+                    GoRoute(
+                      path: _config.myCarsRoutes.sellMyCarPage,
+                      name: _config.myCarsRoutes.sellMyCarPage,
+                      parentNavigatorKey: _rootNavigatorKey,
+                      pageBuilder: (BuildContext context, GoRouterState state) {
+                        return _builderPage(
+                          child: const SellMyCarPage(),
+                          state: state,
+                        );
+                      },
+                    ),
+                  ]),
             ],
           ),
           StatefulShellBranch(

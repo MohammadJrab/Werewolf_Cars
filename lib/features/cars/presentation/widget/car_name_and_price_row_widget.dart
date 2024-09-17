@@ -18,24 +18,24 @@ class CarNameAndPriceRowWidget extends StatelessWidget {
       children: [
         AppText(
           'Ferrari',
-          style: context.textTheme.bodyLarge!.s18.xb.withColor(AppColors.white),
+          style: context.textTheme.bodyLarge!.s20.b.withColor(AppColors.white),
         ),
-        5.horizontalSpace,
+        6.horizontalSpace,
         AppText(
           'SF90 Stradale',
-          style: context.textTheme.bodyLarge!.s18.withColor(AppColors.white),
+          style: context.textTheme.bodyLarge!.s20.r.withColor(AppColors.white),
         ),
         const Spacer(),
         AppSvgPicture(
           Assets.svgBell,
-          height: 24.h,
-          width: 24.w,
+          height: 20.h,
+          width: 18.w,
         ),
-        8.horizontalSpace,
+        10.horizontalSpace,
         AppText(
           r'125,000 $',
           style:
-              context.textTheme.bodyLarge!.s18.xb.withColor(AppColors.primary),
+              context.textTheme.bodyLarge!.s20.xb.withColor(AppColors.primary),
         ),
       ],
     );

@@ -1,30 +1,93 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:werewolf_cars/core/config/routing/router.dart';
+import 'package:werewolf_cars/core/config/theme/colors_app.dart';
 import 'package:werewolf_cars/core/utils/responsive_padding.dart';
-import 'package:werewolf_cars/features/cars/presentation/widget/image_car.dart';
+import 'package:werewolf_cars/features/cars/presentation/widget/car_image_viewer.dart';
+import 'package:werewolf_cars/generated/assets.dart';
 
-class MoreImagesCarsList extends StatelessWidget {
+class MoreImagesCarsList extends StatefulWidget {
   const MoreImagesCarsList({
     super.key,
   });
 
   @override
+  State<MoreImagesCarsList> createState() => _MoreImagesCarsListState();
+}
+
+class _MoreImagesCarsListState extends State<MoreImagesCarsList> {
+  final List<String> carImages = [
+    Assets.imagesCar1,
+    Assets.imagesCar2,
+    Assets.imagesCar1,
+    Assets.imagesCar2,
+  ];
+
+  int selectedIndex = 0;
+  @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 101.h,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        shrinkWrap: true,
-        itemCount: 4,
-        physics: const BouncingScrollPhysics(),
-        itemBuilder: (context, index) => Padding(
-          padding: HWEdgeInsets.only(left: 11),
-          child: const ImageCar(
-            width: 101,
-            height: 101,
+    return Column(
+      children: [
+        GestureDetector(
+          onTap: () => GRouter.router
+              .pushNamed(GRouter.config.carRoutes.carImagesPreviewer),
+          child: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 500),
+            switchInCurve: Curves.easeIn,
+            switchOutCurve: Curves.easeOut,
+            transitionBuilder: (Widget child, Animation<double> animation) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+            child: CarImageViewer(
+              key: ValueKey<String>(carImages[selectedIndex]),
+              imagePath: carImages[selectedIndex],
+            ),
           ),
         ),
-      ),
+        14.verticalSpace,
+        SizedBox(
+          height: 70.h,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            shrinkWrap: true,
+            itemCount: carImages.length,
+            physics: const BouncingScrollPhysics(),
+            itemBuilder: (context, index) {
+              bool isSelected = selectedIndex == index;
+
+              return Padding(
+                padding: HWEdgeInsets.only(left: 11),
+                child: GestureDetector(
+                  onTap: () => setState(() {
+                    selectedIndex = index;
+                  }),
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
+                    width: isSelected ? 110.w : 100.w,
+                    height: isSelected ? 80.h : 70.h,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color:
+                            isSelected ? AppColors.primary : Colors.transparent,
+                        width: isSelected ? 2.r : 0,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: CarImageViewer(
+                      imagePath: carImages[index],
+                      isSelected: isSelected,
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }
