@@ -37,7 +37,7 @@ class CarDetailsItem extends StatelessWidget {
             ],
           ),
         ),
-        const WhiteDivider(color: AppColors.whiteLess, thickness: 2),
+        WhiteDivider(color: AppColors.whiteLess, thickness: 1.r),
       ],
     );
   }

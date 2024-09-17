@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:werewolf_cars/core/config/routing/router.dart';
 import 'package:werewolf_cars/core/config/theme/colors_app.dart';
-import 'package:werewolf_cars/core/utils/responsive_padding.dart';
-
 import '../../../app/presentation/widgets/bottom_section_car_mini_details_card.dart';
 import '../../../app/presentation/widgets/status_section_widget.dart';
 import '../../../app/presentation/widgets/top_secrion_car_mini_details_card.dart';

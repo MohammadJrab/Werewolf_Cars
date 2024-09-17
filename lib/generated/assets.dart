@@ -68,6 +68,7 @@ class Assets {
   static const String svgBell = 'assets/svg/bell.svg';
   static const String svgCarDealer = 'assets/svg/car_dealer.svg';
   static const String svgCheck = 'assets/svg/check.svg';
+  static const String svgCheckCircle = 'assets/svg/check-circle.svg';
   static const String svgCoupeCar = 'assets/svg/coupe-car.svg';
   static const String svgEmail = 'assets/svg/email.svg';
   static const String svgEngineMotor = 'assets/svg/engine_motor.svg';
@@ -89,6 +90,7 @@ class Assets {
   static const String svgLock = 'assets/svg/lock.svg';
   static const String svgLogout = 'assets/svg/logout.svg';
   static const String svgMapPin = 'assets/svg/map_pin.svg';
+  static const String svgMessageSquare = 'assets/svg/message-square.svg';
   static const String svgMicroCar = 'assets/svg/micro-car.svg';
   static const String svgNavCarSell = 'assets/svg/nav_car_sell.svg';
   static const String svgNavChat = 'assets/svg/nav_chat.svg';
@@ -111,6 +113,7 @@ class Assets {
   static const String svgSuperCar = 'assets/svg/super-car.svg';
   static const String svgSuvCar = 'assets/svg/suv-car.svg';
   static const String svgVanCar = 'assets/svg/van-car.svg';
+  static const String svgWhatsapp = 'assets/svg/whatsapp.svg';
   static const String svgYear = 'assets/svg/year.svg';
   static const String translationsAr = 'assets/translations/ar.json';
   static const String translationsEn = 'assets/translations/en.json';

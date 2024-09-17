@@ -1,3 +1,4 @@
+import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:werewolf_cars/core/config/theme/colors_app.dart';
@@ -23,27 +24,34 @@ class UserSectionWithLocation extends StatelessWidget {
         ),
         25.horizontalSpace,
         Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            AppText(
-              'Name User',
-              style: context.textTheme.bodyLarge!.s17.xb
-                  .withColor(AppColors.white),
+            SizedBox(
+              width: 200.w,
+              child: AppText(
+                Faker().person.name(),
+                style: context.textTheme.bodyLarge!.s17.xb
+                    .withColor(AppColors.white),
+              ),
             ),
             7.verticalSpace,
             Row(
               children: [
-                5.horizontalSpace,
                 AppSvgPicture(
                   Assets.svgLocationPin,
                   height: 15.h,
                   width: 15.w,
                   color: AppColors.grey,
                 ),
-                4.horizontalSpace,
-                AppText(
-                  'Location',
-                  style: context.textTheme.bodyLarge!.s17.r
-                      .withColor(AppColors.grey),
+                9.horizontalSpace,
+                SizedBox(
+                  width: 200.w,
+                  child: AppText(
+                    Faker().address.country(),
+                    style: context.textTheme.bodyLarge!.s17.r
+                        .withColor(AppColors.grey),
+                  ),
                 ),
               ],
             ),
