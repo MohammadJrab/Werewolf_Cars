@@ -23,7 +23,7 @@ class LogoutBottomSheetBody extends StatelessWidget {
               context.textTheme.bodyLarge!.s20.xb.withColor(AppColors.primary),
         ),
         10.verticalSpace,
-        const WhiteDivider(
+        const CustomDivider(
           color: AppColors.whiteLess,
           endIndent: 10,
           indent: 10,

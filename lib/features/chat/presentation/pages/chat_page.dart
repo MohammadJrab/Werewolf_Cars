@@ -19,7 +19,7 @@ class ChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     backgroundColor: AppColors.blackLight,
+      backgroundColor: AppColors.blackLight,
       body: SafeArea(
         child: Padding(
           padding: HWEdgeInsets.only(left: 18, right: 18, top: 4),
@@ -37,7 +37,7 @@ class ChatPage extends StatelessWidget {
                 ),
               ),
               12.verticalSpace,
-              const WhiteDivider(),
+              const CustomDivider(),
               const Expanded(
                 child: MessagesListViewWidget(),
               ),

@@ -32,7 +32,7 @@ class TopSectionProfilePage extends StatelessWidget {
           style: context.textTheme.bodyLarge!.s14.withColor(AppColors.white),
         ),
         10.verticalSpace,
-        const WhiteDivider(
+        const CustomDivider(
           thickness: 1,
           endIndent: 0,
           indent: 0,
