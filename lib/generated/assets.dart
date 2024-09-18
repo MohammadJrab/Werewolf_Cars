@@ -16,6 +16,7 @@ class Assets {
   static const String makersAudi = 'assets/svg/makers/audi.svg';
   static const String makersBentley = 'assets/svg/makers/bentley.svg';
   static const String makersBmw = 'assets/svg/makers/bmw.svg';
+  static const String makersBmwWhiteBlack = 'assets/svg/makers/bmw-white-black.svg';
   static const String makersBugatti = 'assets/svg/makers/bugatti.svg';
   static const String makersCadillac = 'assets/svg/makers/cadillac.svg';
   static const String makersChevrolet = 'assets/svg/makers/chevrolet.svg';
