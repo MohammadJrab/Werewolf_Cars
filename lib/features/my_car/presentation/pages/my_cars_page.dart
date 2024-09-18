@@ -51,7 +51,8 @@ class MyCarsPage extends StatelessWidget {
               //     barrierLabel: "YearPickerDialog");
               //!!******** End ********
 
-              // GRouter.router.pushNamed(GRouter.config.myCarsRoutes.sellMyCarPage);
+              GRouter.router
+                  .pushNamed(GRouter.config.myCarsRoutes.sellMyCarPage);
             },
             child: const AppText("Sell My Car")),
         appBar: const CustomAppbar(
