@@ -32,7 +32,7 @@ class TransmissionSection extends StatelessWidget {
           child: const TransmissionListView(),
         ),
         20.verticalSpace,
-        const WhiteDivider(
+        const CustomDivider(
           color: AppColors.whiteLess,
           thickness: .5,
           endIndent: 15,

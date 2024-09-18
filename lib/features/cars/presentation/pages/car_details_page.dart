@@ -30,7 +30,8 @@ class CarDetailsPage extends StatelessWidget {
             const FeaturesListView(),
             Padding(
               padding: HWEdgeInsets.symmetric(horizontal: 11),
-              child: WhiteDivider(color: AppColors.whiteLess, thickness: 0.6.r),
+              child:
+                  CustomDivider(color: AppColors.whiteLess, thickness: 0.6.r),
             ),
             const CarDescription(
               description:
@@ -39,7 +40,8 @@ class CarDetailsPage extends StatelessWidget {
             Padding(
               padding:
                   HWEdgeInsets.only(left: 11, right: 11, top: 10, bottom: 5),
-              child: WhiteDivider(color: AppColors.whiteLess, thickness: 0.6.r),
+              child:
+                  CustomDivider(color: AppColors.whiteLess, thickness: 0.6.r),
             ),
             const SellerSctionDetalis(),
             const SimilarCarsListView()

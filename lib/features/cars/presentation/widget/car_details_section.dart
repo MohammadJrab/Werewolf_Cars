@@ -19,11 +19,11 @@ class CarDetailsSection extends StatelessWidget {
       child: Column(
         children: [
           const CarNameAndPriceRowWidget(),
-          WhiteDivider(color: AppColors.whiteLess, thickness: 1.r),
+          CustomDivider(color: AppColors.whiteLess, thickness: 1.r),
           5.verticalSpace,
           const CarDetailesGridView(),
           6.verticalSpace,
-          WhiteDivider(color: AppColors.whiteLess, thickness: 1.r),
+          CustomDivider(color: AppColors.whiteLess, thickness: 1.r),
           const CarDetailsItem(title: 'Brand', value: 'Ferrari'),
           const CarDetailsItem(title: 'Model', value: 'SF90 Stradale'),
           const CarDetailsItem(title: 'Year Model', value: '2019'),

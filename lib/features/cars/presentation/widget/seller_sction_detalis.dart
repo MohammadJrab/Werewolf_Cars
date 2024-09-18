@@ -43,7 +43,7 @@ class SellerSctionDetalis extends StatelessWidget {
               svg: Assets.svgMessageSquare,
               title: 'Send Message to Mohammad'),
           15.verticalSpace,
-          WhiteDivider(color: AppColors.grey, thickness: 1.r),
+          CustomDivider(color: AppColors.grey, thickness: 1.r),
           10.verticalSpace,
         ],
       ),

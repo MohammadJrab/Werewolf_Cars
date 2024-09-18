@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:werewolf_cars/core/config/theme/colors_app.dart';
 
-class WhiteDivider extends StatelessWidget {
-  const WhiteDivider({
+class CustomDivider extends StatelessWidget {
+  const CustomDivider({
     super.key,
     this.thickness = 4,
     this.indent = 0,
