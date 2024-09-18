@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,8 +20,41 @@ import 'package:werewolf_cars/generated/assets.dart';
 import 'package:werewolf_cars/generated/locale_keys.g.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SellMyCarPage extends StatelessWidget {
+class SellMyCarPage extends StatefulWidget {
   const SellMyCarPage({super.key});
+
+  @override
+  State<SellMyCarPage> createState() => _SellMyCarPageState();
+}
+
+class _SellMyCarPageState extends State<SellMyCarPage> {
+  int _currentStep = 0;
+  final ScrollController _scrollController = ScrollController();
+
+  final List<Widget> _sellItemSections = const [
+    SellItemSectionFour(),
+    SellItemSection(),
+    SellItemSection(),
+    SellItemSection(),
+    SellItemSection(),
+  ];
+
+  final List<double> _progressValues = [.2, .4, .6, .8, 1];
+
+  void _onNext() {
+    if (_currentStep < _sellItemSections.length - 1) {
+      setState(() {
+        _currentStep++;
+      });
+
+      // Scroll back to the top of the screen
+      _scrollController.animateTo(
+        0.0,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,16 +72,32 @@ class SellMyCarPage extends StatelessWidget {
           automaticallyImplyLeading: true,
         ),
         body: SingleChildScrollView(
+          controller: _scrollController, // Attach the ScrollController here
           child: Column(
             children: [
-              const ProgressLine(
-                value: 0.25,
-              ),
+              ProgressLine(value: _progressValues[_currentStep]),
               10.verticalSpace,
-              const SellItemSection(),
-              const NextButton(),
+              _sellItemSections[_currentStep],
+              NextButton(onTap: _onNext),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class CongratulationsSection extends StatelessWidget {
+  const CongratulationsSection({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        leading: GestureDetector(
+          onTap: () => GRouter.router.pop(),
+          child: const Icon(CupertinoIcons.xmark),
         ),
       ),
     );
@@ -103,6 +153,193 @@ class SellItemSection extends StatelessWidget {
   }
 }
 
+class SellItemSectionFour extends StatelessWidget {
+  const SellItemSectionFour({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          margin: HWEdgeInsets.only(top: (12.5).h, left: 10.w, right: 10.w),
+          padding: HWEdgeInsets.symmetric(horizontal: 10.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  AppText(
+                    'Safety',
+                    style: context.textTheme.bodyMedium?.r.s18
+                        .withColor(AppColors.grey),
+                  ),
+                  AppText(
+                    'Add / Edit',
+                    style: context.textTheme.bodyMedium?.r.s13
+                        .withColor(AppColors.grey),
+                  ),
+                ],
+              ),
+              10.verticalSpace,
+              Column(
+                children: [
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 150.w,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const AppSvgPicture(Assets.svgCheckCircle),
+                            5.horizontalSpace,
+                            SizedBox(
+                              width: 125.w,
+                              child: AppText(
+                                'Adaptive cruise control',
+                                style: context.textTheme.bodyMedium?.r.s15
+                                    .withColor(AppColors.white),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      30.horizontalSpace,
+                      SizedBox(
+                        width: 150.w,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const AppSvgPicture(Assets.svgCheckCircle),
+                            5.horizontalSpace,
+                            SizedBox(
+                              width: 125.w,
+                              child: AppText(
+                                'Adaptive cruise control',
+                                style: context.textTheme.bodyMedium?.r.s15
+                                    .withColor(AppColors.white),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  5.verticalSpace,
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 150.w,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const AppSvgPicture(Assets.svgCheckCircle),
+                            5.horizontalSpace,
+                            SizedBox(
+                              width: 125.w,
+                              child: AppText(
+                                'Adaptive cruise control',
+                                style: context.textTheme.bodyMedium?.r.s15
+                                    .withColor(AppColors.white),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      30.horizontalSpace,
+                      SizedBox(
+                        width: 150.w,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const AppSvgPicture(Assets.svgCheckCircle),
+                            5.horizontalSpace,
+                            SizedBox(
+                              width: 125.w,
+                              child: AppText(
+                                'Adaptive cruise control',
+                                style: context.textTheme.bodyMedium?.r.s15
+                                    .withColor(AppColors.white),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              20.verticalSpace,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  AppText(
+                    'Exterior',
+                    style: context.textTheme.bodyMedium?.r.s18
+                        .withColor(AppColors.grey),
+                  ),
+                  AppText(
+                    'Add / Edit',
+                    style: context.textTheme.bodyMedium?.r.s13
+                        .withColor(AppColors.grey),
+                  ),
+                ],
+              ),
+              20.verticalSpace,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  AppText(
+                    'Interior',
+                    style: context.textTheme.bodyMedium?.r.s18
+                        .withColor(AppColors.grey),
+                  ),
+                  AppText(
+                    'Add / Edit',
+                    style: context.textTheme.bodyMedium?.r.s13
+                        .withColor(AppColors.grey),
+                  ),
+                ],
+              ),
+              20.verticalSpace,
+              AppText(
+                'Description',
+                style: context.textTheme.bodyMedium?.r.s18
+                    .withColor(AppColors.grey),
+              ),
+              20.verticalSpace,
+              AppText(
+                "This BMW M4 Competition features a powerful twin-turbocharged engine, a sleek carbon-fiber roof, and high-end performance features. It’s a perfect balance of luxury and speed, with low mileage and excellent condition.",
+                style: context.textTheme.bodyMedium?.r.s15
+                    .withColor(AppColors.white),
+              ),
+              30.verticalSpace,
+              const CustomDivider(
+                thickness: .5,
+              ),
+              30.verticalSpace,
+              AppText(
+                'Price',
+                style: context.textTheme.bodyMedium?.r.s18
+                    .withColor(AppColors.grey),
+              ),
+              8.verticalSpace,
+              AppText(
+                r'25,000 $',
+                style: context.textTheme.bodyMedium?.b.s20
+                    .withColor(AppColors.white),
+              ),
+              40.verticalSpace,
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 class SellCarItem extends StatelessWidget {
   const SellCarItem({
     super.key,
@@ -121,13 +358,13 @@ class SellCarItem extends StatelessWidget {
           children: [
             AppText(
               'Make',
-              style: context.textTheme.bodyMedium?.sb.s20
-                  .withColor(AppColors.grey),
+              style:
+                  context.textTheme.bodyMedium?.r.s18.withColor(AppColors.grey),
             ),
             10.verticalSpace,
             AppText(
               'BMW',
-              style: context.textTheme.bodyMedium?.xb.s20
+              style: context.textTheme.bodyMedium?.b.s20
                   .withColor(AppColors.white),
             ),
             5.verticalSpace,

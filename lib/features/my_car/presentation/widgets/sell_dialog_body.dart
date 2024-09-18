@@ -44,6 +44,7 @@ class SellDialogBody extends StatelessWidget {
                 // appButtonStyle: AppButtonStyle.secondary,
                 onPressed: () {
                   GRouter.router.pop();
+                  GRouter.router.pop();
                 },
               ),
             ],
