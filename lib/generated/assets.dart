@@ -116,6 +116,7 @@ class Assets {
   static const String svgVanCar = 'assets/svg/van-car.svg';
   static const String svgWhatsapp = 'assets/svg/whatsapp.svg';
   static const String svgYear = 'assets/svg/year.svg';
+  static const String svgPlusAdd = 'assets/svg/plus_add.svg';
   static const String translationsAr = 'assets/translations/ar.json';
   static const String translationsEn = 'assets/translations/en.json';
 

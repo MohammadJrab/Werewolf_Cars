@@ -79,6 +79,7 @@ class _AuthRoutes {
 class _MyCarsRoutes {
   const _MyCarsRoutes._();
   final String sellMyCarPage = 'sellMyCarPage';
+  final String congratulationsPage = 'CongratulationsPage';
 }
 
 class _ChatsRoutes {

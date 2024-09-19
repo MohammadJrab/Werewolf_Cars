@@ -7,6 +7,7 @@ import 'package:werewolf_cars/core/config/theme/colors_app.dart';
 import 'package:werewolf_cars/features/app/presentation/pages/splash_page.dart';
 import 'package:werewolf_cars/features/cars/presentation/pages/car_details_page.dart';
 import 'package:werewolf_cars/features/cars/presentation/pages/car_images_previewer.dart';
+import 'package:werewolf_cars/features/my_car/presentation/pages/congratulations_page.dart';
 import 'package:werewolf_cars/features/my_car/presentation/pages/sell_my_car_page.dart';
 import 'package:werewolf_cars/features/search_and_filteration/presentation/pages/filter_page.dart';
 import 'package:werewolf_cars/features/profile/presentation/pages/edit_profile_page.dart';
@@ -260,6 +261,17 @@ class GRouter {
                       pageBuilder: (BuildContext context, GoRouterState state) {
                         return _builderPage(
                           child: const SellMyCarPage(),
+                          state: state,
+                        );
+                      },
+                    ),
+                    GoRoute(
+                      path: _config.myCarsRoutes.congratulationsPage,
+                      name: _config.myCarsRoutes.congratulationsPage,
+                      parentNavigatorKey: _rootNavigatorKey,
+                      pageBuilder: (BuildContext context, GoRouterState state) {
+                        return _builderPage(
+                          child: const CongratulationsPage(),
                           state: state,
                         );
                       },
