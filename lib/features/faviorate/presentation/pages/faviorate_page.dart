@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:werewolf_cars/core/config/theme/colors_app.dart';
 import 'package:werewolf_cars/core/utils/responsive_padding.dart';
-import 'package:werewolf_cars/features/home/presentation/widgets/car_mini_details_card_widget.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/custom_appbar.dart';
 import 'package:werewolf_cars/features/home/presentation/widgets/cars_list_view_builder.dart';
 

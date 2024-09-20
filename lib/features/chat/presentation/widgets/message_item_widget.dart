@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:werewolf_cars/features/chat/presentation/pages/chat_page.dart';
-
 import 'chat_bubble_item_widget.dart';
 import 'date_time_widget_message_item.dart';
 

@@ -15,6 +15,9 @@ class CarsListViewBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       scrollDirection: scrollDirection,
+      padding: scrollDirection == Axis.vertical
+          ? HWEdgeInsets.only(bottom: 20, left: 10, right: 10)
+          : null,
       itemCount: 4,
       itemBuilder: (context, index) => Padding(
         padding: padding,

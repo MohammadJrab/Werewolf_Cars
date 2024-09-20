@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:werewolf_cars/core/config/theme/colors_app.dart';
+import 'package:werewolf_cars/core/config/theme/typography.dart';
+import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
 import 'package:werewolf_cars/core/utils/responsive_padding.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
 
@@ -13,19 +14,18 @@ class DateTimeWidgetMessageItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 144.w,
-      padding: HWEdgeInsets.symmetric(vertical: 10, horizontal: 8),
-      margin: HWEdgeInsets.only(bottom: 24),
+      padding: HWEdgeInsets.symmetric(vertical: 9, horizontal: 16),
+      margin: HWEdgeInsets.only(bottom: 22),
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(40.r),
-        color: AppColors.white,
+        borderRadius: BorderRadius.circular(15.r),
+        color: const Color(0xffF4F5FA),
       ),
-      child: const AppText(
-        '8 jun 2024',
+      child: AppText(
+        '8 Jun 2024',
         maxLines: 1,
-        style: TextStyle(
-          color: AppColors.black,
-        ),
+        style:
+            context.textTheme.labelLarge.b.withColor(const Color(0xff1C1D22)),
       ),
     );
   }

@@ -7,6 +7,7 @@ import 'package:werewolf_cars/core/config/theme/colors_app.dart';
 import 'package:werewolf_cars/features/app/presentation/pages/splash_page.dart';
 import 'package:werewolf_cars/features/cars/presentation/pages/car_details_page.dart';
 import 'package:werewolf_cars/features/cars/presentation/pages/car_images_previewer.dart';
+import 'package:werewolf_cars/features/chat/presentation/pages/messages_base_page.dart';
 import 'package:werewolf_cars/features/my_car/presentation/pages/sell_my_car_page.dart';
 import 'package:werewolf_cars/features/search_and_filteration/presentation/pages/filter_page.dart';
 import 'package:werewolf_cars/features/profile/presentation/pages/edit_profile_page.dart';
@@ -284,14 +285,27 @@ class GRouter {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: _config.mainRoutes.chat,
-                name: _config.mainRoutes.chat,
+                path: _config.mainRoutes.messagesBasePage,
+                name: _config.mainRoutes.messagesBasePage,
                 pageBuilder: (BuildContext context, GoRouterState state) {
                   return _builderPage(
-                    child: const ChatPage(),
+                    child: const MessagesBasePage(),
                     state: state,
                   );
                 },
+                routes: [
+                  GoRoute(
+                    path: _config.chatsRoutes.chatPage,
+                    name: _config.chatsRoutes.chatPage,
+                    parentNavigatorKey: _rootNavigatorKey,
+                    pageBuilder: (BuildContext context, GoRouterState state) {
+                      return _builderPage(
+                        child: const ChatPage(),
+                        state: state,
+                      );
+                    },
+                  ),
+                ],
               ),
             ],
           ),

@@ -47,7 +47,7 @@ class BottomSectionCarMiniDetailsCard extends StatelessWidget {
                   ),
                 ],
               ),
-              4.verticalSpace,
+              6.verticalSpace,
               Row(
                 children: [
                   AppText(
@@ -84,8 +84,8 @@ class BottomSectionCarMiniDetailsCard extends StatelessWidget {
           const Spacer(),
           AppText(
             r'34,999$',
-            style: context.textTheme.titleSmall!.xb.withColor(AppColors.white),
-          )
+            style: context.textTheme.titleMedium!.xb.withColor(AppColors.white),
+          ),
         ],
       ),
     );
