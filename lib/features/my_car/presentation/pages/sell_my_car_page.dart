@@ -64,22 +64,27 @@ class _SellMyCarPageState extends State<SellMyCarPage> {
           text: 'Sell My Car',
           automaticallyImplyLeading: true,
         ),
-        body: SingleChildScrollView(
-          controller: _scrollController, // Attach the ScrollController here
-          child: Column(
-            children: [
-              ProgressLine(value: _progressValues[_currentStep]),
-              10.verticalSpace,
-              _sellItemSections[_currentStep],
-              NextButton(
-                text: _currentStep == 4 ? 'Submit' : 'Next',
-                onTap: _currentStep >= 4
-                    ? () => GRouter.router.pushReplacementNamed(
-                        GRouter.config.myCarsRoutes.congratulationsPage)
-                    : _onNext,
+        body: Column(
+          children: [
+            ProgressLine(value: _progressValues[_currentStep]),
+            10.verticalSpace,
+            Expanded(
+              child: SingleChildScrollView(
+                controller:
+                    _scrollController, // Attach the ScrollController here
+                child: Column(children: [
+                  _sellItemSections[_currentStep],
+                  NextButton(
+                    text: _currentStep == 4 ? 'Submit' : 'Next',
+                    onTap: _currentStep >= 4
+                        ? () => GRouter.router.pushReplacementNamed(
+                            GRouter.config.myCarsRoutes.congratulationsPage)
+                        : _onNext,
+                  ),
+                ]),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
