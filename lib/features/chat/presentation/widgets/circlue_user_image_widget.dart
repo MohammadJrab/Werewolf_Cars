@@ -31,9 +31,9 @@ class CirclueUserImageWidget extends StatelessWidget {
           )
         ],
       ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(60),
+      child: ClipOval(
         child: CachedNetworkImage(
+          fit: BoxFit.cover,
           imageUrl: userImage ??
               Faker()
                   .image

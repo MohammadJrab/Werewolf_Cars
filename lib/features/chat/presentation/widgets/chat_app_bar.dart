@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -7,7 +6,6 @@ import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
 import 'package:werewolf_cars/core/utils/responsive_padding.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_svg_picture.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
-import 'package:werewolf_cars/features/app/presentation/widgets/custom_appbar.dart';
 import 'package:werewolf_cars/features/chat/presentation/widgets/circlue_user_image_widget.dart';
 import 'package:werewolf_cars/generated/assets.dart';
 
@@ -30,7 +28,7 @@ class ChatAppbar extends StatelessWidget implements PreferredSizeWidget {
             children: [
               const Padding(
                 padding: EdgeInsets.only(top: 3.5),
-                child: CirclueUserImageWidget(height: 48, width: 48),
+                child: CirclueUserImageWidget(height: 42, width: 42),
               ),
               14.horizontalSpace,
               AppText(
@@ -53,7 +51,6 @@ class ChatAppbar extends StatelessWidget implements PreferredSizeWidget {
               ),
             ),
           ),
-          // actions: [action ?? const SizedBox()],
           automaticallyImplyLeading: true),
     );
   }
