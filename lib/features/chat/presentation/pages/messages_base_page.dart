@@ -47,7 +47,8 @@ class _MessagesBasePageState extends State<MessagesBasePage> {
                           padding: HWEdgeInsets.only(bottom: 25),
                           physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: (context, index) => Padding(
-                            padding: HWEdgeInsets.only(top: 25),
+                            padding:
+                                HWEdgeInsets.only(top: index == 0 ? 0 : 25),
                             child: ChatItem(
                               index: index,
                               onTap: () => GRouter.router.pushNamed(
