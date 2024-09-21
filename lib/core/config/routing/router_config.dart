@@ -21,7 +21,7 @@ class _MainRoutes {
   final String search = '/search';
   final String myCars = '/myCars';
   final String favorites = '/favorites';
-  final String chat = '/chat';
+  final String messagesBasePage = '/messagesBasePage';
   final String profile = '/profile';
 }
 
@@ -84,5 +84,5 @@ class _MyCarsRoutes {
 
 class _ChatsRoutes {
   const _ChatsRoutes._();
-  final String chatsPage = 'chatsPage';
+  final String chatPage = 'chatPage';
 }

@@ -1,13 +1,12 @@
 import 'package:werewolf_cars/generated/assets.dart';
 
-enum CarType {
+enum VehicleType {
   coupe('Coupe', Assets.svgCoupeCar),
   sports('Sports', Assets.svgSportsCar),
   superCar('Super', Assets.svgSuperCar),
   suv('SUV', Assets.svgSuvCar),
   sedan('Sedan', Assets.svgSedanCar),
   micro('Micro', Assets.svgMicroCar),
-
   hatchback('Hatchback', Assets.svgHatchbackCar),
   pickup('Pickup', Assets.svgPickupCar),
   roadster('Roadster', Assets.svgRoadsterCar),
@@ -18,5 +17,5 @@ enum CarType {
   final String name;
   final String asset;
 
-  const CarType(this.name, this.asset);
+  const VehicleType(this.name, this.asset);
 }

@@ -23,7 +23,7 @@ class TopSecrionCarMiniDetailsCard extends StatelessWidget {
             topRight: Radius.circular(12.r),
           ),
           border:
-              Border(bottom: BorderSide(color: AppColors.white, width: 1.w)),
+              Border(bottom: BorderSide(color: AppColors.grey, width: 1.5.w)),
           image: const DecorationImage(
             image: AssetImage(Assets.imagesCar2),
             fit: BoxFit.cover,

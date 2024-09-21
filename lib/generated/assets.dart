@@ -72,6 +72,7 @@ class Assets {
   static const String svgCheckCircle = 'assets/svg/check-circle.svg';
   static const String svgCoupeCar = 'assets/svg/coupe-car.svg';
   static const String svgEmail = 'assets/svg/email.svg';
+  static const String svgEmptyMessages = 'assets/svg/empty-messages.svg';
   static const String svgEngineMotor = 'assets/svg/engine_motor.svg';
   static const String svgEye = 'assets/svg/eye.svg';
   static const String svgEyeCrossed = 'assets/svg/eye_crossed.svg';
