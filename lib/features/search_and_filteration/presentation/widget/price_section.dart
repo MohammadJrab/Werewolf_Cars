@@ -6,7 +6,6 @@ import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
 import 'package:werewolf_cars/core/utils/responsive_padding.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
 import 'package:werewolf_cars/features/chat/presentation/widgets/white_divider.dart';
-import 'package:werewolf_cars/features/search_and_filteration/presentation/widget/custom_slider_widget_state.dart';
 
 import 'suggestions_list_view_item.dart';
 
@@ -29,12 +28,13 @@ class PriceSection extends StatelessWidget {
           ),
         ),
         20.verticalSpace,
-        Padding(
-          padding: HWEdgeInsets.symmetric(horizontal: 20),
-          // TODO we must change this slider
-          child: const CustomSliderWidget(),
-        ),
-        20.verticalSpace,
+
+        // Padding(
+        //   padding: HWEdgeInsets.symmetric(horizontal: 20),
+        //   // TODO we must change this slider
+        //   child: const CustomSliderWidget(),
+        // ),
+        // 20.verticalSpace,
         Padding(
           padding: HWEdgeInsets.only(left: 25),
           child: AppText(

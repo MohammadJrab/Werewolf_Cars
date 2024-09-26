@@ -49,19 +49,15 @@ class ChatTextFieldInput extends StatelessWidget {
         ),
         constraints: BoxConstraints(minHeight: 50.h),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(18.r),
+          borderRadius: BorderRadius.circular(10.r),
           borderSide: BorderSide(color: AppColors.grey, width: 1.5.r),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(18.r),
+          borderRadius: BorderRadius.circular(10.r),
           borderSide: BorderSide(color: AppColors.grey, width: 1.5.r),
         ),
-        contentPadding: HWEdgeInsets.only(
-          right: 8,
-          left: 15,
-          top: 12,
-          bottom: 12,
-        ),
+        contentPadding:
+            HWEdgeInsets.only(right: 8, left: 15, top: 12, bottom: 12),
         hintText: 'Your message...',
         hintStyle:
             context.textTheme.titleMedium?.m.withColor(const Color(0xff6E7079)),

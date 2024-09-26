@@ -3,52 +3,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:werewolf_cars/core/config/theme/colors_app.dart';
 import 'package:werewolf_cars/core/config/theme/typography.dart';
 import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
+
 import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
-import 'package:werewolf_cars/features/app/presentation/widgets/year_picker_dialog.dart';
-import 'package:werewolf_cars/features/search_and_filteration/presentation/pages/filter_page.dart';
 
-class YearItemWidget extends StatefulWidget {
-  const YearItemWidget({
-    super.key,
-  });
+class YearItemWidget extends StatelessWidget {
+  final int? selectedYear;
+  final VoidCallback? onTap;
 
-  @override
-  State<YearItemWidget> createState() => _YearItemWidgetState();
-}
-
-class _YearItemWidgetState extends State<YearItemWidget> {
-  late int selectedYear;
-
-  @override
-  void initState() {
-    super.initState();
-    selectedYear = 1990;
-  }
-
-  void onYearChanged(int newYear) {
-    setState(() {
-      selectedYear = newYear;
-    });
-  }
-
-  void _pickYear() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return YearPickerDialog(
-          currentYear: selectedYear,
-          onYearChanged: (newYear) {
-            onYearChanged(newYear);
-          },
-        );
-      },
-    );
-  }
+  const YearItemWidget({super.key, required this.onTap, this.selectedYear});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: _pickYear,
+      onTap: onTap,
       child: Container(
         alignment: Alignment.center,
         height: 45.h,
@@ -56,12 +23,12 @@ class _YearItemWidgetState extends State<YearItemWidget> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(14.r),
           border: Border.all(
-            color: Colors.white,
-            width: 1,
+            color: selectedYear != null ? AppColors.primary : AppColors.white,
+            width: 1.r,
           ),
         ),
         child: AppText(
-          '$selectedYear',
+          selectedYear != null ? selectedYear.toString() : "----",
           style: context.textTheme.bodyLarge?.s14.withColor(AppColors.white),
         ),
       ),

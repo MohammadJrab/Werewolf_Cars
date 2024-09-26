@@ -28,7 +28,7 @@ class ChatAppbar extends StatelessWidget implements PreferredSizeWidget {
             children: [
               const Padding(
                 padding: EdgeInsets.only(top: 3.5),
-                child: CirclueUserImageWidget(height: 42, width: 42),
+                child: CirclueUserImageWidget(width: 42),
               ),
               14.horizontalSpace,
               AppText(

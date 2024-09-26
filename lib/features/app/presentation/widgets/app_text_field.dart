@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
+import 'package:werewolf_cars/core/config/theme/colors_app.dart';
 import 'package:werewolf_cars/core/config/theme/my_color_scheme.dart';
 import 'package:werewolf_cars/core/config/theme/typography.dart';
 import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
@@ -192,7 +193,7 @@ class _AppTextFieldState extends State<AppTextField> {
             ],
             style: widget.textStyle ??
                 context.textTheme.titleSmall?.r?.copyWith(
-                  color: context.colorScheme.onBackground,
+                  color: context.colorScheme.onSurface,
                   decoration: TextDecoration.none,
                   decorationColor: context.colorScheme.borderTextField,
                 ),
@@ -207,7 +208,7 @@ class _AppTextFieldState extends State<AppTextField> {
               ),
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color: widget.borderSideColor ?? context.colorScheme.primary,
+                  color: AppColors.primary,
                   width: widget.borderWidth ?? 1.0,
                 ),
                 borderRadius: widget.borderRadius ??
@@ -270,7 +271,7 @@ class _AppTextFieldState extends State<AppTextField> {
                   context.textTheme.bodyMedium?.s13
                       .withColor(context.colorScheme.hint),
               floatingLabelStyle: context.textTheme.bodyMedium?.m.s15
-                  .withColor(context.colorScheme.onBackground),
+                  .withColor(context.colorScheme.onSurface),
             ),
           );
         });

@@ -19,7 +19,6 @@ class UserSectionWithLocation extends StatelessWidget {
     return Row(
       children: [
         const CirclueUserImageWidget(
-          height: 80,
           width: 80,
         ),
         25.horizontalSpace,

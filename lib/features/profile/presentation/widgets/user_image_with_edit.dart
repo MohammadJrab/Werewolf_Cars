@@ -15,7 +15,6 @@ class UserImageWithEdit extends StatelessWidget {
       child: Stack(
         children: [
           const CirclueUserImageWidget(
-            height: 90,
             width: 90,
           ),
           Positioned(

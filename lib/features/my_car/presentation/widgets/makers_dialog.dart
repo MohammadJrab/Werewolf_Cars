@@ -13,7 +13,16 @@ import 'package:werewolf_cars/features/my_car/presentation/widgets/makers_list_t
 import 'package:werewolf_cars/services/car_maker_filter_service.dart';
 
 class CarsMakersDialog extends StatefulWidget {
-  const CarsMakersDialog({super.key});
+  final bool isMultiSelect;
+  final List<CarMaker> selectedCarMakers;
+  final Function(dynamic) onSelectionConfirmed;
+
+  const CarsMakersDialog({
+    Key? key,
+    this.isMultiSelect = false,
+    required this.onSelectionConfirmed,
+    required this.selectedCarMakers,
+  }) : super(key: key);
 
   @override
   State<CarsMakersDialog> createState() => _CarsMakersDialogState();
@@ -23,18 +32,20 @@ class _CarsMakersDialogState extends State<CarsMakersDialog> {
   final TextEditingController _searchController = TextEditingController();
   final CarMakerFilterService _filterService = CarMakerFilterService();
   List<CarMaker> _filteredCarMakers = List.from(CarMaker.values);
-
+  List<CarMaker> _selectedCarMakers = [];
   @override
   void initState() {
     super.initState();
     _filteredCarMakers = _filterService.filterCarMakers("", _filteredCarMakers);
+    setState(() {
+      _selectedCarMakers = widget.selectedCarMakers;
+    });
     _searchController.addListener(_onSearchChanged);
   }
 
   @override
   void dispose() {
     _searchController.removeListener(_onSearchChanged);
-    _searchController.dispose();
     super.dispose();
   }
 
@@ -45,12 +56,41 @@ class _CarsMakersDialogState extends State<CarsMakersDialog> {
     });
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return _buildDialog(context);
+  void _onMakerSelected(CarMaker maker) {
+    setState(() {
+      if (widget.isMultiSelect) {
+        if (_selectedCarMakers.contains(maker)) {
+          _selectedCarMakers.remove(maker);
+        } else {
+          _selectedCarMakers.add(maker);
+        }
+      } else {
+        _selectedCarMakers = [maker];
+      }
+    });
   }
 
-  Widget _buildDialog(BuildContext context) {
+  void _onConfirmSelection() {
+    if (widget.isMultiSelect) {
+      widget.onSelectionConfirmed(_selectedCarMakers);
+    } else {
+      widget.onSelectionConfirmed(
+          _selectedCarMakers.isNotEmpty ? _selectedCarMakers.first : null);
+    }
+    Navigator.of(context).pop();
+  }
+
+  void _onReset() {
+    if (widget.isMultiSelect) {
+      widget.onSelectionConfirmed(null);
+    } else {
+      widget.onSelectionConfirmed(null);
+    }
+    Navigator.of(context).pop();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       padding: HWEdgeInsets.symmetric(horizontal: 20, vertical: 20),
       decoration: _buildBoxDecoration(),
@@ -59,9 +99,12 @@ class _CarsMakersDialogState extends State<CarsMakersDialog> {
           _buildHeader(context),
           20.verticalSpace,
           CustomDialogSearchBar(
-              searchController: _searchController,
-              hintText: 'Search for Makers'),
+            searchController: _searchController,
+            hintText: 'Search for Makers',
+          ),
           _buildCarMakersContent(),
+          20.verticalSpace,
+          _buildButtons(),
         ],
       ),
     );
@@ -69,25 +112,33 @@ class _CarsMakersDialogState extends State<CarsMakersDialog> {
 
   Widget _buildCarMakersContent() {
     return Expanded(
-      child: CustomScrollView(
-        slivers: [
-          if (_searchController.text.isEmpty) const CarLogoSliverGrid(),
-          SliverToBoxAdapter(child: 10.verticalSpace),
-          SliverFillRemaining(
-            child: MakersListTileListView(carMakers: _filteredCarMakers),
+        child: CustomScrollView(
+      slivers: [
+        if (_searchController.text.isEmpty)
+          CarLogoSliverGrid(
+            selectedCarMakers: _selectedCarMakers,
+            onMakerSelected: _onMakerSelected,
+            isMultiSelect: widget.isMultiSelect,
           ),
-        ],
-      ),
-    );
+        SliverToBoxAdapter(
+          child: 10.verticalSpace,
+        ),
+        MakersSliverListTileListView(
+          carMakers: _filteredCarMakers,
+          onMakerSelected: _onMakerSelected,
+          selectedMakers: _selectedCarMakers,
+        ),
+      ],
+    ));
   }
 
   Widget _buildHeader(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        AppText(
+        Text(
           'Makers',
-          style: context.textTheme.titleMedium?.s20.b,
+          style: context.textTheme.bodyMedium.s20.b,
         ),
         IconButton(
           icon: const Icon(CupertinoIcons.xmark, color: Colors.white),
@@ -97,10 +148,42 @@ class _CarsMakersDialogState extends State<CarsMakersDialog> {
     );
   }
 
+  Widget _buildButtons() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        ElevatedButton(
+          onPressed: _onConfirmSelection,
+          style: ButtonStyle(
+              backgroundColor: const WidgetStatePropertyAll(AppColors.primary),
+              minimumSize: WidgetStatePropertyAll(
+                Size(35.w, 45.h),
+              )),
+          child: AppText(
+            widget.isMultiSelect ? 'Confirm Selection' : 'Select',
+            style: context.textTheme.bodyMedium.b,
+          ),
+        ),
+        ElevatedButton(
+          onPressed: _onReset,
+          style: ButtonStyle(
+              backgroundColor: const WidgetStatePropertyAll(AppColors.grey),
+              minimumSize: WidgetStatePropertyAll(
+                Size(35.w, 45.h),
+              )),
+          child: AppText(
+            'Reset',
+            style: context.textTheme.bodyMedium.b,
+          ),
+        ),
+      ],
+    );
+  }
+
   BoxDecoration _buildBoxDecoration() {
     return BoxDecoration(
       color: AppColors.blackLight,
-      borderRadius: BorderRadius.circular(10.r),
+      borderRadius: BorderRadius.circular(10),
       boxShadow: const [
         BoxShadow(
           blurRadius: 8,

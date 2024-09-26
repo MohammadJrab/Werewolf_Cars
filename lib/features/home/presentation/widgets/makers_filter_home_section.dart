@@ -4,10 +4,10 @@ import 'package:werewolf_cars/core/config/theme/typography.dart';
 import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
 import 'package:werewolf_cars/core/utils/responsive_padding.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
-import 'package:werewolf_cars/features/search_and_filteration/presentation/widget/makers_list_view.dart';
+import 'package:werewolf_cars/features/home/presentation/widgets/maker_list_view_home.dart';
 
-class MakersFilterSection extends StatelessWidget {
-  const MakersFilterSection({
+class MakersFilterHomeSection extends StatelessWidget {
+  const MakersFilterHomeSection({
     super.key,
   });
 
@@ -23,11 +23,10 @@ class MakersFilterSection extends StatelessWidget {
             style: context.textTheme.bodyMedium.s20.sb,
           ),
         ),
-        Container(
+        SizedBox(
           width: 1.sw,
           height: 60.h,
-          margin: HWEdgeInsetsDirectional.only(start: 14),
-          child: const MakersListView(),
+          child: const MakersListViewHome(),
         ),
       ],
     );

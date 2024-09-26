@@ -23,11 +23,11 @@ class SimilarCarsListView extends StatelessWidget {
             'Similar',
             style: context.textTheme.bodyLarge!.s17.b.withColor(AppColors.grey),
           ),
-          16.verticalSpace,
+          20.verticalSpace,
           SizedBox(
             height: 150.h,
             child: ListView.builder(
-                padding: HWEdgeInsets.only(left: 11, right: 10),
+                padding: HWEdgeInsets.only(left: 8, right: 10),
                 itemCount: 4,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) => Padding(
@@ -35,7 +35,7 @@ class SimilarCarsListView extends StatelessWidget {
                       child: const SimilarCarItem(),
                     )),
           ),
-          45.verticalSpace,
+          30.verticalSpace,
         ],
       ),
     );

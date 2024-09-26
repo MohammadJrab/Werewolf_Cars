@@ -2,7 +2,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:werewolf_cars/core/config/routing/router.dart';
+import 'package:werewolf_cars/core/config/theme/app_theme.dart';
 import 'package:werewolf_cars/core/config/theme/colors_app.dart';
+import 'package:werewolf_cars/core/config/theme/typography.dart';
+import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
 import 'package:werewolf_cars/core/utils/responsive_padding.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/animated_dialog.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
@@ -27,105 +30,113 @@ class MyCarsPage extends StatelessWidget {
       child: Scaffold(
         floatingActionButtonLocation:
             FloatingActionButtonLocation.miniCenterDocked,
-        floatingActionButton: ElevatedButton(
-            style: ButtonStyle(
-                alignment: Alignment.center,
-                minimumSize: WidgetStatePropertyAll(Size(200.w, 50.h)),
-                backgroundColor: const WidgetStatePropertyAll(AppColors.white)),
-            onPressed: () {
-              //!!******** MakersDialog Display ********
-              // AnimatedDialog.show(context,
-              //     insetPadding:  HWEdgeInsets.only(
-              //         top: 60, left: 40, right: 40, bottom: 30),
-              //     child: const CarsMakersDialog(),
-              //     barrierDismissible: true,
-              //     barrierLabel: "MakersDialog");
+        floatingActionButton: Padding(
+          padding: HWEdgeInsets.only(bottom: 18),
+          child: ElevatedButton(
+              style: ButtonStyle(
+                  alignment: Alignment.center,
+                  minimumSize: WidgetStatePropertyAll(Size(200.w, 50.h)),
+                  backgroundColor:
+                      const WidgetStatePropertyAll(AppColors.white)),
+              onPressed: () {
+                //!!******** MakersDialog Display ********
+                // AnimatedDialog.show(context,
+                //     insetPadding:  HWEdgeInsets.only(
+                //         top: 60, left: 40, right: 40, bottom: 30),
+                //     child: const CarsMakersDialog(),
+                //     barrierDismissible: true,
+                //     barrierLabel: "MakersDialog");
 
-              //!!******** YearsDialog Display ********
-              // AnimatedDialog.show(context,
-              //     insetPadding: HWEdgeInsets.only(
-              //         top: 60, left: 40, right: 40, bottom: 30),
-              //     child: YearPickerDialog(
-              //       currentYear: DateTime.now().year,
-              //       onYearChanged: (selectedYear) {
-              //         if (kDebugMode) {
-              //           print('Selected Year: $selectedYear');
-              //         }
-              //         // Todo: Select car year
-              //       },
-              //     ),
-              //     barrierDismissible: true,
-              //     barrierLabel: "YearPickerDialog");
+                //!!******** YearsDialog Display ********
+                // AnimatedDialog.show(context,
+                //     insetPadding: HWEdgeInsets.only(
+                //         top: 60, left: 40, right: 40, bottom: 30),
+                //     child: YearPickerDialog(
+                //       currentYear: DateTime.now().year,
+                //       onYearChanged: (selectedYear) {
+                //         if (kDebugMode) {
+                //           print('Selected Year: $selectedYear');
+                //         }
+                //         // Todo: Select car year
+                //       },
+                //     ),
+                //     barrierDismissible: true,
+                //     barrierLabel: "YearPickerDialog");
 
-              //!!******** TranmissionDialog Display ********
-              // AnimatedDialog.show(context,
-              //     insetPadding: HWEdgeInsets.only(
-              //         top: 60, left: 40, right: 40, bottom: 30),
-              //     child: const TranmissionDialog(),
-              //     alignment: Alignment.center,
-              //     barrierDismissible: true,
-              //     barrierLabel: "TransmissionDialog");
+                //!!******** TranmissionDialog Display ********
+                // AnimatedDialog.show(context,
+                //     insetPadding: HWEdgeInsets.only(
+                //         top: 60, left: 40, right: 40, bottom: 30),
+                //     child: const TranmissionDialog(),
+                //     alignment: Alignment.center,
+                //     barrierDismissible: true,
+                //     barrierLabel: "TransmissionDialog");
 
-              //!!******** FuelTypeDialog Display ********
-              // AnimatedDialog.show(context,
-              //     insetPadding: HWEdgeInsets.only(
-              //         top: 60, left: 40, right: 40, bottom: 30),
-              //     child: const FuelTypeDialog(),
-              //     alignment: Alignment.center,
-              //     barrierDismissible: true,
-              //     barrierLabel: "FuelTypeDialog");
+                //!!******** FuelTypeDialog Display ********
+                // AnimatedDialog.show(context,
+                //     insetPadding: HWEdgeInsets.only(
+                //         top: 60, left: 40, right: 40, bottom: 30),
+                //     child: const FuelTypeDialog(),
+                //     alignment: Alignment.center,
+                //     barrierDismissible: true,
+                //     barrierLabel: "FuelTypeDialog");
 
-              //!!******** ColorsDialog Display ********
-              // AnimatedDialog.show(context,
-              //     insetPadding: HWEdgeInsets.only(
-              //         top: 60, left: 40, right: 40, bottom: 30),
-              //     child: const ColorsDialog(),
-              //     alignment: Alignment.center,
-              //     barrierDismissible: true,
-              //     barrierLabel: "ColorsDialog");
+                //!!******** ColorsDialog Display ********
+                // AnimatedDialog.show(context,
+                //     insetPadding: HWEdgeInsets.only(
+                //         top: 60, left: 40, right: 40, bottom: 30),
+                //     child: const ColorsDialog(),
+                //     alignment: Alignment.center,
+                //     barrierDismissible: true,
+                //     barrierLabel: "ColorsDialog");
 
-              //!!******** VehicleTypeDialog Display ********
-              // AnimatedDialog.show(context,
-              //     insetPadding: HWEdgeInsets.only(
-              //         top: 60, left: 40, right: 40, bottom: 30),
-              //     child: const VehicleTypeDialog(),
-              //     alignment: Alignment.center,
-              //     barrierDismissible: true,
-              //     barrierLabel: "VehicleType");
+                //!!******** VehicleTypeDialog Display ********
+                // AnimatedDialog.show(context,
+                //     insetPadding: HWEdgeInsets.only(
+                //         top: 60, left: 40, right: 40, bottom: 30),
+                //     child: const VehicleTypeDialog(),
+                //     alignment: Alignment.center,
+                //     barrierDismissible: true,
+                //     barrierLabel: "VehicleType");
 
-              //!!******** InteriorFeaturesDialog Display ********
-              // AnimatedDialog.show(context,
-              //     insetPadding: HWEdgeInsets.only(
-              //         top: 60, left: 40, right: 40, bottom: 30),
-              //     child: const InteriorFeaturesDialog(),
-              //     alignment: Alignment.center,
-              //     barrierDismissible: true,
-              //     barrierLabel: "InteriorDialog");
+                //!!******** InteriorFeaturesDialog Display ********
+                // AnimatedDialog.show(context,
+                //     insetPadding: HWEdgeInsets.only(
+                //         top: 60, left: 40, right: 40, bottom: 30),
+                //     child: const InteriorFeaturesDialog(),
+                //     alignment: Alignment.center,
+                //     barrierDismissible: true,
+                //     barrierLabel: "InteriorDialog");
 
-              //!!******** ExteriorFeaturesDialog Display ********
-              // AnimatedDialog.show(context,
-              //     insetPadding: HWEdgeInsets.only(
-              //         top: 60, left: 40, right: 40, bottom: 30),
-              //     child: const ExteriorFeaturesDialog(),
-              //     alignment: Alignment.center,
-              //     barrierDismissible: true,
-              //     barrierLabel: "ExteriorDialog");
+                //!!******** ExteriorFeaturesDialog Display ********
+                // AnimatedDialog.show(context,
+                //     insetPadding: HWEdgeInsets.only(
+                //         top: 60, left: 40, right: 40, bottom: 30),
+                //     child: const ExteriorFeaturesDialog(),
+                //     alignment: Alignment.center,
+                //     barrierDismissible: true,
+                //     barrierLabel: "ExteriorDialog");
 
-              //!!******** SafetyFeaturesDialog Display ********
-              // AnimatedDialog.show(context,
-              //     insetPadding: HWEdgeInsets.only(
-              //         top: 60, left: 40, right: 40, bottom: 30),
-              //     child: const SafetyFeaturesDialog(),
-              //     alignment: Alignment.center,
-              //     barrierDismissible: true,
-              //     barrierLabel: "SafetyFeaturesDialog");
+                //!!******** SafetyFeaturesDialog Display ********
+                // AnimatedDialog.show(context,
+                //     insetPadding: HWEdgeInsets.only(
+                //         top: 60, left: 40, right: 40, bottom: 30),
+                //     child: const SafetyFeaturesDialog(),
+                //     alignment: Alignment.center,
+                //     barrierDismissible: true,
+                //     barrierLabel: "SafetyFeaturesDialog");
 
-              //!!******** End ********
+                //!!******** End ********
 
-              GRouter.router
-                  .pushNamed(GRouter.config.myCarsRoutes.sellMyCarPage);
-            },
-            child: const AppText("Sell My Car")),
+                GRouter.router
+                    .pushNamed(GRouter.config.myCarsRoutes.sellMyCarPage);
+              },
+              child: AppText(
+                "Sell My Car",
+                style: context.textTheme.bodyLarge?.b
+                    .withColor(AppColors.blackLight),
+              )),
+        ),
         appBar: const CustomAppbar(
           text: 'My Cars',
         ),

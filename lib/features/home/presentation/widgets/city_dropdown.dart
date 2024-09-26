@@ -20,9 +20,10 @@ class CityDropdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 40.h,
+      height: 25.h,
       width: 180.w,
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           15.horizontalSpace,
           const AppSvgPicture(Assets.svgLocationPin),

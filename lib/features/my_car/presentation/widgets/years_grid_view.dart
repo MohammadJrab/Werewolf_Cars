@@ -6,13 +6,13 @@ class YearsGridView extends StatelessWidget {
     super.key,
     required this.nowYear,
     required this.startYear,
-    required this.currentYear,
+    this.currentYear,
     required this.onYearChanged,
   });
 
   final int nowYear;
   final int startYear;
-  final int currentYear;
+  final int? currentYear;
   final ValueChanged<int> onYearChanged;
 
   @override
@@ -24,7 +24,7 @@ class YearsGridView extends StatelessWidget {
             mainAxisSpacing: 16,
             childAspectRatio: 25 / 15.5,
             crossAxisCount: 3),
-        itemCount: (nowYear - startYear) + 1,
+        itemCount: (nowYear - startYear) + 2,
         itemBuilder: (context, index) {
           final year = startYear + index;
           return YearItem(

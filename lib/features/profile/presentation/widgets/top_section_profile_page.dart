@@ -21,7 +21,6 @@ class TopSectionProfilePage extends StatelessWidget {
       children: [
         40.verticalSpace,
         const CirclueUserImageWidget(
-          height: 90,
           width: 90,
         ),
         20.verticalSpace,

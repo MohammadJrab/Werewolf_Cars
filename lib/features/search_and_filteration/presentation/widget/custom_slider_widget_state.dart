@@ -13,13 +13,10 @@ class CustomSliderWidget extends StatefulWidget {
 }
 
 class _CustomSliderWidgetState extends State<CustomSliderWidget> {
-  RangeValues _currentRangeValues = const RangeValues(30000, 2000000);
+  RangeValues _currentRangeValues = const RangeValues(10000, 200000);
 
   @override
   Widget build(BuildContext context) {
-    // Initialize ScreenUtil for responsive sizing
-    ScreenUtil.init(context);
-
     return Stack(
       alignment: Alignment.center,
       children: [

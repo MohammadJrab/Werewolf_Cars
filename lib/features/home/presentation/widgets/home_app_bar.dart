@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:werewolf_cars/core/config/routing/router.dart';
 import 'package:werewolf_cars/core/config/theme/colors_app.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_svg_picture.dart';
+import 'package:werewolf_cars/features/chat/presentation/widgets/circlue_user_image_widget.dart';
 import 'package:werewolf_cars/features/home/presentation/widgets/city_dropdown.dart';
 import 'package:werewolf_cars/generated/assets.dart';
 
@@ -43,9 +44,7 @@ class HomeAppBar extends StatelessWidget {
               onTap: () {
                 GRouter.router.pushNamed(GRouter.config.profileRoutes.profile);
               },
-              child: const CircleAvatar(
-                backgroundImage: AssetImage(Assets.imagesAppIcon),
-              ),
+              child: const CirclueUserImageWidget(width: 40, height: 40),
             ),
           ],
         ),

@@ -24,7 +24,6 @@ class ChatItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CirclueUserImageWidget(
-            height: 55,
             width: 55,
             userImage: Faker()
                 .image

@@ -12,7 +12,7 @@ class FavioratePage extends StatelessWidget {
     return Scaffold(
       appBar: const CustomAppbar(
         text: 'Faviorate',
-        automaticallyImplyLeading: true,
+        automaticallyImplyLeading: false,
       ),
       body: Column(
         children: [
@@ -20,7 +20,7 @@ class FavioratePage extends StatelessWidget {
             child: CarsListViewBuilder(
               scrollDirection: Axis.vertical,
               padding:
-                  HWEdgeInsetsDirectional.only(start: 14, end: 14, top: 20),
+                  HWEdgeInsetsDirectional.only(start: 14, end: 14, top: 10),
             ),
           ),
         ],

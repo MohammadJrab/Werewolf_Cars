@@ -24,8 +24,9 @@ class SearchBarButton extends StatelessWidget {
       child: Container(
         height: 50.h,
         decoration: BoxDecoration(
-            color: AppColors.white, borderRadius: BorderRadius.circular(10).r),
-        padding: HWEdgeInsetsDirectional.only(start: 36, end: 24),
+            border: Border.all(color: AppColors.grey, width: 1.2.r),
+            borderRadius: BorderRadius.circular(10).r),
+        padding: HWEdgeInsetsDirectional.only(start: 22, end: 24),
         margin: HWEdgeInsets.only(left: 24, right: 24),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -37,13 +38,13 @@ class SearchBarButton extends StatelessWidget {
                 color: Color(0xff8C9199),
               ),
             ),
-            const Spacer(),
+            12.horizontalSpace,
             AppText(
               LocaleKeys.searchHereForCars,
               style: context.textTheme.bodyMedium?.r
-                  .withColor(AppColors.blackLight.withOpacity(0.67)),
+                  .withColor(AppColors.white.withOpacity(0.67)),
             ),
-            55.horizontalSpace,
+            const Spacer(),
             SizedBox(
               width: 24.r,
               child: const AppSvgPicture(

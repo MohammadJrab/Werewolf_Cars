@@ -10,12 +10,12 @@ class YearItem extends StatelessWidget {
   const YearItem({
     super.key,
     required this.year,
-    required this.currentYear,
+    this.currentYear,
     required this.onYearChanged,
   });
 
   final int year;
-  final int currentYear;
+  final int? currentYear;
   final ValueChanged<int> onYearChanged;
 
   @override

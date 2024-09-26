@@ -10,17 +10,17 @@ class CirclueUserImageWidget extends StatelessWidget {
   const CirclueUserImageWidget({
     super.key,
     this.width = 60,
-    this.height = 60,
     this.userImage,
+    this.height,
   });
   final double width;
-  final double height;
+  final double? height;
   final String? userImage;
   @override
   Widget build(BuildContext context) {
     return Container(
       width: width.w,
-      height: height.h,
+      height: height?.h,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         boxShadow: [
@@ -49,7 +49,6 @@ class CirclueUserImageWidget extends StatelessWidget {
           },
           errorWidget: (context, url, error) => Container(
             width: width,
-            height: height,
             color: AppColors.grey,
             child: const Icon(Icons.error),
           ),
