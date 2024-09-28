@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:werewolf_cars/common/enums/car_color.dart';
 import 'package:werewolf_cars/core/config/theme/colors_app.dart';
 import 'package:werewolf_cars/core/config/theme/typography.dart';
 import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
+import 'package:werewolf_cars/core/utils/extensions/color_extension.dart';
 import 'package:werewolf_cars/core/utils/responsive_padding.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
 
 class ColorItem extends StatelessWidget {
   const ColorItem({
     super.key,
-    required this.colorName,
-    required this.color,
+    required this.colorItem,
     required this.isSelected,
     required this.onTap,
   });
 
-  final String colorName;
-  final Color color;
+  final CarColor colorItem;
   final bool isSelected;
   final VoidCallback onTap;
 
@@ -29,23 +29,27 @@ class ColorItem extends StatelessWidget {
         child: Column(
           children: [
             AnimatedContainer(
-              duration: const Duration(milliseconds: 250),
+              duration: const Duration(milliseconds: 400),
               decoration: BoxDecoration(
                 border: isSelected
-                    ? Border.all(color: Colors.white, width: 2)
+                    ? Border.all(
+                        color: colorItem.colorValue == Colors.orange
+                            ? Colors.white
+                            : AppColors.orange,
+                        width: 2.r)
                     : null,
                 shape: BoxShape.circle,
               ),
               child: CircleAvatar(
-                backgroundColor: color,
+                backgroundColor: colorItem.colorValue,
                 radius: isSelected ? 23.5.r : 25.r,
               ),
             ),
             10.verticalSpace,
             AppText(
-              colorName,
-              style:
-                  context.textTheme.bodyLarge?.s14.withColor(AppColors.white),
+              colorItem.displayName,
+              style: context.textTheme.bodyLarge?.s14.l
+                  .withColor(isSelected ? AppColors.orange : AppColors.white),
             ),
           ],
         ),

@@ -4,7 +4,7 @@ import 'package:werewolf_cars/core/config/theme/typography.dart';
 import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
 import 'package:werewolf_cars/core/utils/responsive_padding.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
-import 'package:werewolf_cars/features/search_and_filteration/presentation/widget/car_type_list_view_state.dart';
+import 'package:werewolf_cars/features/search_and_filteration/presentation/widget/car_body_type_list_view.dart';
 
 class BodyTypesFilterSection extends StatelessWidget {
   const BodyTypesFilterSection({
@@ -27,7 +27,7 @@ class BodyTypesFilterSection extends StatelessWidget {
           margin: HWEdgeInsetsDirectional.only(start: 12, end: 14),
           width: 1.sw,
           height: 50.h,
-          child: const CarTypeListView(),
+          child: const CarBodyTypeListView(),
         ),
       ],
     );

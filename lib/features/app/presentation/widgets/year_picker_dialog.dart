@@ -7,14 +7,17 @@ import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
 import 'package:werewolf_cars/core/utils/responsive_padding.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
 import 'package:werewolf_cars/features/my_car/presentation/widgets/years_grid_view.dart';
+import 'package:werewolf_cars/generated/locale_keys.g.dart';
 
 class YearPickerDialog extends StatelessWidget {
   final int? currentYear;
+  final void Function()? onReset;
   final ValueChanged<int> onYearChanged;
 
   const YearPickerDialog({
     super.key,
     this.currentYear,
+    this.onReset,
     required this.onYearChanged,
   });
 
@@ -34,6 +37,20 @@ class YearPickerDialog extends StatelessWidget {
               startYear: startYear,
               currentYear: currentYear,
               onYearChanged: onYearChanged),
+          10.verticalSpace,
+          ElevatedButton(
+            onPressed: onReset,
+            style: ButtonStyle(
+                backgroundColor: WidgetStatePropertyAll(
+                    currentYear != null ? AppColors.primary : AppColors.grey),
+                minimumSize: WidgetStatePropertyAll(
+                  Size(150.w, 45.h),
+                )),
+            child: AppText(
+              LocaleKeys.auth_reset,
+              style: context.textTheme.bodyMedium.b,
+            ),
+          ),
         ],
       ),
     );

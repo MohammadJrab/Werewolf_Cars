@@ -7,28 +7,30 @@ import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
 
 class YearItemWidget extends StatelessWidget {
-  final int? selectedYear;
+  final int selectedYear;
   final VoidCallback? onTap;
 
-  const YearItemWidget({super.key, required this.onTap, this.selectedYear});
+  const YearItemWidget(
+      {super.key, required this.onTap, required this.selectedYear});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Container(
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 800),
         alignment: Alignment.center,
         height: 45.h,
-        width: 130.w,
+        width: 110.w,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(14.r),
+          borderRadius: BorderRadius.circular(10.r),
           border: Border.all(
-            color: selectedYear != null ? AppColors.primary : AppColors.white,
-            width: 1.r,
+            color: selectedYear != 0 ? AppColors.primary : AppColors.greyStroke,
+            width: 1.5.r,
           ),
         ),
         child: AppText(
-          selectedYear != null ? selectedYear.toString() : "----",
+          selectedYear != 0 ? selectedYear.toString() : "----",
           style: context.textTheme.bodyLarge?.s14.withColor(AppColors.white),
         ),
       ),

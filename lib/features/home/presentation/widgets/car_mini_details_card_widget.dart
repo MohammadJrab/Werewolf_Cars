@@ -14,7 +14,7 @@ class CarMiniDetailsCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double h = isStatus ? 200.h + 50.h : 215.h;
+    double h = isStatus ? 200.h + 60.h : 215.h;
     return GestureDetector(
       onTap: () =>
           GRouter.router.pushNamed(GRouter.config.homeRoutes.carDetails),

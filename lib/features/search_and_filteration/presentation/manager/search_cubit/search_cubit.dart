@@ -2,6 +2,8 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:werewolf_cars/common/enums/budget_filter.dart';
+import 'package:werewolf_cars/core/config/routing/router.dart';
 import 'package:werewolf_cars/core/utils/debouncer.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -38,12 +40,49 @@ class SearchCubit extends Cubit<SearchState> {
     } else {
       currentSelected.add(carMaker);
     }
-
     emit(state.copyWith(selectedCarMakersFilter: currentSelected));
   }
 
   void resetMakerSelection() {
     emit(state.copyWith(selectedCarMakersFilter: []));
+  }
+
+  void selectPrice(BudgetFiltertype? item) {
+    emit(state.copyWith(selectedPrice: item?.name));
+  }
+
+  void selectTransmission(String? transmissionType) {
+    emit(state.copyWith(selectedTransmission: transmissionType));
+  }
+
+  void selectBodyType(String? bodyType) {
+    emit(state.copyWith(seletedBodyType: bodyType));
+  }
+
+  void selectCylinders(String? cylinders) {
+    emit(state.copyWith(seletedCylinders: cylinders));
+  }
+
+  void selectSeats(String? seatsCount) {
+    emit(state.copyWith(seletedSeatsCount: seatsCount));
+  }
+
+  void toggleColorsSelection(String carColor) {
+    final currentSelected = List<String>.from(state.seletedColors);
+    if (currentSelected.contains(carColor)) {
+      currentSelected.remove(carColor);
+    } else {
+      currentSelected.add(carColor);
+    }
+    emit(state.copyWith(seletedColors: currentSelected));
+  }
+
+  void selectCarCondition(String? carCondition) {
+    emit(state.copyWith(seletedCondition: carCondition));
+  }
+
+  void selectFuelType(String? fuelType) {
+    emit(state.copyWith(seletedFuelType: fuelType));
   }
 
   void changeCarYearFilter({int? minYear, int? maxYear}) {
@@ -52,6 +91,15 @@ class SearchCubit extends Cubit<SearchState> {
     } else if (maxYear != null) {
       emit(state.copyWith(selectedCarMaxYear: maxYear));
     }
+  }
+
+  void resetYearFilter({bool? minYear, bool? maxYear}) {
+    if (minYear != null && minYear) {
+      emit(state.copyWith(selectedCarMinYear: 0));
+    } else if (maxYear != null && maxYear) {
+      emit(state.copyWith(selectedCarMaxYear: 0));
+    }
+    GRouter.router.pop();
   }
 
   // favoriteItemToggle(CarViewModel car) async {

@@ -35,7 +35,7 @@ class YearSectionFilter extends StatelessWidget {
         ),
         20.verticalSpace,
         Padding(
-          padding: HWEdgeInsets.symmetric(horizontal: 60),
+          padding: HWEdgeInsets.symmetric(horizontal: 55),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -70,6 +70,8 @@ class YearSectionFilter extends StatelessWidget {
                           currentYear: state.selectedCarMinYear,
                           onYearChanged: (minYear) =>
                               searchCubit.changeCarYearFilter(minYear: minYear),
+                          onReset: () =>
+                              searchCubit.resetYearFilter(minYear: true),
                         ),
                         barrierDismissible: true,
                         barrierLabel: "YearPickerDialog"),
@@ -88,12 +90,12 @@ class YearSectionFilter extends StatelessWidget {
                         child: YearPickerDialog(
                           currentYear: state.selectedCarMaxYear,
                           onYearChanged: (maxYear) {
-                            if (state.selectedCarMinYear != null
-                                ? maxYear < state.selectedCarMinYear!
-                                : false) {
+                            if (maxYear > state.selectedCarMinYear) {
                               searchCubit.changeCarYearFilter(maxYear: maxYear);
                             }
                           },
+                          onReset: () =>
+                              searchCubit.resetYearFilter(maxYear: true),
                         ),
                         barrierDismissible: true,
                         barrierLabel: "YearPickerDialog"),

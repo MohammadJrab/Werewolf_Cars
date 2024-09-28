@@ -13,7 +13,7 @@ class MyCarsListViewBuilder extends StatelessWidget {
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
         itemCount: 4,
-        padding: HWEdgeInsets.only(bottom: 50),
+        padding: HWEdgeInsets.only(bottom: 75),
         itemBuilder: (context, index) => Padding(
               padding: HWEdgeInsets.only(top: 20, right: 14, left: 14),
               child: const CarMiniDetailsCardWidget(

@@ -5,13 +5,12 @@ import 'package:werewolf_cars/core/config/theme/typography.dart';
 import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
 import 'package:werewolf_cars/core/utils/responsive_padding.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
-import 'package:werewolf_cars/features/search_and_filteration/presentation/widget/car_body_type_list_view.dart';
+import 'package:werewolf_cars/features/search_and_filteration/presentation/widget/seats_list_view.dart';
 
-class CarTypeSection extends StatelessWidget {
-  const CarTypeSection({
+class SeatsSection extends StatelessWidget {
+  const SeatsSection({
     super.key,
   });
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -20,15 +19,15 @@ class CarTypeSection extends StatelessWidget {
         Padding(
           padding: HWEdgeInsets.only(left: 25),
           child: AppText(
-            'Car type',
+            "Seats",
             style:
-                context.textTheme.bodyLarge?.xb.s21.withColor(AppColors.white),
+                context.textTheme.bodyLarge?.xb.s20.withColor(AppColors.white),
           ),
         ),
         20.verticalSpace,
         SizedBox(
           height: 46.h,
-          child: const CarBodyTypeListView(),
+          child: const SeatsListView(),
         ),
         30.verticalSpace,
       ],

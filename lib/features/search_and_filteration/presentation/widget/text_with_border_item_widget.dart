@@ -30,10 +30,10 @@ class TextWithBorderItemWidget extends StatelessWidget {
         height: 45.h,
         // width: 100.w,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(14.r),
+          borderRadius: BorderRadius.circular(10.r),
           border: Border.all(
-            color: isSelected ? AppColors.primary : AppColors.white,
-            width: 1,
+            color: isSelected ? AppColors.primary : AppColors.greyStroke,
+            width: 1.2.r,
           ),
         ),
         child: AppText(

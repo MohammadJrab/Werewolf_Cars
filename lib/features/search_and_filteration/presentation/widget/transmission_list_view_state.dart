@@ -1,44 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:werewolf_cars/features/search_and_filteration/presentation/pages/filter_page.dart';
-import 'package:werewolf_cars/features/search_and_filteration/presentation/widget/transmission_item_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:werewolf_cars/common/enums/transmission_type.dart';
+import 'package:werewolf_cars/core/utils/responsive_padding.dart';
+import 'package:werewolf_cars/features/search_and_filteration/presentation/manager/search_cubit/search_cubit.dart';
+import 'package:werewolf_cars/features/search_and_filteration/presentation/widget/text_with_border_item_widget.dart';
 
-class TransmissionListView extends StatefulWidget {
+class TransmissionListView extends StatelessWidget {
   const TransmissionListView({super.key});
 
   @override
-  State<TransmissionListView> createState() => _TransmissionListViewState();
-}
-
-class _TransmissionListViewState extends State<TransmissionListView> {
-  String? _selectedTransmission;
-
-  void _onItemSelected(String title) {
-    setState(() {
-      _selectedTransmission = title;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return ListView(
-      scrollDirection: Axis.horizontal,
-      children: [
-        TextWithBorderItemWidget(
-          title: 'Automatic',
-          isSelected: _selectedTransmission == 'Automatic',
-          onTap: () => _onItemSelected('Automatic'),
-        ),
-        TextWithBorderItemWidget(
-          title: 'Manual',
-          isSelected: _selectedTransmission == 'Manual',
-          onTap: () => _onItemSelected('Manual'),
-        ),
-        TextWithBorderItemWidget(
-          title: 'Other',
-          isSelected: _selectedTransmission == 'Other',
-          onTap: () => _onItemSelected('Other'),
-        ),
-      ],
+    return BlocBuilder<SearchCubit, SearchState>(
+      builder: (context, state) {
+        return ListView.builder(
+          padding: HWEdgeInsets.only(right: 10),
+          scrollDirection: Axis.horizontal,
+          itemCount: TransmissionType.values.length,
+          itemBuilder: (context, index) {
+            final item = TransmissionType.values[index];
+            final isSelected = item.name == state.selectedTransmission;
+            return TextWithBorderItemWidget(
+                title: item.name,
+                isSelected: isSelected,
+                onTap: () =>
+                    context.read<SearchCubit>().selectTransmission(item.name));
+          },
+        );
+      },
     );
   }
 }

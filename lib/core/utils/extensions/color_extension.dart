@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:werewolf_cars/common/enums/car_color.dart';
 
 extension CarColorExtension on CarColor {
-  String get name {
+  String get displayName {
     switch (this) {
       case CarColor.beige:
         return 'Beige';

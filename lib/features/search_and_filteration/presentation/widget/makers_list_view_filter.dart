@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:werewolf_cars/common/constants/constants.dart';
 import 'package:werewolf_cars/common/enums/car_makers.dart';
-import 'package:werewolf_cars/core/utils/responsive_padding.dart';
 import 'package:werewolf_cars/features/search_and_filteration/presentation/manager/search_cubit/search_cubit.dart';
-
 import 'maker_item_filter_widget.dart';
 
 class MakersListViewFilter extends StatelessWidget {
@@ -24,16 +20,14 @@ class MakersListViewFilter extends StatelessWidget {
             bool isSelected = state.selectedCarMakersFilter
                 .contains(CarMaker.values[index].name);
 
-            return GestureDetector(
+            return MakerItemFilterWidget(
+              makersLogoPath: CarMaker.values[index].logoAsset,
+              isSelected: isSelected,
               onTap: () {
                 context
                     .read<SearchCubit>()
                     .toggleMakerSelection(CarMaker.values[index].name);
               },
-              child: MakerItemFilterWidget(
-                makersLogoPath: CarMaker.values[index].logoAsset,
-                isSelected: isSelected,
-              ),
             );
           },
         );

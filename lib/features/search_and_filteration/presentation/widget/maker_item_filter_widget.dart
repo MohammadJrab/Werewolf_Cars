@@ -37,7 +37,7 @@ class MakerItemFilterWidget extends StatelessWidget {
                 : null,
             color: AppColors.grey.shade600,
             border: isSelected
-                ? Border.all(color: AppColors.primary, width: 1.4.r)
+                ? Border.all(color: AppColors.primary, width: 1.5.r)
                 : null),
         child: AppSvgPicture(
           makersLogoPath,

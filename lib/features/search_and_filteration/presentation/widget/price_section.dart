@@ -6,8 +6,7 @@ import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
 import 'package:werewolf_cars/core/utils/responsive_padding.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
 import 'package:werewolf_cars/features/chat/presentation/widgets/white_divider.dart';
-
-import 'suggestions_list_view_item.dart';
+import 'package:werewolf_cars/features/search_and_filteration/presentation/widget/budget_list_view.dart';
 
 class PriceSection extends StatelessWidget {
   const PriceSection({
@@ -24,28 +23,15 @@ class PriceSection extends StatelessWidget {
           child: AppText(
             'Price',
             style:
-                context.textTheme.bodyLarge?.xb.s21.withColor(AppColors.white),
+                context.textTheme.bodyLarge?.xb.s20.withColor(AppColors.white),
           ),
         ),
         20.verticalSpace,
-
-        // Padding(
-        //   padding: HWEdgeInsets.symmetric(horizontal: 20),
-        //   // TODO we must change this slider
-        //   child: const CustomSliderWidget(),
-        // ),
-        // 20.verticalSpace,
-        Padding(
-          padding: HWEdgeInsets.only(left: 25),
-          child: AppText(
-            'Suggestions',
-            style: context.textTheme.bodyLarge?.s15.withColor(AppColors.white),
-          ),
-        ),
-        20.verticalSpace,
-        SizedBox(
-          height: 66.h,
-          child: const SuggestionsListViewItem(),
+        Container(
+          width: 1.sw,
+          height: 50.h,
+          margin: HWEdgeInsetsDirectional.only(start: 14, end: 14),
+          child: const BudgetListView(),
         ),
         20.verticalSpace,
         const CustomDivider(

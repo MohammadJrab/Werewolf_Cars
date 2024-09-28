@@ -1,34 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:werewolf_cars/common/constants/constants.dart';
-import 'package:werewolf_cars/core/config/theme/colors_app.dart';
-import 'package:werewolf_cars/core/config/theme/typography.dart';
-import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
-import 'package:werewolf_cars/core/utils/responsive_padding.dart';
-import 'package:werewolf_cars/features/app/presentation/widgets/app_svg_picture.dart';
-import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/custom_appbar.dart';
-import 'package:werewolf_cars/features/chat/presentation/widgets/white_divider.dart';
 import 'package:werewolf_cars/features/search_and_filteration/presentation/widget/makers_section_filter.dart';
+import 'package:werewolf_cars/features/search_and_filteration/presentation/widget/seats_section.dart';
 import 'package:werewolf_cars/features/search_and_filteration/presentation/widget/year_section_filter.dart';
-
-import '../widget/car_type_item.dart';
-import '../widget/car_type_list_view_state.dart';
 import '../widget/car_type_section.dart';
-import '../widget/color_item.dart';
-import '../widget/colors_list_view_state.dart';
 import '../widget/colors_section.dart';
-import '../widget/condition_list_view_state.dart';
 import '../widget/condition_section.dart';
-import '../widget/custom_slider_widget_state.dart';
-import '../widget/cylinders_and_doors_list_view_state.dart';
-import '../widget/cylinders_and_doors_section.dart';
-import '../widget/fuel_type_list_view_state.dart';
+import '../widget/cylinders_section.dart';
 import '../widget/fuel_type_section.dart';
 import '../widget/price_section.dart';
-import '../widget/suggestions_item.dart';
-import '../widget/transmission_item_widget.dart';
-import '../widget/transmission_list_view_state.dart';
 import '../widget/transmission_section.dart';
 
 class FilterPage extends StatelessWidget {
@@ -52,12 +33,8 @@ class FilterPage extends StatelessWidget {
             const TransmissionSection(),
             const CarTypeSection(),
             const FuelTypeSection(),
-            const CylindersAndDoorsSection(
-              title: 'Cylinders',
-            ),
-            const CylindersAndDoorsSection(
-              title: 'Doors',
-            ),
+            const CylindersSection(),
+            const SeatsSection(),
             const ColorsSection(),
             const ConditionSection(),
           ],

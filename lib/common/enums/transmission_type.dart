@@ -1,7 +1,7 @@
 enum TransmissionType {
   automatic('Automatic'),
   manual('Manual'),
-  semiAutomatic('Semi-automatic');
+  semiAutomatic('Semi-Automatic');
 
   final String name;
 

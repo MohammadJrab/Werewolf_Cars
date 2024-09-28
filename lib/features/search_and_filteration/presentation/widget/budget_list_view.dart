@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:werewolf_cars/common/enums/budget_filter.dart';
+import 'package:werewolf_cars/features/search_and_filteration/presentation/manager/search_cubit/search_cubit.dart';
 import 'package:werewolf_cars/features/search_and_filteration/presentation/widget/budget_item.dart';
 
 class BudgetListView extends StatelessWidget {
@@ -9,12 +11,20 @@ class BudgetListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      scrollDirection: Axis.horizontal,
-      itemCount: BudgetFiltertype.values.length,
-      itemBuilder: (context, index) {
-        final item = BudgetFiltertype.values[index];
-        return BudgetItem(title: item.title, range: item.range, onTap: () {});
+    return BlocBuilder<SearchCubit, SearchState>(
+      builder: (context, state) {
+        return ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: BudgetFiltertype.values.length,
+          itemBuilder: (context, index) {
+            final item = BudgetFiltertype.values[index];
+            final isSelected = item.name == state.selectedPrice;
+            return BudgetItem(
+                item: item,
+                isSelected: isSelected,
+                onTap: () => context.read<SearchCubit>().selectPrice(item));
+          },
+        );
       },
     );
   }

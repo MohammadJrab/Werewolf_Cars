@@ -35,7 +35,7 @@ class MyCarsPage extends StatelessWidget {
           child: ElevatedButton(
               style: ButtonStyle(
                   alignment: Alignment.center,
-                  minimumSize: WidgetStatePropertyAll(Size(200.w, 50.h)),
+                  minimumSize: WidgetStatePropertyAll(Size(200.w, 40.h)),
                   backgroundColor:
                       const WidgetStatePropertyAll(AppColors.white)),
               onPressed: () {
