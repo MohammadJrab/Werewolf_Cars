@@ -22,7 +22,8 @@ class BudgetListView extends StatelessWidget {
             return BudgetItem(
                 item: item,
                 isSelected: isSelected,
-                onTap: () => context.read<SearchCubit>().selectPrice(item));
+                onTap: () =>
+                    context.read<SearchCubit>().selectPrice(item.name));
           },
         );
       },

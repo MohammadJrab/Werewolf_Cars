@@ -7,11 +7,10 @@ import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
 
 class YearItemWidget extends StatelessWidget {
-  final int selectedYear;
+  final String? selectedYear;
   final VoidCallback? onTap;
 
-  const YearItemWidget(
-      {super.key, required this.onTap, required this.selectedYear});
+  const YearItemWidget({super.key, this.onTap, this.selectedYear});
 
   @override
   Widget build(BuildContext context) {
@@ -25,12 +24,20 @@ class YearItemWidget extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.r),
           border: Border.all(
-            color: selectedYear != 0 ? AppColors.primary : AppColors.greyStroke,
+            color: selectedYear != null
+                ? selectedYear != "0"
+                    ? AppColors.primary
+                    : AppColors.greyStroke
+                : AppColors.greyStroke,
             width: 1.5.r,
           ),
         ),
         child: AppText(
-          selectedYear != 0 ? selectedYear.toString() : "----",
+          selectedYear != null
+              ? selectedYear != ""
+                  ? selectedYear.toString()
+                  : "----"
+              : "----",
           style: context.textTheme.bodyLarge?.s14.withColor(AppColors.white),
         ),
       ),

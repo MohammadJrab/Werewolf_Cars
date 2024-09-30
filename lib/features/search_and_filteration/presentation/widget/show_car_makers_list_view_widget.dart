@@ -32,7 +32,7 @@ class ShowCarMakersListViewWidget extends StatelessWidget {
                       searchCubit.toggleMakerSelection(carMaker.name);
                     }
                   } else {
-                    searchCubit.resetMakerSelection();
+                    searchCubit.resetMakerSelectionFilter();
                   }
                 },
               ),

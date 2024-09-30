@@ -24,7 +24,7 @@ class SeatsListView extends StatelessWidget {
                 title: item.displayName,
                 isSelected: isSelected,
                 onTap: () =>
-                    context.read<SearchCubit>().selectBodyType(item.name));
+                    context.read<SearchCubit>().selectSeats(item.name));
           },
         );
       },

@@ -7,16 +7,16 @@ import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
 import 'package:werewolf_cars/core/utils/responsive_padding.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/animated_dialog.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
-import 'package:werewolf_cars/features/app/presentation/widgets/year_picker_dialog.dart';
 import 'package:werewolf_cars/features/chat/presentation/widgets/white_divider.dart';
 import 'package:werewolf_cars/features/search_and_filteration/presentation/manager/search_cubit/search_cubit.dart';
+import 'package:werewolf_cars/features/search_and_filteration/presentation/widget/kilometers_dialog.dart';
 import 'package:werewolf_cars/features/search_and_filteration/presentation/widget/section_title_and_reset_filter_widget.dart';
 import 'package:werewolf_cars/features/search_and_filteration/presentation/widget/year_item_widget_state.dart';
 
-class YearSectionFilter extends StatelessWidget {
+class KilometersSectionFilter extends StatelessWidget {
   final SearchCubit searchCubit;
 
-  const YearSectionFilter({
+  const KilometersSectionFilter({
     super.key,
     required this.searchCubit,
   });
@@ -28,22 +28,22 @@ class YearSectionFilter extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SectionTitleAndResetFilterWidget(
-            title: 'Year',
-            resetFilter: () => searchCubit.resetYearFilter(
-                resetMaxYear: true, resetMinYear: true)),
+            title: 'Kilometers',
+            resetFilter: () => searchCubit.resetKilometersFilter(
+                resetMinKilometers: true, resetMaxKilometers: true)),
         20.verticalSpace,
         Padding(
-          padding: HWEdgeInsets.symmetric(horizontal: 44),
+          padding: HWEdgeInsets.symmetric(horizontal: 24),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               AppText(
-                'Min year',
+                'Min Kilometers',
                 style:
                     context.textTheme.bodyLarge?.s14.withColor(AppColors.white),
               ),
               AppText(
-                'Max year',
+                'Max Kilometers',
                 style:
                     context.textTheme.bodyLarge?.s14.withColor(AppColors.white),
               ),
@@ -59,22 +59,26 @@ class YearSectionFilter extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   YearItemWidget(
-                    key: const Key("MinYear"),
-                    selectedYear: state.selectedCarMaxYear?.toString(),
+                    key: const Key("MinKilometers"),
+                    selectedYear: state.selectedCarMinKilometers,
                     onTap: () => AnimatedDialog.show(context,
                         insetPadding: HWEdgeInsets.only(
                             top: 60, left: 40, right: 40, bottom: 30),
-                        child: YearPickerDialog(
-                          currentYear: state.selectedCarMinYear,
-                          onYearChanged: (minYear) =>
-                              searchCubit.changeCarYearFilter(minYear: minYear),
+                        child: KilometersDialog(
+                          isMin: true,
+                          onSelectionConfirmed: (p0) {
+                            searchCubit.changeCarKilometersFilter(
+                                minKilometers: p0);
+                            context.pop();
+                          },
                           onReset: () {
-                            searchCubit.resetYearFilter(resetMinYear: true);
+                            searchCubit.resetKilometersFilter(
+                                resetMinKilometers: true);
                             context.pop();
                           },
                         ),
                         barrierDismissible: true,
-                        barrierLabel: "YearPickerDialog"),
+                        barrierLabel: "MinKilometersPickerDialog"),
                   ),
                   Container(
                     width: 30.w,
@@ -82,27 +86,26 @@ class YearSectionFilter extends StatelessWidget {
                     decoration: const BoxDecoration(color: AppColors.whiteLess),
                   ),
                   YearItemWidget(
-                    key: const Key("MaxYear"),
-                    selectedYear: state.selectedCarMaxYear?.toString(),
+                    key: const Key("MaxKilometers"),
+                    selectedYear: state.selectedCarMaxKilometers,
                     onTap: () => AnimatedDialog.show(context,
                         insetPadding: HWEdgeInsets.only(
                             top: 60, left: 40, right: 40, bottom: 30),
-                        child: YearPickerDialog(
-                          currentYear: state.selectedCarMaxYear,
-                          onYearChanged: (maxYear) {
-                            if (state.selectedCarMinYear != null
-                                ? maxYear > state.selectedCarMinYear!
-                                : true) {
-                              searchCubit.changeCarYearFilter(maxYear: maxYear);
-                            }
+                        child: KilometersDialog(
+                          isMin: false,
+                          onSelectionConfirmed: (p0) {
+                            searchCubit.changeCarKilometersFilter(
+                                maxKilometers: p0);
+                            context.pop();
                           },
                           onReset: () {
-                            searchCubit.resetYearFilter(resetMaxYear: true);
+                            searchCubit.resetKilometersFilter(
+                                resetMaxKilometers: true);
                             context.pop();
                           },
                         ),
                         barrierDismissible: true,
-                        barrierLabel: "YearPickerDialog"),
+                        barrierLabel: "MaxKilometersPickerDialog"),
                   ),
                 ],
               );

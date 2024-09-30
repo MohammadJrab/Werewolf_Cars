@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:werewolf_cars/features/my_car/presentation/widgets/year_item.dart';
 
 class YearsGridView extends StatelessWidget {
@@ -19,9 +20,9 @@ class YearsGridView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisSpacing: 8,
-            mainAxisSpacing: 16,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisSpacing: 1.w,
+            mainAxisSpacing: 16.h,
             childAspectRatio: 25 / 15.5,
             crossAxisCount: 3),
         itemCount: (nowYear - startYear) + 2,

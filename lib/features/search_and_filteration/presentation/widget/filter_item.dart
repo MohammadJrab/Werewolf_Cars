@@ -17,7 +17,7 @@ class FilterItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: () {
         GRouter.router.pushNamed(GRouter.config.filterRoutes.filter);
       },
