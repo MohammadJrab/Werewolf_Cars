@@ -25,7 +25,7 @@ class SimilarCarsListView extends StatelessWidget {
           ),
           20.verticalSpace,
           SizedBox(
-            height: 150.h,
+            height: 160.h,
             child: ListView.builder(
                 padding: HWEdgeInsets.only(left: 8, right: 10),
                 itemCount: 4,

@@ -18,7 +18,6 @@ class SimilarCarItem extends StatelessWidget {
       onTap: () =>
           GRouter.router.pushNamed(GRouter.config.homeRoutes.carDetails),
       child: Container(
-        height: 150.h,
         width: 335.w,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.r),

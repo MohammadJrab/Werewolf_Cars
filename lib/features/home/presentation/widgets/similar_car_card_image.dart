@@ -21,7 +21,6 @@ class SimilarCarCardImage extends StatelessWidget {
       ),
       child: SizedBox(
         width: 135.w,
-        height: 146.h,
         child: Stack(
           children: [
             LayoutBuilder(
