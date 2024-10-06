@@ -11,7 +11,9 @@ import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
 import 'package:werewolf_cars/features/my_car/presentation/widgets/custom_dialog_list_view.dart';
 
 class FuelTypeDialog extends StatefulWidget {
-  const FuelTypeDialog({super.key});
+  final Function(String)? onItemSelected;
+
+  const FuelTypeDialog({super.key, this.onItemSelected});
 
   @override
   State<FuelTypeDialog> createState() => _TranmissionDialogState();
@@ -37,9 +39,7 @@ class _TranmissionDialogState extends State<FuelTypeDialog> {
           Expanded(
               child: CustomDialogListView(
             items: _fuelTypes,
-            onItemSelected: (selectedItem) {
-              showMessage(selectedItem);
-            },
+            onItemSelected: widget.onItemSelected,
           ))
         ],
       ),

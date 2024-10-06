@@ -21,7 +21,7 @@ class CarsMakersDialog extends StatefulWidget {
     Key? key,
     this.isMultiSelect = false,
     required this.onSelectionConfirmed,
-    required this.selectedCarMakers,
+    this.selectedCarMakers = const [],
   }) : super(key: key);
 
   @override

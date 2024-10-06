@@ -26,7 +26,7 @@ TextButtonThemeData _textButtonTheme(ColorScheme scheme, TextTheme textTheme) =>
 AppBarTheme _appBarTheme(ThemeData theme, ColorScheme scheme,
         TextTheme textTheme, ThemeMode themeMode) =>
     theme.appBarTheme.copyWith(
-        backgroundColor: scheme.background,
+        backgroundColor: scheme.surface,
         titleTextStyle: textTheme.headlineSmall,
         systemOverlayStyle: themeMode == ThemeMode.dark
             ? SystemUiOverlayStyle.light
@@ -45,10 +45,15 @@ BottomSheetThemeData _bottomSheetThemeData(ThemeData theme) =>
           top: Radius.circular(kbrDefault),
         ),
       ),
-      backgroundColor: theme.colorScheme.background,
+      backgroundColor: theme.colorScheme.surface,
     );
+TextSelectionThemeData _textSelectionThemeData(ThemeData theme) =>
+    theme.textSelectionTheme.copyWith(
+        cursorColor: AppColors.primary,
+        selectionColor: AppColors.grey,
+        selectionHandleColor: AppColors.primary);
 
-final double kbrDefault = 15.r;
+final double kbrDefault = 10.r;
 final double kbrBorderTextField = 10.r;
 final double kbrButton = 6.r;
 

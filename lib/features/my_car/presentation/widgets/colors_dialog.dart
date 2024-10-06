@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:werewolf_cars/common/enums/car_color.dart';
-import 'package:werewolf_cars/core/api/api_utils.dart';
 import 'package:werewolf_cars/core/config/theme/colors_app.dart';
 import 'package:werewolf_cars/core/config/theme/typography.dart';
 import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
@@ -11,7 +10,9 @@ import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
 import 'package:werewolf_cars/features/my_car/presentation/widgets/colors_list_view.dart';
 
 class ColorsDialog extends StatefulWidget {
-  const ColorsDialog({super.key});
+  final Function(String)? onItemSelected;
+
+  const ColorsDialog({super.key, this.onItemSelected});
 
   @override
   State<ColorsDialog> createState() => _ColorsDialogState();
@@ -37,9 +38,7 @@ class _ColorsDialogState extends State<ColorsDialog> {
           Expanded(
             child: ColorsListView(
               items: _carColors,
-              onItemSelected: (selectedItem) {
-                showMessage(selectedItem);
-              },
+              onItemSelected: widget.onItemSelected,
             ),
           )
         ],
@@ -52,7 +51,7 @@ class _ColorsDialogState extends State<ColorsDialog> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         AppText(
-          'Colors',
+          'Color',
           style: context.textTheme.titleMedium?.s20.b,
         ),
         IconButton(

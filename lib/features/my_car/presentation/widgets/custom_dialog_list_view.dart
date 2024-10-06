@@ -26,7 +26,7 @@ class _CustomDialogListViewState<T> extends State<CustomDialogListView<T>> {
     return ListView.builder(
       padding: EdgeInsets.zero,
       scrollDirection: Axis.vertical,
-      physics: const NeverScrollableScrollPhysics(),
+      // physics: const NeverScrollableScrollPhysics(),
       itemCount: widget.items.length,
       itemBuilder: (context, index) {
         final item = widget.items[index];

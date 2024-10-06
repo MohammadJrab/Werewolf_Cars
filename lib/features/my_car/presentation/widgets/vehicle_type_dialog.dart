@@ -1,19 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:werewolf_cars/common/enums/car_color.dart';
 import 'package:werewolf_cars/common/enums/vehicle_types.dart';
-import 'package:werewolf_cars/core/api/api_utils.dart';
 import 'package:werewolf_cars/core/config/theme/colors_app.dart';
 import 'package:werewolf_cars/core/config/theme/typography.dart';
 import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
 import 'package:werewolf_cars/core/utils/responsive_padding.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
-import 'package:werewolf_cars/features/my_car/presentation/widgets/colors_list_view.dart';
 import 'package:werewolf_cars/features/my_car/presentation/widgets/vehicle_type_list_view.dart';
 
 class VehicleTypeDialog extends StatefulWidget {
-  const VehicleTypeDialog({super.key});
+  final Function(String)? onItemSelected;
+
+  const VehicleTypeDialog({super.key, this.onItemSelected});
 
   @override
   State<VehicleTypeDialog> createState() => _VehicleTypeDialogState();
@@ -38,11 +37,7 @@ class _VehicleTypeDialogState extends State<VehicleTypeDialog> {
           15.verticalSpace,
           Expanded(
               child: VehicleTypeListView(
-            items: _vehicleType,
-            onItemSelected: (selectedItem) {
-              showMessage(selectedItem);
-            },
-          ))
+                  items: _vehicleType, onItemSelected: widget.onItemSelected))
         ],
       ),
     );

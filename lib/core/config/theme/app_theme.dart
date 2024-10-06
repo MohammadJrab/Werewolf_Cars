@@ -58,7 +58,8 @@ class AppTheme {
             _builtInLightTheme, _lightColorScheme, textTheme, ThemeMode.light),
         dividerTheme: _dividerTheme(_builtInLightTheme, _lightColorScheme),
         primaryColor: _lightColorScheme.primary,
-        bottomSheetTheme: _bottomSheetThemeData(_builtInLightTheme));
+        bottomSheetTheme: _bottomSheetThemeData(_builtInLightTheme),
+        textSelectionTheme: _textSelectionThemeData(_builtInDarkTheme));
   }
 
   static ThemeData dark(BuildContext context) {
@@ -69,17 +70,18 @@ class AppTheme {
     );
 
     return _builtInDarkTheme.copyWith(
-      colorScheme: _darkColorScheme,
-      textTheme: textTheme,
-      typography: Typography.material2018(),
-      elevatedButtonTheme: _elevatedButtonTheme(_darkColorScheme, textTheme),
-      textButtonTheme: _textButtonTheme(_darkColorScheme, textTheme),
-      scaffoldBackgroundColor: _darkColorScheme.surface,
-      appBarTheme: _appBarTheme(
-          _builtInDarkTheme, _darkColorScheme, textTheme, ThemeMode.dark),
-      dividerTheme: _dividerTheme(_builtInDarkTheme, _darkColorScheme),
-      primaryColor: _lightColorScheme.primary,
-      bottomSheetTheme: _bottomSheetThemeData(_builtInDarkTheme),
-    );
+        colorScheme: _darkColorScheme,
+        indicatorColor: AppColors.primary,
+        textTheme: textTheme,
+        typography: Typography.material2018(),
+        elevatedButtonTheme: _elevatedButtonTheme(_darkColorScheme, textTheme),
+        textButtonTheme: _textButtonTheme(_darkColorScheme, textTheme),
+        scaffoldBackgroundColor: _darkColorScheme.surface,
+        appBarTheme: _appBarTheme(
+            _builtInDarkTheme, _darkColorScheme, textTheme, ThemeMode.dark),
+        dividerTheme: _dividerTheme(_builtInDarkTheme, _darkColorScheme),
+        primaryColor: _lightColorScheme.primary,
+        bottomSheetTheme: _bottomSheetThemeData(_builtInDarkTheme),
+        textSelectionTheme: _textSelectionThemeData(_builtInDarkTheme));
   }
 }

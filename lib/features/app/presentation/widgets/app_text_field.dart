@@ -277,6 +277,13 @@ class _AppTextFieldState extends State<AppTextField> {
         });
   }
 
+/*************  ✨ Codeium Command ⭐  *************/
+  /// Builds an [IconButton] which is used as a suffix icon for password fields.
+  /// The icon is an eye or an eye with a slash depending on [obscure].
+  /// The icon color is the primary color of the color scheme.
+  /// The icon is pressed to toggle the value of [obscureNotifier].
+  ///
+  /// ****  b1975b12-7980-466b-aef2-cc760d82956b  ******
   Widget eyeIcon(bool obscure) {
     return IconButton(
       onPressed: () => obscureNotifier.value = !obscure,

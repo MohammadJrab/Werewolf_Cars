@@ -13,7 +13,9 @@ import 'package:werewolf_cars/features/my_car/presentation/widgets/feautres_list
 import 'package:werewolf_cars/generated/locale_keys.g.dart';
 
 class ExteriorFeaturesDialog extends StatefulWidget {
-  const ExteriorFeaturesDialog({super.key});
+  final Function(List<String>?) onItemSelected;
+
+  const ExteriorFeaturesDialog({super.key, required this.onItemSelected});
 
   @override
   State<ExteriorFeaturesDialog> createState() => _ExteriorFeaturesDialogState();
@@ -35,20 +37,15 @@ class _ExteriorFeaturesDialogState extends State<ExteriorFeaturesDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return _buildDialog(context);
-  }
-
-  Widget _buildDialog(BuildContext context) {
     return Container(
-      height: 675.h,
+      height: 650.h,
       padding: HWEdgeInsets.symmetric(horizontal: 20, vertical: 20),
       decoration: _buildBoxDecoration(),
       child: Column(
         children: [
           _buildHeader(context),
           15.verticalSpace,
-          SizedBox(
-            height: 530.h,
+          Expanded(
             child: DialogFeaturesListView(
               items: _exteriorFeatures,
               selectedItems: _selectedFeatures,
@@ -56,26 +53,48 @@ class _ExteriorFeaturesDialogState extends State<ExteriorFeaturesDialog> {
             ),
           ),
           22.verticalSpace,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              dialogButton(
-                context: context,
-                title: LocaleKeys.cancel,
-                onTap: () => context.pop(),
-              ),
-              dialogButton(
-                context: context,
-                title: LocaleKeys.ok,
-                onTap: () {
-                  showMessage(_selectedFeatures.join(" || "));
-                  context.pop();
-                },
-              ),
-            ],
-          )
+          _buildButtons(),
         ],
       ),
+    );
+  }
+
+  Widget _buildButtons() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        ElevatedButton(
+          onPressed: () {
+            widget.onItemSelected(_selectedFeatures.toList());
+            context.pop();
+          },
+          style: ButtonStyle(
+              backgroundColor: const WidgetStatePropertyAll(AppColors.primary),
+              minimumSize: WidgetStatePropertyAll(
+                Size(140.w, 45.h),
+              )),
+          child: AppText(
+            'Confirm',
+            style: context.textTheme.bodyMedium.b,
+          ),
+        ),
+        10.horizontalSpace,
+        ElevatedButton(
+          onPressed: () {
+            widget.onItemSelected([]);
+            context.pop();
+          },
+          style: ButtonStyle(
+              backgroundColor: const WidgetStatePropertyAll(AppColors.grey),
+              minimumSize: WidgetStatePropertyAll(
+                Size(35.w, 45.h),
+              )),
+          child: AppText(
+            'Reset',
+            style: context.textTheme.bodyMedium.b,
+          ),
+        ),
+      ],
     );
   }
 

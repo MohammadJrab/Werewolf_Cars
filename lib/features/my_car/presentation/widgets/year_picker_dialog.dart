@@ -9,12 +9,12 @@ import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
 import 'package:werewolf_cars/features/my_car/presentation/widgets/years_grid_view.dart';
 
 class YearPickerDialog extends StatelessWidget {
-  final int currentYear;
+  final int? currentYear;
   final ValueChanged<int> onYearChanged;
 
   const YearPickerDialog({
     super.key,
-    required this.currentYear,
+    this.currentYear,
     required this.onYearChanged,
   });
 
