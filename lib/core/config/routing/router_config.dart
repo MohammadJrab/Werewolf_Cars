@@ -22,7 +22,6 @@ class _MainRoutes {
   final String myCars = '/myCars';
   final String favorites = '/favorites';
   final String messagesBasePage = '/messagesBasePage';
-  final String profile = '/profile';
 }
 
 class _HomeRoutes {
@@ -46,9 +45,8 @@ class _CarRoutes {
 class _ProfileRoutes {
   const _ProfileRoutes._();
   final String profile = '/profile';
-  final String profileView = '/profileView';
-  final String profileEdit = '/profileEdit';
-  final String favorite = '/favorite';
+  final String profileEdit = 'profileEdit';
+  final String addressPage = 'addressPage';
 }
 
 class _NotificationsRoutes {
@@ -61,8 +59,8 @@ class _SettingsRoutes {
   const _SettingsRoutes._();
 
   final String settings = '/settings';
-  final String privacyPolicy = '/privacyPolicy';
-  final String aboutUs = '/aboutUs';
+  final String privacyPolicy = 'privacyPolicy';
+  final String aboutUs = 'aboutUs';
 }
 
 class _AuthRoutes {

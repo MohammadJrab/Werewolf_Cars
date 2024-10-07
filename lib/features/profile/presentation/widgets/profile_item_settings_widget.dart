@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:werewolf_cars/core/config/theme/colors_app.dart';
 import 'package:werewolf_cars/core/config/theme/typography.dart';
 import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
-import 'package:werewolf_cars/core/utils/responsive_padding.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_svg_picture.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
 import 'package:werewolf_cars/generated/assets.dart';
@@ -14,7 +13,8 @@ class ProfileItemSettingsWidget extends StatelessWidget {
     required this.title,
     required this.svgIcon,
     this.isLastItem = true,
-    this.color = AppColors.white, this.onTap,
+    this.color = AppColors.white,
+    this.onTap,
   });
   final String title;
   final String svgIcon;
@@ -23,10 +23,10 @@ class ProfileItemSettingsWidget extends StatelessWidget {
   final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: HWEdgeInsets.only(bottom: 30),
-      child: GestureDetector(
-        onTap:onTap ,
+    return InkWell(
+      onTap: onTap,
+      child: SizedBox(
+        height: 55.h,
         child: Row(
           children: [
             AppSvgPicture(
@@ -43,7 +43,7 @@ class ProfileItemSettingsWidget extends StatelessWidget {
             const Spacer(),
             isLastItem
                 ? Transform.rotate(
-                    angle: 3.14, // 180 degrees in radians
+                    angle: 3.14,
                     child: AppSvgPicture(
                       Assets.svgArrowLeft,
                       height: 25.h,

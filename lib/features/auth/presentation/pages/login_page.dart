@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
@@ -9,7 +8,6 @@ import 'package:werewolf_cars/core/config/theme/colors_app.dart';
 import 'package:werewolf_cars/core/config/theme/typography.dart';
 import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
 import 'package:werewolf_cars/core/utils/responsive_padding.dart';
-import 'package:werewolf_cars/features/app/domin/repositories/prefs_repository.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_elvated_button.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_svg_picture.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
@@ -20,7 +18,6 @@ import 'package:reactive_forms/reactive_forms.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 import 'package:werewolf_cars/services/language_service.dart';
 import '../bloc/auth_bloc.dart';
-import '../widgets/phone_text_field.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({

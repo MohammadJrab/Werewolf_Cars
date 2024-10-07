@@ -10,13 +10,15 @@ class Assets {
   static const String imagesOnboarding = 'assets/images/onboarding.png';
   static const String imagesSadAnimation = 'assets/images/sadAnimation.json';
   static const String imagesSplash = 'assets/images/splash.png';
-  static const String imagesWelcomeFerrari = 'assets/images/welcome_ferrari.png';
+  static const String imagesWelcomeFerrari =
+      'assets/images/welcome_ferrari.png';
   static const String makersAlfaromeo = 'assets/svg/makers/alfaromeo.svg';
   static const String makersAstonMartin = 'assets/svg/makers/aston_martin.svg';
   static const String makersAudi = 'assets/svg/makers/audi.svg';
   static const String makersBentley = 'assets/svg/makers/bentley.svg';
   static const String makersBmw = 'assets/svg/makers/bmw.svg';
-  static const String makersBmwWhiteBlack = 'assets/svg/makers/bmw-white-black.svg';
+  static const String makersBmwWhiteBlack =
+      'assets/svg/makers/bmw-white-black.svg';
   static const String makersBugatti = 'assets/svg/makers/bugatti.svg';
   static const String makersCadillac = 'assets/svg/makers/cadillac.svg';
   static const String makersChevrolet = 'assets/svg/makers/chevrolet.svg';
@@ -120,5 +122,4 @@ class Assets {
   static const String svgPlusAdd = 'assets/svg/plus_add.svg';
   static const String translationsAr = 'assets/translations/ar.json';
   static const String translationsEn = 'assets/translations/en.json';
-
 }

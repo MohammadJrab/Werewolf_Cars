@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:werewolf_cars/core/config/routing/router.dart';
 import 'package:werewolf_cars/core/config/theme/colors_app.dart';
+import 'package:werewolf_cars/features/app/presentation/widgets/animated_dialog.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_bottom_sheet.dart';
+import 'package:werewolf_cars/features/app/presentation/widgets/language_dialog.dart';
 import 'package:werewolf_cars/features/profile/presentation/pages/profile_page.dart';
 import 'package:werewolf_cars/features/profile/presentation/widgets/logout_bottom_sheet.dart';
 import 'package:werewolf_cars/generated/assets.dart';
@@ -15,36 +19,51 @@ class SettingsSectionProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        const ProfileItemSettingsWidget(
+        ProfileItemSettingsWidget(
           title: 'Edit Profile',
           svgIcon: Assets.svgPerson,
+          onTap: () => GRouter.router
+              .pushNamed(GRouter.config.profileRoutes.profileEdit),
         ),
-        const ProfileItemSettingsWidget(
+        ProfileItemSettingsWidget(
           title: 'Address',
           svgIcon: Assets.svgMapPin,
+          onTap: () => GRouter.router.pushNamed(
+              GRouter.config.profileRoutes.addressPage,
+              extra: "Germany"),
         ),
-        const ProfileItemSettingsWidget(
+        ProfileItemSettingsWidget(
           title: 'My Cars',
           svgIcon: Assets.svgCarDealer,
+          onTap: () => GRouter.router.goNamed(GRouter.config.mainRoutes.myCars),
         ),
-        const ProfileItemSettingsWidget(
+        ProfileItemSettingsWidget(
           title: 'Notfications',
           svgIcon: Assets.svgBell,
+          onTap: () => GRouter.router
+              .pushNamed(GRouter.config.notificationsRoutes.notifications),
         ),
-        const ProfileItemSettingsWidget(
+        ProfileItemSettingsWidget(
           title: 'Language',
           svgIcon: Assets.svgGlobe,
+          onTap: () => AnimatedDialog.show(context,
+              child: const LanguageDialog(),
+              barrierDismissible: true,
+              barrierLabel: "LanguageDialog"),
         ),
-        const ProfileItemSettingsWidget(
+        ProfileItemSettingsWidget(
           title: 'Privacy Policy',
           svgIcon: Assets.svgLock,
+          onTap: () => GRouter.router
+              .pushNamed(GRouter.config.settingsRoutes.privacyPolicy),
         ),
-        const ProfileItemSettingsWidget(
+        ProfileItemSettingsWidget(
           title: 'About Us',
           svgIcon: Assets.svgInfoRect,
+          onTap: () =>
+              GRouter.router.pushNamed(GRouter.config.settingsRoutes.aboutUs),
         ),
         ProfileItemSettingsWidget(
           title: 'Logout',

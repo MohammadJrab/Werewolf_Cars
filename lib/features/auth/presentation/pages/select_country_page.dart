@@ -10,12 +10,14 @@ import 'package:werewolf_cars/core/utils/responsive_padding.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_dropdown_search.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_svg_picture.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
+import 'package:werewolf_cars/features/app/presentation/widgets/custom_appbar.dart';
 import 'package:werewolf_cars/generated/assets.dart';
 import 'package:werewolf_cars/generated/locale_keys.g.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 
 class SelectCountyPage extends StatefulWidget {
-  const SelectCountyPage({super.key});
+  final String? country;
+  const SelectCountyPage({super.key, this.country});
 
   @override
   State<SelectCountyPage> createState() => _SelectCountyPageState();
@@ -42,13 +44,18 @@ class _SelectCountyPageState extends State<SelectCountyPage> {
   }
 
   initSelectedOption() async {
-    selectedOption = "Dubie";
+    setState(() {
+      selectedOption = widget.country ?? "Dubie";
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: const CustomAppbar(
+          automaticallyImplyLeading: true,
+        ),
         body: SingleChildScrollView(
           child: Padding(
             padding:

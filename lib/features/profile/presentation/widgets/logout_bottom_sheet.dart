@@ -50,7 +50,7 @@ class _LogoutBottomSheetState extends State<LogoutBottomSheet> {
           ),
         ),
       ),
-      width: context.mediaQuery.size.width,
+      width: 1.sw,
       child: const LogoutBottomSheetBody(),
     );
   }

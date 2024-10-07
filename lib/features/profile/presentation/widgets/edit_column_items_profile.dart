@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:werewolf_cars/features/profile/presentation/pages/edit_profile_page.dart';
 import 'package:werewolf_cars/generated/assets.dart';
 
 import 'edit_item_profile.dart';

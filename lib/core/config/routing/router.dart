@@ -46,8 +46,6 @@ class GRouter {
       GlobalKey<NavigatorState>();
   static final GlobalKey<NavigatorState> _homeNavigatorKey =
       GlobalKey<NavigatorState>();
-  static final GlobalKey<NavigatorState> _searchNavigatorKey =
-      GlobalKey<NavigatorState>();
 
   static final GoRouter _router = GoRouter(
     navigatorKey: _rootNavigatorKey,
@@ -134,40 +132,63 @@ class GRouter {
         },
       ),
       GoRoute(
-        path: _config.profileRoutes.profile,
-        name: _config.profileRoutes.profile,
-        parentNavigatorKey: _rootNavigatorKey,
-        pageBuilder: (BuildContext context, GoRouterState state) {
-          return _builderPage(
-            child: const ProfilePage(),
-            state: state,
-          );
-        },
-      ),
-      GoRoute(
-        path: _config.settingsRoutes.privacyPolicy,
-        name: _config.settingsRoutes.privacyPolicy,
-        pageBuilder: (BuildContext context, GoRouterState state) {
-          return _builderPage(
-            child: Container(
-              color: AppColors.blackLight,
+          path: _config.profileRoutes.profile,
+          name: _config.profileRoutes.profile,
+          parentNavigatorKey: _rootNavigatorKey,
+          pageBuilder: (BuildContext context, GoRouterState state) {
+            return _builderPage(
+              child: const ProfilePage(),
+              state: state,
+            );
+          },
+          routes: [
+            GoRoute(
+              path: _config.profileRoutes.profileEdit,
+              name: _config.profileRoutes.profileEdit,
+              parentNavigatorKey: _rootNavigatorKey,
+              pageBuilder: (BuildContext context, GoRouterState state) {
+                return _builderPage(
+                  child: const EditProfilePage(),
+                  state: state,
+                );
+              },
             ),
-            state: state,
-          );
-        },
-      ),
-      GoRoute(
-        path: _config.settingsRoutes.aboutUs,
-        name: _config.settingsRoutes.aboutUs,
-        pageBuilder: (BuildContext context, GoRouterState state) {
-          return _builderPage(
-            child: Container(
-              color: AppColors.blackLight,
+            GoRoute(
+              path: _config.profileRoutes.addressPage,
+              name: _config.profileRoutes.addressPage,
+              parentNavigatorKey: _rootNavigatorKey,
+              pageBuilder: (BuildContext context, GoRouterState state) {
+                return _builderPage(
+                  child: SelectCountyPage(
+                    country: state.extra as String,
+                  ),
+                  state: state,
+                );
+              },
             ),
-            state: state,
-          );
-        },
-      ),
+            GoRoute(
+              path: _config.settingsRoutes.privacyPolicy,
+              name: _config.settingsRoutes.privacyPolicy,
+              parentNavigatorKey: _rootNavigatorKey,
+              pageBuilder: (BuildContext context, GoRouterState state) {
+                return _builderPage(
+                  child: const PrivacyPolicy(),
+                  state: state,
+                );
+              },
+            ),
+            GoRoute(
+              path: _config.settingsRoutes.aboutUs,
+              name: _config.settingsRoutes.aboutUs,
+              parentNavigatorKey: _rootNavigatorKey,
+              pageBuilder: (BuildContext context, GoRouterState state) {
+                return _builderPage(
+                  child: const AboutUsPage(),
+                  state: state,
+                );
+              },
+            ),
+          ]),
       StatefulShellRoute.indexedStack(
         branches: [
           StatefulShellBranch(

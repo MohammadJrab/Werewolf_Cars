@@ -5,7 +5,9 @@ import 'package:werewolf_cars/core/config/theme/typography.dart';
 import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_svg_picture.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
+import 'package:werewolf_cars/features/app/presentation/widgets/custom_appbar.dart';
 import 'package:werewolf_cars/generated/assets.dart';
+import 'package:werewolf_cars/generated/locale_keys.g.dart';
 
 class AboutUsPage extends StatelessWidget {
   const AboutUsPage({
@@ -15,47 +17,52 @@ class AboutUsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: const CustomAppbar(
+          text: LocaleKeys.settingsApp_aboutTheApplication,
+          automaticallyImplyLeading: true,
+        ),
         body: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        AppText(
-          'This App Developed by',
-          style: context.textTheme.bodyLarge!.s18.xb.withColor(AppColors.white),
-        ),
-        AppSvgPicture(
-          Assets.svgAboutUsArrows,
-          height: 175.h,
-          width: 175.w,
-        ),
-        Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SvgPersonWidget(),
-                SizedBox(
-                    width: 100.w,
-                    child: const NameText(name: 'Mohamad Adib Tawil'))
-              ],
+            AppText(
+              'This App Developed by',
+              style: context.textTheme.bodyLarge!.s18.xb
+                  .withColor(AppColors.white),
             ),
-            60.horizontalSpace,
-            Column(
+            AppSvgPicture(
+              Assets.svgAboutUsArrows,
+              height: 175.h,
+              width: 175.w,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SvgPersonWidget(),
-                SizedBox(
-                  width: 100.w,
-                  child: const NameText(name: 'Mohamad Jrab'),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const SvgPersonWidget(),
+                    SizedBox(
+                        width: 100.w,
+                        child: const NameText(name: 'Mohamad Adib Tawil'))
+                  ],
+                ),
+                60.horizontalSpace,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const SvgPersonWidget(),
+                    SizedBox(
+                      width: 100.w,
+                      child: const NameText(name: 'Mohamad Jrab'),
+                    )
+                  ],
                 )
               ],
             )
           ],
-        )
-      ],
-    ));
+        ));
   }
 }
 

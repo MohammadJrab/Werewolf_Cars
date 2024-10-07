@@ -5,7 +5,6 @@ import 'package:werewolf_cars/core/config/theme/typography.dart';
 import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
 import 'package:werewolf_cars/features/chat/presentation/widgets/circlue_user_image_widget.dart';
-import 'package:werewolf_cars/features/chat/presentation/widgets/user_name.dart';
 import 'package:werewolf_cars/features/chat/presentation/widgets/white_divider.dart';
 
 class TopSectionProfilePage extends StatelessWidget {
@@ -24,15 +23,18 @@ class TopSectionProfilePage extends StatelessWidget {
           width: 90,
         ),
         20.verticalSpace,
-        const UserName(),
+        AppText(
+          'User Name',
+          style: context.textTheme.bodyLarge!.s25.xb.withColor(AppColors.white),
+        ),
         10.verticalSpace,
         AppText(
           '+963 999 999 999',
           style: context.textTheme.bodyLarge!.s14.withColor(AppColors.white),
         ),
         10.verticalSpace,
-        const CustomDivider(
-          thickness: 1,
+        CustomDivider(
+          thickness: 0.5.r,
           endIndent: 0,
           indent: 0,
         ),

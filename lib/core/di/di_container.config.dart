@@ -37,13 +37,14 @@ import '../../features/home/presentation/manager/home_cubit/home_cubit.dart'
 import '../../features/my_car/presentation/manager/my_cars_bloc.dart' as _i9;
 import '../../features/notifications/data/datasources/notifications_datasource.dart'
     as _i27;
+import '../../features/profile/presentation/manager/profile_bloc.dart' as _i29;
 import '../../features/search_and_filteration/presentation/manager/search_cubit/search_cubit.dart'
     as _i10;
 import '../../services/search_and_filters_service.dart' as _i8;
 import '../api/client.dart' as _i13;
 import '../storage/prefs_repository.dart' as _i11;
 import '../storage/prefs_repository_impl.dart' as _i12;
-import 'di_container.dart' as _i29;
+import 'di_container.dart' as _i30;
 
 // initializes the registration of main-scope dependencies inside of GetIt
 Future<_i1.GetIt> $initGetIt(
@@ -116,7 +117,9 @@ Future<_i1.GetIt> $initGetIt(
         gh<_i25.AppManagerCubit>(),
         gh<_i14.PrefsRepository>(),
       ));
+  gh.lazySingleton<_i29.ProfileBloc>(
+      () => _i29.ProfileBloc(gh<_i25.AppManagerCubit>()));
   return getIt;
 }
 
-class _$AppModule extends _i29.AppModule {}
+class _$AppModule extends _i30.AppModule {}
