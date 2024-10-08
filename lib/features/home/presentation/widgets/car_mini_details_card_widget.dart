@@ -14,7 +14,7 @@ class CarMiniDetailsCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double h = isStatus ? 215.h + 50.h : 215.h;
+    double h = isStatus ? 200.h + 50.h : 215.h;
     return GestureDetector(
       onTap: () =>
           GRouter.router.pushNamed(GRouter.config.homeRoutes.carDetails),
@@ -23,14 +23,14 @@ class CarMiniDetailsCardWidget extends StatelessWidget {
         width: 320.w,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.r),
-          border: Border.all(color: AppColors.greyStroke, width: 1.5.w),
+          border: Border.all(color: AppColors.greyStroke, width: 1.5.r),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             TopSecrionCarMiniDetailsCard(isFaviorateIcon: isFaviorateIcon),
             const BottomSectionCarMiniDetailsCard(),
-            StatusSectionWidget(isStatus: isStatus)
+            if (isStatus) const StatusSectionWidget()
           ],
         ),
       ),

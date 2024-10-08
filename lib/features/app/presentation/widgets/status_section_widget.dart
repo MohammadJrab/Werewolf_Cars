@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:werewolf_cars/core/config/theme/colors_app.dart';
 import 'package:werewolf_cars/core/config/theme/typography.dart';
 import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
@@ -6,27 +7,24 @@ import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
 class StatusSectionWidget extends StatelessWidget {
   const StatusSectionWidget({
     super.key,
-    required this.isStatus,
   });
-
-  final bool isStatus;
 
   @override
   Widget build(BuildContext context) {
-    return isStatus
-        ? Column(
-            children: [
-              const Divider(),
-              Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                  child: Text(
-                    'Status : Under reviewing',
-                    style: context.textTheme.bodyLarge!.xb
-                        .withColor(AppColors.white),
-                  ))
-            ],
-          )
-        : const SizedBox();
+    return Column(
+      children: [
+        2.verticalSpace,
+        Divider(
+          color: AppColors.grey,
+          thickness: 1.r,
+        ),
+        Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            child: Text(
+              'Status : Under reviewing',
+              style: context.textTheme.bodyLarge!.xb.withColor(AppColors.white),
+            ))
+      ],
+    );
   }
 }

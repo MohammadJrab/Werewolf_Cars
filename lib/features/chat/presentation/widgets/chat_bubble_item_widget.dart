@@ -28,42 +28,46 @@ class ChatBubbleItemWidget extends StatelessWidget {
           padding: HWEdgeInsets.only(top: 20, bottom: 20, right: 12, left: 20),
           width: context.mediaQuery.size.width * 0.6,
           decoration: BoxDecoration(
-              color: isCurrent ? AppColors.primary : AppColors.white,
-              borderRadius: BorderRadius.only(
-                  bottomLeft:
-                      isCurrent ? Radius.circular(20.r) : Radius.circular(0.r),
-                  bottomRight:
-                      isCurrent ? Radius.circular(0.r) : Radius.circular(20.r),
-                  topRight: Radius.circular(20.r),
-                  topLeft: Radius.circular(20.r))),
+            color: isCurrent
+                ? AppColors.primary.withOpacity(0.8)
+                : AppColors.white,
+            borderRadius: BorderRadius.only(
+              bottomLeft:
+                  isCurrent ? Radius.circular(16.r) : Radius.circular(0.r),
+              bottomRight:
+                  isCurrent ? Radius.circular(0.r) : Radius.circular(16.r),
+              topRight: Radius.circular(16.r),
+              topLeft: Radius.circular(16.r),
+            ),
+          ),
           child: AppText(
-            'Message body Message body Message body Message Message body Message body Message body Message ',
+            'Lorem ipsum dolor sit amet consectetur Vitae turpis eget cras',
             style: context.textTheme.bodyLarge!.s15
                 .withColor(isCurrent ? AppColors.white : AppColors.black),
           ),
         ),
-        4.verticalSpace,
+        5.verticalSpace,
         Row(
           mainAxisAlignment:
               isCurrent ? MainAxisAlignment.end : MainAxisAlignment.start,
           crossAxisAlignment:
               isCurrent ? CrossAxisAlignment.end : CrossAxisAlignment.start,
           children: [
-            const AppText(
-              '12:00 am',
-              style: TextStyle(
-                color: AppColors.white,
+            Padding(
+              padding: HWEdgeInsets.only(bottom: 1, right: 8),
+              child: AppText(
+                '12:00 am',
+                style: context.textTheme.labelMedium.m,
               ),
             ),
-            10.horizontalSpace,
             isCurrent
                 ? CircleAvatar(
-                    backgroundColor: AppColors.primary,
-                    radius: 12.r,
+                    backgroundColor: AppColors.primary.withOpacity(0.8),
+                    radius: 7.5.r,
                     child: AppSvgPicture(
                       Assets.svgCheck,
-                      height: 15.h,
-                      width: 15.w,
+                      height: 11.h,
+                      width: 11.w,
                     ),
                   )
                 : const SizedBox(),
