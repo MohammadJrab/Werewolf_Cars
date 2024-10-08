@@ -8,6 +8,7 @@ import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
 import 'package:werewolf_cars/features/chat/presentation/widgets/white_divider.dart';
 
 class SellCarItem extends StatelessWidget {
+  
   const SellCarItem({
     super.key,
     this.onTap,
