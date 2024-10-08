@@ -54,6 +54,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar>
 
   @override
   Widget build(BuildContext context) {
+      print("`123 CustomNavigationBar is rebuilding");
     return Container(
       height: 85.h,
       width: 413.w,

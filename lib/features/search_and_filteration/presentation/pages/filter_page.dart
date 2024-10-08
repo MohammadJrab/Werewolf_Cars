@@ -41,27 +41,28 @@ class FilterPage extends StatelessWidget {
         text: 'Filter',
         automaticallyImplyLeading: true,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            20.verticalSpace,
-            const MakersSectionFilter(),
-            const YearSectionFilter(),
-            const PriceSection(),
-            const TransmissionSection(),
-            const CarTypeSection(),
-            const FuelTypeSection(),
-            const CylindersAndDoorsSection(
-              title: 'Cylinders',
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          print("`123 FilterPage constraints: $constraints");
+          return const SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 20),
+                MakersSectionFilter(),
+                YearSectionFilter(),
+                PriceSection(),
+                TransmissionSection(),
+                CarTypeSection(),
+                FuelTypeSection(),
+                CylindersAndDoorsSection(title: 'Cylinders'),
+                CylindersAndDoorsSection(title: 'Doors'),
+                ColorsSection(),
+                ConditionSection(),
+              ],
             ),
-            const CylindersAndDoorsSection(
-              title: 'Doors',
-            ),
-            const ColorsSection(),
-            const ConditionSection(),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

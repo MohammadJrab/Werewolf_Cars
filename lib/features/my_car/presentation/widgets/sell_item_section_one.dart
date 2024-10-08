@@ -1,4 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:werewolf_cars/core/utils/responsive_padding.dart';
+import 'package:werewolf_cars/features/app/presentation/widgets/animated_dialog.dart';
+import 'package:werewolf_cars/features/my_car/presentation/widgets/makers_dialog.dart';
 import 'package:werewolf_cars/features/my_car/presentation/widgets/sell_car_item.dart';
 
 class SellItemSectionOne extends StatelessWidget {
@@ -8,33 +11,41 @@ class SellItemSectionOne extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
         SellCarItem(
           title: 'Make',
           value: 'BMW',
+          onTap: () {
+            AnimatedDialog.show(context,
+                insetPadding:
+                    HWEdgeInsets.only(top: 60, left: 40, right: 40, bottom: 30),
+                child: const CarsMakersDialog(),
+                barrierDismissible: true,
+                barrierLabel: "MakersDialog");
+          },
         ),
-        SellCarItem(
+        const SellCarItem(
           title: 'Model',
           value: 'M4 Competition',
         ),
-        SellCarItem(
+        const SellCarItem(
           title: 'Engine Variant',
           value: '3.0L Twin-Turbo Inline-6',
         ),
-        SellCarItem(
+        const SellCarItem(
           title: 'Year',
           value: '2023',
         ),
-        SellCarItem(
+        const SellCarItem(
           title: 'Transmission',
           value: 'Automatic',
         ),
-        SellCarItem(
+        const SellCarItem(
           title: 'Mileage',
           value: '12,500 KM',
         ),
-        SellCarItem(
+        const SellCarItem(
           title: 'Fuel Type',
           value: 'Petrol',
         ),
