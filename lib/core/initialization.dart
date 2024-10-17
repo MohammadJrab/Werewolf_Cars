@@ -12,7 +12,7 @@ Future<void> initialization(
 }) async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureDependencies();
-  // await FirebaseService.initialize();
+  await FirebaseService.initialize();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitDown,
     DeviceOrientation.portraitUp,

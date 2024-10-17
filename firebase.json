@@ -1,0 +1,22 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "werewolf-cars",
+          "appId": "1:180089825003:android:b7af60995f7f17881c40ae",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "werewolf-cars",
+          "configurations": {
+            "android": "1:180089825003:android:b7af60995f7f17881c40ae",
+            "ios": "1:180089825003:ios:5d6cde0e3edc32011c40ae"
+          }
+        }
+      }
+    }
+  }
+}

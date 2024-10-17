@@ -34,13 +34,13 @@ import '../../features/chat/presentation/manager/chat_bloc.dart' as _i6;
 import '../../features/home/data/datasources/home_datasource.dart' as _i26;
 import '../../features/home/presentation/manager/home_cubit/home_cubit.dart'
     as _i7;
-import '../../features/my_car/presentation/manager/my_cars_bloc.dart' as _i9;
+import '../../features/my_car/presentation/manager/my_cars_bloc.dart' as _i8;
 import '../../features/notifications/data/datasources/notifications_datasource.dart'
     as _i27;
 import '../../features/profile/presentation/manager/profile_bloc.dart' as _i29;
 import '../../features/search_and_filteration/presentation/manager/search_cubit/search_cubit.dart'
     as _i10;
-import '../../services/search_and_filters_service.dart' as _i8;
+import '../../services/search_and_filters_service.dart' as _i9;
 import '../api/client.dart' as _i13;
 import '../storage/prefs_repository.dart' as _i11;
 import '../storage/prefs_repository_impl.dart' as _i12;
@@ -66,10 +66,10 @@ Future<_i1.GetIt> $initGetIt(
   );
   gh.lazySingleton<_i6.ChatBloc>(() => _i6.ChatBloc());
   gh.lazySingleton<_i7.HomeCubit>(() => _i7.HomeCubit());
-  gh.lazySingleton<_i8.SearchFilterService>(() => _i8.SearchFilterService());
-  gh.lazySingleton<_i9.MyCarsBloc>(() => _i9.MyCarsBloc());
+  gh.lazySingleton<_i8.MyCarsBloc>(() => _i8.MyCarsBloc());
+  gh.lazySingleton<_i9.SearchFilterService>(() => _i9.SearchFilterService());
   gh.lazySingleton<_i10.SearchCubit>(
-      () => _i10.SearchCubit(gh<_i8.SearchFilterService>()));
+      () => _i10.SearchCubit(gh<_i9.SearchFilterService>()));
   gh.lazySingleton<_i3.Dio>(() => appModule.dio(
         gh<_i3.BaseOptions>(),
         gh<_i4.Logger>(),
