@@ -8,11 +8,13 @@ environment:
   sdk: ">=3.3.4 <4.0.0"
 
 dependencies:
+  animate_do: ^3.3.4
   auto_size_text: ^3.0.0
   badges: ^3.1.2
   bloc_concurrency: ^0.2.1
   cached_network_image: ^3.3.0
   carousel_slider: ^4.2.1
+  cloud_firestore: ^5.4.4
   collection: ^1.17.2
   country_picker: ^2.0.26
   cupertino_icons: ^1.0.2
@@ -28,8 +30,10 @@ dependencies:
   expandable: ^5.0.1
   faker: ^2.1.0
   fancy_shimmer_image: ^2.0.3
+  firebase_auth: ^5.3.1
   firebase_core: ^3.1.1
   firebase_messaging: ^15.0.2
+  firebase_storage: ^12.3.4
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.2

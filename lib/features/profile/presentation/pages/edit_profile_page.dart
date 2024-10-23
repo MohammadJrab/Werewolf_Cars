@@ -34,12 +34,28 @@ class EditProfilePage extends StatefulWidget {
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
+  late AppManagerCubit blocApp;
   late ProfileBloc _profileCubit;
 
   @override
   void initState() {
+    blocApp = GetIt.I<AppManagerCubit>();
     _profileCubit = GetIt.I<ProfileBloc>();
+    initProfileFormGroup();
     super.initState();
+  }
+
+  void initProfileFormGroup() {
+    _profileCubit.profileForm = FormGroup(
+      {
+        _profileCubit.kFromName:
+            FormControl<String>(value: blocApp.state.user?.displayName),
+        _profileCubit.kFromEmail: FormControl<String>(
+            validators: [Validators.email], value: blocApp.state.user?.email),
+        _profileCubit.kFromPhone:
+            FormControl<String>(value: "+963 948 305 198"),
+      },
+    );
   }
 
   @override
@@ -89,16 +105,24 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                     ),
                                   ),
                                   30.verticalSpace,
-                                  PhoneTextField(
-                                    controlName: _profileCubit.kFromPhone,
-                                    onSelect: (value) => _profileCubit
-                                        .profileForm
-                                        .control(_profileCubit.kFromCountryCode)
-                                        .value = value.phoneCode,
-                                    onInit: (value) => _profileCubit.profileForm
-                                        .control(_profileCubit.kFromCountryCode)
-                                        .value = value.phoneCode,
+                                  CustomTextField(
+                                    hint: LocaleKeys.enterPhoneHint,
+                                    formControlName: _profileCubit.kFromPhone,
+                                    textInputAction: TextInputAction.done,
+                                    prefixIcon: const AppSvgPicture(
+                                      Assets.svgPhone,
+                                    ),
                                   ),
+                                  // PhoneTextField(
+                                  //   controlName: _profileCubit.kFromPhone,
+                                  //   onSelect: (value) => _profileCubit
+                                  //       .profileForm
+                                  //       .control(_profileCubit.kFromCountryCode)
+                                  //       .value = value.phoneCode,
+                                  //   onInit: (value) => _profileCubit.profileForm
+                                  //       .control(_profileCubit.kFromCountryCode)
+                                  //       .value = value.phoneCode,
+                                  // ),
                                   80.verticalSpace,
                                   AppElevatedButton(
                                     text: LocaleKeys.saveChanges,
@@ -136,7 +160,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           height: 120.h,
                           width: 120.w,
                           decoration: const BoxDecoration(
-                            color: AppColors.primary,
+                            color: AppColors.white,
                             shape: BoxShape.circle,
                           ),
                           child: Stack(
@@ -154,11 +178,21 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                           imageUrl: Faker().image.loremPicsum(),
                                           fit: BoxFit.cover,
                                           errorWidget: (context, url, error) =>
-                                              const AppSvgPicture(
-                                                  Assets.svgPerson),
+                                              const Padding(
+                                            padding: EdgeInsets.all(20.0),
+                                            child: AppSvgPicture(
+                                              Assets.svgPerson,
+                                              color: AppColors.primary,
+                                            ),
+                                          ),
                                           placeholder: (context, url) =>
-                                              const AppSvgPicture(
-                                                  Assets.svgPerson),
+                                              const Padding(
+                                            padding: EdgeInsets.all(20.0),
+                                            child: AppSvgPicture(
+                                              Assets.svgPerson,
+                                              color: AppColors.primary,
+                                            ),
+                                          ),
                                         ),
                                       ),
                               ),
@@ -305,59 +339,3 @@ class _EditProfilePageState extends State<EditProfilePage> {
   //   );
   // }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// class EditProfilePage extends StatelessWidget {
-//   const EditProfilePage({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: AppColors.blackLight,
-//       appBar: const CustomAppbar(
-//         text: 'Edit Profile',
-//         automaticallyImplyLeading: true,
-//       ),
-//       body: SafeArea(
-//         child: Padding(
-//           padding: HWEdgeInsets.symmetric(horizontal: 24),
-//           child: Column(
-//             crossAxisAlignment: CrossAxisAlignment.center,
-//             children: [
-//               40.verticalSpace,
-//               const UserImageWithEdit(),
-//               60.verticalSpace,
-//               const EditColumnItemsProfile(),
-//               const Spacer(),
-//               const SaveButtonProfile(),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }

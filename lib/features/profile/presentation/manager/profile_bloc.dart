@@ -13,7 +13,6 @@ import 'package:werewolf_cars/core/api/api_utils.dart';
 import 'package:werewolf_cars/core/config/routing/router.dart';
 import 'package:werewolf_cars/features/app/domin/repositories/prefs_repository.dart';
 import 'package:werewolf_cars/features/app/presentation/bloc/app_manager_cubit.dart';
-import 'package:werewolf_cars/features/auth/data/models/customer_info.dart';
 import 'package:werewolf_cars/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:werewolf_cars/features/home/presentation/manager/home_cubit/home_cubit.dart';
 import 'package:werewolf_cars/generated/locale_keys.g.dart';
@@ -85,32 +84,34 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   // final String kFromCity = 'city';
   //}
   // profileForm
-  late final profileForm = FormGroup(
-    {
-      kFromName: FormControl<String>(
-        validators: [
-          Validators.required,
-          Validators.minLength(3),
-        ],
-      ),
-      kFromEmail: FormControl<String>(
-        validators: [
-          Validators.required,
-          Validators.email,
-        ],
-      ),
-      kFromCountryCode: FormControl<String>(validators: [Validators.required]),
-      kFromPhone: FormControl<String>(
-        validators: [
-          Validators.required,
-          // const PhoneNumberValidator(),
-        ],
-      ),
-    },
-    validators: [
-      PhoneNumberValidator(kFromPhone, kFromCountryCode),
-    ],
-  );
+  late FormGroup profileForm;
+
+  // late final profileForm = FormGroup(
+  //   {
+  //     kFromName: FormControl<String>(
+  //       validators: [
+  //         Validators.required,
+  //         Validators.minLength(3),
+  //       ],
+  //     ),
+  //     kFromEmail: FormControl<String>(
+  //       validators: [
+  //         Validators.required,
+  //         Validators.email,
+  //       ],
+  //     ),
+  //     kFromCountryCode: FormControl<String>(validators: [Validators.required]),
+  //     kFromPhone: FormControl<String>(
+  //       validators: [
+  //         Validators.required,
+  //         // const PhoneNumberValidator(),
+  //       ],
+  //     ),
+  //   },
+  //   validators: [
+  //     PhoneNumberValidator(kFromPhone, kFromCountryCode),
+  //   ],
+  // );
 
   @override
   Future<void> close() {

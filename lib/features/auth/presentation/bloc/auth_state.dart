@@ -11,8 +11,6 @@ class AuthState extends Equatable {
     this.resetPasswordStatus = const BlocStatus.initial(),
     this.logoutStatus = const BlocStatus.initial(),
     this.phone,
-    this.authorizationResponse,
-    this.hasAccountNotVerified = false,
     Country? selectedCountry,
   }) : selectedCountry = selectedCountry ?? AuthBloc.initCountry;
 
@@ -25,17 +23,13 @@ class AuthState extends Equatable {
   final BlocStatus resetPasswordStatus;
   final BlocStatus logoutStatus;
   final String? phone;
-  final AuthorizationResponse? authorizationResponse;
-  final bool hasAccountNotVerified;
   Country selectedCountry;
 
   @override
   List<Object?> get props => [
         phone,
-        authorizationResponse,
         registerStatus,
         loginStatus,
-        hasAccountNotVerified,
         resetPasswordStatus,
         resetPasswordGenerateStatus,
         resetPasswordCheckStatus,
@@ -53,7 +47,6 @@ class AuthState extends Equatable {
     final BlocStatus? resetPasswordGenerateStatus,
     final BlocStatus? resetPasswordCheckStatus,
     final String? phone,
-    final AuthorizationResponse? authorizationResponse,
     final bool? hasAccountNotVerified,
     BlocStatus? resendCodeStatus,
     final BlocStatus? resetPasswordStatus,
@@ -64,14 +57,16 @@ class AuthState extends Equatable {
       loginStatus: loginStatus ?? this.loginStatus,
       logoutStatus: logoutStatus ?? this.logoutStatus,
       phone: phone ?? this.phone,
-      authorizationResponse: authorizationResponse ?? this.authorizationResponse,
-      hasAccountNotVerified: hasAccountNotVerified ?? this.hasAccountNotVerified,
       verificationStatus: verificationStatus ?? this.verificationStatus,
       resetPasswordStatus: resetPasswordStatus ?? this.resetPasswordStatus,
       resendCodeStatus: resendCodeStatus ?? this.resendCodeStatus,
-      resetPasswordGenerateStatus: resetPasswordGenerateStatus ?? this.resetPasswordGenerateStatus,
-      resetPasswordCheckStatus: resetPasswordCheckStatus ?? this.resetPasswordCheckStatus,
-      selectedCountry: selectedCountry != null ? selectedCountry.value : this.selectedCountry,
+      resetPasswordGenerateStatus:
+          resetPasswordGenerateStatus ?? this.resetPasswordGenerateStatus,
+      resetPasswordCheckStatus:
+          resetPasswordCheckStatus ?? this.resetPasswordCheckStatus,
+      selectedCountry: selectedCountry != null
+          ? selectedCountry.value
+          : this.selectedCountry,
     );
   }
 }

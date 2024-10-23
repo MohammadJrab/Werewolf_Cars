@@ -24,7 +24,7 @@ class BodyTypesFilterSection extends StatelessWidget {
           ),
         ),
         Container(
-          margin: HWEdgeInsetsDirectional.only(start: 12, end: 14),
+          margin: HWEdgeInsetsDirectional.only(end: 10),
           width: 1.sw,
           height: 50.h,
           child: const CarBodyTypeListView(),

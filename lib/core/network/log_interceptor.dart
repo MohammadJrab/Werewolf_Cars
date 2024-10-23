@@ -16,7 +16,7 @@ enum _StatusType {
 class LoggerInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    if (GetIt.I<PrefsRepository>().registeredCustomer &&
+    if (GetIt.I<PrefsRepository>().registeredUser &&
         GetIt.I<PrefsRepository>().token != null) {
       options.headers[HttpHeaders.authorizationHeader] =
           'Bearer ${GetIt.I<PrefsRepository>().token}';
@@ -71,7 +71,7 @@ class LoggerInterceptor extends Interceptor {
   }
 
   @override
-  void onError(DioError err, ErrorInterceptorHandler handler) {
+  void onError(DioException err, ErrorInterceptorHandler handler) {
     if (kDebugMode) {
       prettyPrinterError(
         "***|| SOMETHING ERROR 💔💔 ||***"

@@ -13,7 +13,7 @@ class CarBodyTypeListView extends StatelessWidget {
     return BlocBuilder<SearchCubit, SearchState>(
       builder: (context, state) {
         return ListView.builder(
-          padding: HWEdgeInsets.only(left: 10, right: 10),
+          padding: HWEdgeInsets.only(left: 8, right: 10),
           scrollDirection: Axis.horizontal,
           itemCount: VehicleType.values.length,
           itemBuilder: (context, index) {

@@ -18,7 +18,7 @@ class LoginEvent extends AuthEvent {
     required this.onSuccess,
   });
 
-  final ValueChanged<CustomerInfoResponse> onSuccess;
+  final ValueChanged<User> onSuccess;
 }
 
 class LogoutEvent extends AuthEvent {
@@ -28,13 +28,7 @@ class LogoutEvent extends AuthEvent {
 }
 
 class VerificationEvent extends AuthEvent {
-  const VerificationEvent(
-      {required this.code, required this.phone, required this.onSuccess});
-
-  final String code;
-  final String phone;
-
-  final VoidCallback onSuccess;
+  const VerificationEvent();
 }
 
 class ResendCodeEvent extends AuthEvent {}
@@ -43,9 +37,9 @@ class ResetPasswordGenerateEvent extends AuthEvent {}
 
 class ResetPasswordCheckEvent extends AuthEvent {
   const ResetPasswordCheckEvent(
-      {required this.token, required this.phone, required this.onSuccess});
+      {required this.token, required this.email, required this.onSuccess});
   final String token;
-  final String phone;
+  final String email;
   final VoidCallback onSuccess;
 }
 
@@ -55,7 +49,7 @@ class ResetPasswordEvent extends AuthEvent {
   final VoidCallback onSuccess;
 }
 
-class ChangeCountryEvent extends AuthEvent{
+class ChangeCountryEvent extends AuthEvent {
   final Country country;
 
   const ChangeCountryEvent({required this.country});

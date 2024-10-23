@@ -45,7 +45,7 @@ class _SelectCountyPageState extends State<SelectCountyPage> {
 
   initSelectedOption() async {
     setState(() {
-      selectedOption = widget.country ?? "Dubie";
+      selectedOption = widget.country ?? "Germany";
     });
   }
 
@@ -53,8 +53,8 @@ class _SelectCountyPageState extends State<SelectCountyPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: const CustomAppbar(
-          automaticallyImplyLeading: true,
+        appBar: CustomAppbar(
+          automaticallyImplyLeading: widget.country != null ? true : false,
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -91,7 +91,7 @@ class _SelectCountyPageState extends State<SelectCountyPage> {
                   child: SizedBox(
                     height: 50.h,
                     width: 626.w,
-                    child: _CityDropdown(
+                    child: _CountryDropdown(
                       onChanged: (v) => onFilter(v!),
                     ),
                   ),
@@ -133,8 +133,8 @@ class _SelectCountyPageState extends State<SelectCountyPage> {
   }
 }
 
-class _CityDropdown extends StatelessWidget {
-  const _CityDropdown({required this.onChanged});
+class _CountryDropdown extends StatelessWidget {
+  const _CountryDropdown({required this.onChanged});
 
   final void Function(String?)? onChanged;
 

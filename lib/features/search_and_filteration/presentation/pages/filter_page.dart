@@ -53,37 +53,41 @@ class FilterPage extends StatelessWidget {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          FloatingActionButton.extended(
-              autofocus: true,
-              label: Padding(
-                padding: HWEdgeInsets.symmetric(horizontal: 36),
-                child: AppText(
-                  "Apply",
-                  style: context.textTheme.bodyMedium?.s20.b,
-                ),
+      floatingActionButton: floatingActionButtons(context, bloc),
+    );
+  }
+
+  Row floatingActionButtons(BuildContext context, SearchCubit bloc) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        FloatingActionButton.extended(
+            autofocus: true,
+            label: Padding(
+              padding: HWEdgeInsets.symmetric(horizontal: 36),
+              child: AppText(
+                "Apply",
+                style: context.textTheme.bodyMedium?.s20.b,
               ),
-              heroTag: null,
-              backgroundColor: AppColors.primary,
-              onPressed: () => context.pop()),
-          FloatingActionButton.extended(
-              label: Padding(
-                padding: HWEdgeInsets.symmetric(horizontal: 20),
-                child: AppText(
-                  "Reset",
-                  style: context.textTheme.bodyMedium?.s20.b,
-                ),
+            ),
+            heroTag: null,
+            backgroundColor: AppColors.primary,
+            onPressed: () => context.pop()),
+        FloatingActionButton.extended(
+            label: Padding(
+              padding: HWEdgeInsets.symmetric(horizontal: 20),
+              child: AppText(
+                "Reset",
+                style: context.textTheme.bodyMedium?.s20.b,
               ),
-              heroTag: null,
-              backgroundColor: AppColors.grey,
-              onPressed: () {
-                bloc.resetAllFilters();
-                context.pop();
-              }),
-        ],
-      ),
+            ),
+            heroTag: null,
+            backgroundColor: AppColors.grey,
+            onPressed: () {
+              bloc.resetAllFilters();
+              context.pop();
+            }),
+      ],
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
+import 'package:werewolf_cars/core/api/api_utils.dart';
 import 'package:werewolf_cars/core/config/routing/router.dart';
 import 'package:werewolf_cars/core/config/theme/colors_app.dart';
 import 'package:werewolf_cars/core/config/theme/typography.dart';
@@ -210,18 +211,14 @@ class _SingUpPageState extends State<SingUpPage> {
   void _onSignUp() {
     FocusScope.of(context).unfocus();
     _authBloc.add(RegisterEvent(
-      onSuccess: () async {
-        final isVerified = await GoRouter.of(context)
-            .push(GRouter.config.authRoutes.confirmAccountPage);
-        if (isVerified == true) {
-          _authBloc.loginForm
-            ..control(_authBloc.kFromPhone).value =
-                _authBloc.singUpForm.control(_authBloc.kFromPhone).value
-            ..control(_authBloc.kFromPassword).value =
-                _authBloc.singUpForm.control(_authBloc.kFromPassword).value;
-          _authBloc.singUpForm.reset();
-          GoRouter.of(context).push(GRouter.config.authRoutes.loginPage);
-        }
+      onSuccess: () {
+        _authBloc.loginForm
+          ..control(_authBloc.kFromEmail).value =
+              _authBloc.singUpForm.control(_authBloc.kFromEmail).value
+          ..control(_authBloc.kFromPassword).value =
+              _authBloc.singUpForm.control(_authBloc.kFromPassword).value;
+        _authBloc.singUpForm.reset();
+        GoRouter.of(context).push(GRouter.config.authRoutes.loginPage);
       },
     ));
   }

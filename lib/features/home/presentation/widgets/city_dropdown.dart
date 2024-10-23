@@ -42,7 +42,8 @@ class CityDropdown extends StatelessWidget {
       onChanged: onChanged,
       contentPadding: HWEdgeInsetsDirectional.only(start: 2, end: 0),
       dropdownButtonProps: DropdownButtonProps(
-        alignment: Alignment.center,
+        iconSize: 14.w,
+        alignment: Alignment.centerLeft,
         icon: AppSvgPicture(Assets.svgArrowDown,
             width: 14.w, color: context.colorScheme.white),
       ),

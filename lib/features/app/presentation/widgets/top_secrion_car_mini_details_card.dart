@@ -8,8 +8,9 @@ class TopSecrionCarMiniDetailsCard extends StatelessWidget {
   const TopSecrionCarMiniDetailsCard({
     super.key,
     required this.isFaviorateIcon,
+    this.image,
   });
-
+  final String? image;
   final bool isFaviorateIcon;
 
   @override
@@ -24,8 +25,8 @@ class TopSecrionCarMiniDetailsCard extends StatelessWidget {
           ),
           border:
               Border(bottom: BorderSide(color: AppColors.grey, width: 1.5.w)),
-          image: const DecorationImage(
-            image: AssetImage(Assets.imagesCar2),
+          image: DecorationImage(
+            image: AssetImage(image ?? Assets.imagesCar2),
             fit: BoxFit.cover,
           )),
       child: isFaviorateIcon ? const FavorateIconWidget() : const SizedBox(),

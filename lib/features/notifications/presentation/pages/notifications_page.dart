@@ -61,12 +61,13 @@ class NotificationItemWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AppText(
-            'data',
+            'From Mohammad Jrab',
             style:
                 context.textTheme.bodyLarge?.b.s15.withColor(AppColors.white),
           ),
+          10.verticalSpace,
           AppText(
-            'data data data data data data data data data data data data data data data data data data data data data data data data data data data data data data data data data data data data data ',
+            "Let's go",
             style: context.textTheme.bodyLarge?.s14.withColor(AppColors.white),
           ),
         ],

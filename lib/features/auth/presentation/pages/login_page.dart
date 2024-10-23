@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
@@ -8,6 +9,7 @@ import 'package:werewolf_cars/core/config/theme/colors_app.dart';
 import 'package:werewolf_cars/core/config/theme/typography.dart';
 import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
 import 'package:werewolf_cars/core/utils/responsive_padding.dart';
+import 'package:werewolf_cars/features/app/domin/repositories/prefs_repository.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_elvated_button.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_svg_picture.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
@@ -203,26 +205,31 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _onLogin() {
-    GRouter.router.goNamed(GRouter.config.authRoutes.selectCountryPage);
+    // GRouter.router.goNamed(GRouter.config.authRoutes.selectCountryPage);
 
-    // FocusScope.of(context).unfocus();
-    // _authBloc.add(LoginEvent(
-    //   onSuccess: (user) async {
-    //     final bool isPhoneVerified = user.customer.phoneVerifiedAt != null;
-    //     if (isPhoneVerified) {
-    //       GRouter.router.goNamed(GRouter.config.authRoutes.selectCountryPage);
-    //     } else {
-    //       // _authBloc.add(ResendCodeEvent());
-    //       final isVerified = await GoRouter.of(context)
-    //           .push(GRouter.config.authRoutes.confirmAccountPage);
-    //       if (isVerified == true) {
-    //         await GetIt.I<PrefsRepository>().setCustomer(user.copyWith(
-    //             customer:
-    //                 user.customer.copyWith(phoneVerifiedAt: DateTime.now())));
-    //         GRouter.router.goNamed(GRouter.config.authRoutes.selectCountryPage);
-    //       }
-    //     }
-    //   },
-    // ));
+    FocusScope.of(context).unfocus();
+    _authBloc.add(LoginEvent(
+      onSuccess: (user) async {
+        final bool isUserVerified = user.emailVerified;
+        if (isUserVerified) {
+          await GetIt.I<PrefsRepository>().setUser(user);
+          GRouter.router.goNamed(GRouter.config.authRoutes.selectCountryPage);
+        } else {
+          EasyLoading.showToast(
+            "Verify was sent, Please Check your email to verify",
+            duration: const Duration(seconds: 4),
+            dismissOnTap: true,
+          );
+          _authBloc.add(const VerificationEvent());
+
+          // if (isVerified == true) {
+          //   // await GetIt.I<PrefsRepository>().setCustomer(user.copyWith(
+          //   //     customer:
+          //   //         user.customer.copyWith(phoneVerifiedAt: DateTime.now())));
+          //   GRouter.router.goNamed(GRouter.config.authRoutes.selectCountryPage);
+          // }
+        }
+      },
+    ));
   }
 }

@@ -1,12 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 import 'package:werewolf_cars/core/api/client.dart';
 import 'package:werewolf_cars/core/api/result.dart';
 import 'package:werewolf_cars/features/app/domin/repositories/prefs_repository.dart';
-import 'package:werewolf_cars/features/auth/data/models/authorization_response.dart';
-import 'package:werewolf_cars/features/auth/data/models/customer_info.dart';
-
+import 'package:werewolf_cars/features/auth/domain/use_cases/register_usecase.dart';
 import '../../../../common/constants/route.dart';
 import '../../../../common/models/response_wrapper/response_wrapper.dart';
 import '../../../../core/api/api_utils.dart';
@@ -20,89 +19,52 @@ class AuthDatasource {
   final ClientApi _clientApi;
   final PrefsRepository _prefsRepository;
 
-  Future<Result<ResponseWrapper<CustomerInfoResponse>>> register(
-      Map<String, dynamic> data) async {
-    fun() async {
-      final response = await _clientApi.request(
-        RequestConfig(
-          endpoint: EndPoints.auth.register,
-          clientMethod: ClientMethod.post,
-          responseType: ResponseType.json,
-          data: data,
-        ),
-      );
+  Future<Result<User>> register(RegisterParams params) async {
+    Future<User> fun() async {
+      final userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+              email: params.email, password: params.password);
 
-      return ResponseWrapper<CustomerInfoResponse>.fromJson(
-        response.data,
-        (json) {
-          final customer = CustomerInfoResponse.fromJson(json);
-          return customer;
-        },
-      );
+      final user = userCredential.user!;
+
+      await user.updateProfile(displayName: params.fullName);
+
+      await user.sendEmailVerification();
+
+      await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+        'full_name': params.fullName,
+        'email': params.email,
+        'phone_number': params.phoneNumber,
+      });
+
+      return user;
     }
 
     return toApiResult(() => throwAppException(fun));
   }
 
-  Future<Result<ResponseWrapper<CustomerInfoResponse>>> login(
-      Map<String, dynamic> data) async {
+  Future<Result<User>> login(
+      {required String email, required String password}) async {
     fun() async {
-      final response = await _clientApi.request(
-        RequestConfig(
-          endpoint: EndPoints.auth.login,
-          clientMethod: ClientMethod.post,
-          responseType: ResponseType.json,
-          data: data,
-        ),
-      );
-
-      return ResponseWrapper<CustomerInfoResponse>.fromJson(
-        response.data,
-        (json) {
-          final customer = CustomerInfoResponse.fromJson(json);
-          return customer;
-        },
-      );
+      final userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+      return userCredential.user!;
     }
 
     return toApiResult(() => throwAppException(fun));
   }
 
-  Future<Result<ResponseWrapper<bool>>> resetPasswordGenerate(
-      Map<String, dynamic> data) async {
+  Future<Result<bool>> resetPasswordGenerate(String email) async {
     fun() async {
       final response = await _clientApi.request(
         RequestConfig(
           endpoint: EndPoints.auth.resetPasswordGenerate,
           clientMethod: ClientMethod.post,
           responseType: ResponseType.json,
-          data: data,
+          data: email,
         ),
       );
-      return const ResponseWrapper<bool>(data: true);
-    }
-
-    return toApiResult(() => throwAppException(fun));
-  }
-
-  Future<Result<ResponseWrapper<AuthorizationResponse>>> resetPasswordCheck(
-      Map<String, dynamic> data) async {
-    fun() async {
-      final response = await _clientApi.request(
-        RequestConfig(
-          endpoint: EndPoints.auth.resetPasswordCheck,
-          clientMethod: ClientMethod.post,
-          responseType: ResponseType.json,
-          data: data,
-        ),
-      );
-      return ResponseWrapper<AuthorizationResponse>.fromJson(
-        response.data,
-        (json) {
-          final authorization = AuthorizationResponse.fromJson(json);
-          return authorization;
-        },
-      );
+      return true;
     }
 
     return toApiResult(() => throwAppException(fun));
@@ -125,33 +87,27 @@ class AuthDatasource {
     return toApiResult(() => throwAppException(fun));
   }
 
-  Future<Result<ResponseWrapper<bool>>> verification(
-      Map<String, dynamic> data) async {
-    fun() async {
-      final response = await _clientApi.request(
-        RequestConfig(
-          endpoint: EndPoints.auth.verify,
-          clientMethod: ClientMethod.post,
-          responseType: ResponseType.json,
-          data: data,
-        ),
-      );
+  Future<Result<bool>> verification() async {
+    Future<bool> fun() async {
+      final user = FirebaseAuth.instance.currentUser;
 
-      return ResponseWrapper<bool>.fromJson(response.data, (json) => true);
+      await user?.sendEmailVerification();
+
+      return true;
     }
 
     return toApiResult(() => throwAppException(fun));
   }
 
   Future<Result<ResponseWrapper<bool>>> resendCode(
-      Map<String, dynamic> data) async {
+      Map<String, dynamic> date) async {
     fun() async {
       final response = await _clientApi.request(
         RequestConfig(
           endpoint: EndPoints.auth.resend,
           clientMethod: ClientMethod.post,
           responseType: ResponseType.json,
-          data: data,
+          data: date,
         ),
       );
 
@@ -161,17 +117,11 @@ class AuthDatasource {
     return toApiResult(() => throwAppException(fun));
   }
 
-  Future<Result<ResponseWrapper<bool>>> logout() async {
+  Future<Result<bool>> logout() async {
     fun() async {
-      final response = await _clientApi.request(
-        RequestConfig(
-          endpoint: EndPoints.auth.logout,
-          clientMethod: ClientMethod.delete,
-          responseType: ResponseType.json,
-        ),
-      );
+      await FirebaseAuth.instance.signOut();
 
-      return const ResponseWrapper<bool>(data: true);
+      return true;
     }
 
     return toApiResult(() => throwAppException(fun));

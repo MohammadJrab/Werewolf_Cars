@@ -17,9 +17,9 @@ class FirebaseService {
       await Firebase.initializeApp(
           options: DefaultFirebaseOptions.currentPlatform);
     }
-    await FirebaseMessaging.instance
-        .setForegroundNotificationPresentationOptions(
-            alert: true, badge: true, sound: true);
+    // await FirebaseMessaging.instance
+    //     .setForegroundNotificationPresentationOptions(
+    //         alert: true, badge: true, sound: true);
     // await NotificationService.initializePlatformNotifications();
   }
 

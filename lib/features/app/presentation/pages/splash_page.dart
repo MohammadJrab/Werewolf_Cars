@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,9 +9,7 @@ import 'package:werewolf_cars/core/config/theme/colors_app.dart';
 import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
 import 'package:werewolf_cars/features/app/domin/repositories/prefs_repository.dart';
 import 'package:werewolf_cars/features/app/presentation/bloc/app_manager_cubit.dart';
-import 'package:werewolf_cars/features/app/presentation/widgets/app_svg_picture.dart';
 import 'package:werewolf_cars/generated/assets.dart';
-import 'dart:math' as math;
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -19,27 +18,79 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
+  double ballY = 0;
+  double widthVal = 50;
+  double heightVal = 50;
+  double bottomVal = 500;
+  bool add = false;
+  bool showShadow = false;
+  int times = 0;
+  bool showComic = false;
+
+  late AnimationController _controller;
+
   @override
   void initState() {
+    _controller =
+        AnimationController(vsync: this, duration: const Duration(seconds: 1))
+          ..addListener(
+            () {
+              if (add) {
+                ballY += 15;
+              } else {
+                ballY -= 15;
+              }
+              if (ballY <= -200) {
+                times += 1;
+                add = true;
+                showShadow = true;
+              }
+              if (ballY >= 0) {
+                add = false;
+                showShadow = false;
+                widthVal += 50;
+                heightVal += 50;
+                bottomVal -= 200;
+              }
+              if (times == 3) {
+                showShadow = false;
+                widthVal = 1.sw;
+                heightVal = 1.sh;
+                Timer(const Duration(milliseconds: 300), () {
+                  setState(() {
+                    showComic = true;
+                  });
+                });
+                _controller.stop();
+              }
+              setState(() {});
+            },
+          );
+    _controller.repeat();
+
     EasyLoading.instance
       ..userInteractions = false
       ..dismissOnTap = false;
     Timer(
-      const Duration(milliseconds: 1200),
+      const Duration(seconds: 3),
       () {
-        // GRouter.router.goNamed(GRouter.config.mainRoutes.home);
-
-        GRouter.router.goNamed(GRouter.config.krpOnboardingRoutePath);
-
-        // final isAuth = GetIt.I<PrefsRepository>().registeredCustomer;
-        // final bool isPhoneVerified =
-        //     GetIt.I<AppManagerCubit>().state.user?.phoneVerifiedAt != null;
-        // if (isAuth && isPhoneVerified) {
-        //   GRouter.router.goNamed(GRouter.config.mainRoutes.home);
-        // } else {
-        //   GRouter.router.goNamed(GRouter.config.krpOnboardingRoutePath);
-        // }
+        final isAuth = GetIt.I<PrefsRepository>().registeredUser;
+        final bool isEmailVerified =
+            GetIt.I<AppManagerCubit>().state.user?.emailVerified != null;
+        if (isAuth && isEmailVerified) {
+          GRouter.router.goNamed(GRouter.config.mainRoutes.home);
+        } else if (isAuth && !isEmailVerified) {
+          EasyLoading.showError(
+            "Please verify your email address",
+            duration: const Duration(seconds: 4),
+            dismissOnTap: true,
+          );
+          GRouter.router.goNamed(GRouter.config.krpOnboardingRoutePath);
+        } else {
+          GRouter.router.goNamed(GRouter.config.krpOnboardingRoutePath);
+        }
       },
     );
     super.initState();
@@ -48,13 +99,61 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-          backgroundColor: context.colorScheme.primary,
-          body: Center(
-            child: Image.asset(
-              Assets.imagesSplash,
+        child: Scaffold(
+      backgroundColor: AppColors.white,
+      body: SizedBox(
+        width: 1.sw,
+        height: 1.sh,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            AnimatedPositioned(
+              bottom: bottomVal,
+              duration: const Duration(milliseconds: 600),
+              child: Column(
+                children: [
+                  Transform.translate(
+                    offset: Offset(0, ballY),
+                    child: AnimatedScale(
+                      duration: const Duration(milliseconds: 200),
+                      scale: times == 3 ? 5 : 1,
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 1000),
+                        width: widthVal,
+                        height: heightVal,
+                        decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: AppColors.blackLight),
+                      ),
+                    ),
+                  ),
+                  if (showShadow)
+                    Container(
+                      width: 50,
+                      height: 10,
+                      decoration: BoxDecoration(
+                          color: Colors.black.withOpacity(.2),
+                          borderRadius: BorderRadius.circular(100)),
+                    )
+                ],
+              ),
             ),
-          )),
-    );
+            if (showComic)
+              Positioned(
+                  child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Image.asset(
+                    Assets.imagesSplash,
+                  ),
+                ],
+              ))
+          ],
+        ),
+      ),
+    )
+
+        // MainPage(),
+        );
   }
 }

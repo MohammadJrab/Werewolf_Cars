@@ -26,7 +26,7 @@ class BudgetFilterSection extends StatelessWidget {
         Container(
           width: 1.sw,
           height: 50.h,
-          margin: HWEdgeInsetsDirectional.only(start: 14, end: 14),
+          margin: HWEdgeInsetsDirectional.only(start: 10, end: 14),
           child: const BudgetListView(),
         ),
       ],

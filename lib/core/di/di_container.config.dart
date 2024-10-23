@@ -109,11 +109,8 @@ Future<_i1.GetIt> $initGetIt(
         gh<_i19.RegisterUsecase>(),
         gh<_i18.LoginUsecase>(),
         gh<_i17.LogoutUsecase>(),
-        gh<_i23.ResetPasswordUsecase>(),
-        gh<_i22.ResetPasswordGenerateUsecase>(),
-        gh<_i21.ResetPasswordCheckUsecase>(),
         gh<_i24.VerificationUsecase>(),
-        gh<_i20.ResendCodeUsecase>(),
+        gh<_i23.ResetPasswordUsecase>(),
         gh<_i25.AppManagerCubit>(),
         gh<_i14.PrefsRepository>(),
       ));

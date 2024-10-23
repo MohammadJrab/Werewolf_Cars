@@ -60,7 +60,7 @@ class YearSectionFilter extends StatelessWidget {
                 children: [
                   YearItemWidget(
                     key: const Key("MinYear"),
-                    selectedYear: state.selectedCarMaxYear?.toString(),
+                    selectedYear: state.selectedCarMinYear?.toString(),
                     onTap: () => AnimatedDialog.show(context,
                         insetPadding: HWEdgeInsets.only(
                             top: 60, left: 40, right: 40, bottom: 30),

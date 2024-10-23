@@ -1,7 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:werewolf_cars/features/auth/data/models/customer_info.dart';
+import 'package:werewolf_cars/features/auth/data/models/local_user.dart';
 
 import '../../../../core/config/theme/app_theme.dart';
 import '../../../../core/utils/nullable.dart';
@@ -25,9 +26,9 @@ class AppManagerCubit extends Cubit<AppManagerState> {
     ));
   }
 
-  bool get isRegisteredCustomer => _prefsRepository.registeredCustomer;
+  bool get isRegisteredCustomer => _prefsRepository.registeredUser;
   void checkUser() {
-    final user = _prefsRepository.customer;
+    final user = _prefsRepository.user;
 
     emit(state.copyWith(user: Nullable.value(user)));
   }

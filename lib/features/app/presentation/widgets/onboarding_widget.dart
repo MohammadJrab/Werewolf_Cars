@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -34,64 +37,81 @@ class OnboardingPage extends StatelessWidget {
             55.verticalSpace,
             Padding(
               padding: HWEdgeInsets.symmetric(horizontal: 28),
-              child: SimpleShadow(
-                color: AppColors.orange,
-                offset: const Offset(0, 4),
-                opacity: 0.2,
-                sigma: 4,
-                child: AppText(
-                  LocaleKeys.onboarding_welcomeToWerewolfCars,
-                  style: context.textTheme.bodyLarge?.xb.s40
-                      .withColor(AppColors.orange),
+              child: Bounce(
+                duration: const Duration(milliseconds: 1300),
+                child: SimpleShadow(
+                  color: AppColors.orange,
+                  offset: const Offset(0, 4),
+                  opacity: 0.2,
+                  sigma: 4,
+                  child: AppText(
+                    LocaleKeys.onboarding_welcomeToWerewolfCars,
+                    style: context.textTheme.bodyLarge?.xb.s40
+                        .withColor(AppColors.orange),
+                  ),
                 ),
               ),
             ),
             80.verticalSpace,
-            Image.asset(
-              Assets.imagesOnboarding,
+            FadeInLeft(
+              duration: const Duration(milliseconds: 1400),
+              child: Image.asset(
+                Assets.imagesOnboarding,
+              ),
             ),
             50.verticalSpace,
             Padding(
               padding: HWEdgeInsets.symmetric(horizontal: 28),
-              child: AppText(
-                LocaleKeys.onboarding_buyAndSellCarsEffortlessly,
-                style: context.textTheme.headlineMedium?.xb
-                    .withColor(AppColors.orange),
+              child: Bounce(
+                child: AppText(
+                  LocaleKeys.onboarding_buyAndSellCarsEffortlessly,
+                  style: context.textTheme.headlineMedium?.xb
+                      .withColor(AppColors.orange),
+                ),
               ),
             ),
             15.verticalSpace,
             Padding(
               padding: HWEdgeInsetsDirectional.only(start: 5),
-              child: AppText(
-                LocaleKeys.onboarding_YourPerfectRideisJustATapAway,
-                style: context.textTheme.bodyLarge?.s20.sb,
+              child: ShakeX(
+                duration: const Duration(milliseconds: 1300),
+                child: AppText(
+                  LocaleKeys.onboarding_YourPerfectRideisJustATapAway,
+                  style: context.textTheme.bodyLarge?.s20.sb,
+                ),
               ),
             ),
             50.verticalSpace,
-            AppElevatedButton(
-              appButtonStyle: AppButtonStyle.primary,
-              style: ButtonStyle(
-                  backgroundColor:
-                      const WidgetStatePropertyAll(AppColors.white),
-                  minimumSize: WidgetStatePropertyAll(Size(319.w, 54.h))),
-              onPressed: () =>
-                  context.push(GRouter.config.authRoutes.signupPage),
-              text: LocaleKeys.auth_createAccount,
-              textStyle: context.textTheme.titleLarge.xb
-                  .withColor(AppColors.blackLight),
+            FadeInDownBig(
+              curve: Curves.easeOut,
+              child: AppElevatedButton(
+                appButtonStyle: AppButtonStyle.primary,
+                style: ButtonStyle(
+                    backgroundColor:
+                        const WidgetStatePropertyAll(AppColors.white),
+                    minimumSize: WidgetStatePropertyAll(Size(319.w, 54.h))),
+                onPressed: () =>
+                    context.push(GRouter.config.authRoutes.signupPage),
+                text: LocaleKeys.auth_createAccount,
+                textStyle: context.textTheme.titleLarge.xb
+                    .withColor(AppColors.blackLight),
+              ),
             ),
             40.verticalSpace,
-            AppElevatedButton(
-              appButtonStyle: AppButtonStyle.primary,
-              style: ButtonStyle(
-                  backgroundColor:
-                      const WidgetStatePropertyAll(AppColors.white),
-                  minimumSize: WidgetStatePropertyAll(Size(319.w, 54.h))),
-              onPressed: () =>
-                  context.push(GRouter.config.authRoutes.loginPage),
-              text: LocaleKeys.auth_login,
-              textStyle: context.textTheme.titleLarge.xb
-                  .withColor(AppColors.blackLight),
+            FadeInDownBig(
+              curve: Curves.easeOut,
+              child: AppElevatedButton(
+                appButtonStyle: AppButtonStyle.primary,
+                style: ButtonStyle(
+                    backgroundColor:
+                        const WidgetStatePropertyAll(AppColors.white),
+                    minimumSize: WidgetStatePropertyAll(Size(319.w, 54.h))),
+                onPressed: () =>
+                    context.push(GRouter.config.authRoutes.loginPage),
+                text: LocaleKeys.auth_login,
+                textStyle: context.textTheme.titleLarge.xb
+                    .withColor(AppColors.blackLight),
+              ),
             ),
           ],
         ));

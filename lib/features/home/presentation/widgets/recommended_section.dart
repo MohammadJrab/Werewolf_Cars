@@ -25,7 +25,7 @@ class RecommendedSection extends StatelessWidget {
         ),
         Container(
           height: 215.h,
-          margin: HWEdgeInsetsDirectional.only(start: 8, end: 14),
+          margin: HWEdgeInsetsDirectional.only(start: 4, end: 14),
           width: double.infinity,
           child: CarsListViewBuilder(
             scrollDirection: Axis.horizontal,

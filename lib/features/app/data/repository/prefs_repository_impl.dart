@@ -1,9 +1,10 @@
 import 'dart:convert';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
-import 'package:werewolf_cars/features/auth/data/models/customer_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:werewolf_cars/features/auth/data/models/local_user.dart';
 
 import '../../../../common/constants/prefs_key.dart';
 import '../../domin/repositories/prefs_repository.dart';
@@ -21,9 +22,9 @@ class PrefsRepositoryImpl extends PrefsRepository {
   @override
   String? get token => _preferences.getString(PrefsKey.token);
 
-  @override
-  Future<bool> setTheme(ThemeMode themeMode) =>
-      _preferences.setString(PrefsKey.theme, themeMode.name);
+  // @override
+  // Future<bool> setTheme(ThemeMode themeMode) =>
+  //     _preferences.setString(PrefsKey.theme, themeMode.name);
 
   @override
   Future<bool> clearLocal() async {
@@ -36,29 +37,31 @@ class PrefsRepositoryImpl extends PrefsRepository {
   }
 
   @override
-  bool get registeredCustomer => token != null;
+  bool get registeredUser => token != null;
 
   @override
-  Future<bool> setCustomer(CustomerInfoResponse customer) async {
-    await setToken(customer.token!);
-    return _preferences.setString(
-        PrefsKey.user, jsonEncode(customer.customer.toJson()));
+  Future<bool> setUser(User user) async {
+    final idToken = await user.getIdToken();
+    await setToken(idToken!);
+    final userData = {
+      'uid': user.uid,
+      'email': user.email,
+      'displayName': user.displayName,
+      'emailVerified': user.emailVerified,
+      'photoURL': user.photoURL,
+    };
+    return _preferences.setString(PrefsKey.user, jsonEncode(userData));
   }
 
   @override
-  Future<bool> setCustomerWithoutToken(CustomerInfoResponse customer) async {
-    return _preferences.setString(
-        PrefsKey.user, jsonEncode(customer.customer.toJson()));
-  }
-
-  @override
-  CustomerInfo? get customer {
+  LocalUser? get user {
     final currentUser = _preferences.getString(PrefsKey.user);
     if (currentUser == null) {
       return null;
     }
 
-    return CustomerInfo.fromJson(jsonDecode(currentUser));
+    final userData = jsonDecode(currentUser);
+    return LocalUser.fromJson(userData);
   }
 
   @override

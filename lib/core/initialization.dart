@@ -1,4 +1,7 @@
 import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:werewolf_cars/core/models/localization_config.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -17,6 +20,19 @@ Future<void> initialization(
     DeviceOrientation.portraitDown,
     DeviceOrientation.portraitUp,
   ]);
+  if (kDebugMode) {
+    // Only for debug mode.
+    try {
+      final emulatorHost = defaultTargetPlatform == TargetPlatform.android
+          ? "10.0.2.2"
+          : "localhost";
+      FirebaseStorage.instance.useStorageEmulator(emulatorHost, 9199);
+      FirebaseFirestore.instance.useFirestoreEmulator(emulatorHost, 8080);
+    } catch (e) {
+      // ignore: avoid_print
+      print(e);
+    }
+  }
 
   final Widget app;
   if (localizationConfig != null) {

@@ -33,7 +33,6 @@ enum AppNetworkExceptionReason {
 
 class AppNetworkException<OriginalException extends Exception>
     extends AppException<OriginalException> {
-  /// Create a network exception.
   AppNetworkException({
     required this.reason,
     required super.exception,
@@ -46,7 +45,6 @@ class AppNetworkException<OriginalException extends Exception>
     required super.message,
   });
 
-  /// The reason the network exception occurred.
   final AppNetworkExceptionReason reason;
 
   @override

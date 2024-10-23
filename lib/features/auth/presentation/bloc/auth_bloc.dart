@@ -1,29 +1,28 @@
 import 'dart:async';
 import 'package:country_picker/country_picker.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:injectable/injectable.dart';
 import 'package:werewolf_cars/common/models/page_state/bloc_status.dart';
+import 'package:werewolf_cars/core/api/api_utils.dart';
 import 'package:werewolf_cars/core/config/routing/router.dart';
-import 'package:werewolf_cars/core/utils/custom_validators.dart';
 import 'package:werewolf_cars/core/utils/nullable.dart';
 import 'package:werewolf_cars/features/app/domin/repositories/prefs_repository.dart';
 import 'package:werewolf_cars/features/app/presentation/bloc/app_manager_cubit.dart';
-import 'package:werewolf_cars/features/auth/data/models/authorization_response.dart';
-import 'package:werewolf_cars/features/auth/data/models/customer_info.dart';
-import 'package:werewolf_cars/features/auth/domain/use_cases/reset_password_generate_usecase.dart';
 import 'package:werewolf_cars/features/auth/domain/use_cases/logout_usecase.dart';
 import 'package:werewolf_cars/features/auth/domain/use_cases/register_usecase.dart';
 import 'package:werewolf_cars/features/auth/domain/use_cases/resend_code_usecase.dart';
 import 'package:werewolf_cars/features/auth/domain/use_cases/reset_password_usecase.dart';
-import 'package:werewolf_cars/features/auth/domain/use_cases/verification_usecase.dart';
 import 'package:phone_numbers_parser/phone_numbers_parser.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:werewolf_cars/features/auth/domain/use_cases/verification_usecase.dart';
+import 'package:werewolf_cars/generated/locale_keys.g.dart';
 import '../../../../common/helpers/helper_functions.dart';
-import '../../../../services/firebase_service.dart';
 import '../../domain/use_cases/login_usecase.dart';
-import '../../domain/use_cases/reset_password_check_usecase.dart';
 
 part 'auth_event.dart';
 
@@ -75,22 +74,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     this._registerUsecase,
     this._loginUsecase,
     this._logoutUsecase,
-    this._resetPasswordUsecase,
-    this._resetPasswordGenerateUsecase,
-    this._resetPasswordCheckUsecase,
     this._verificationUsecase,
-    this._resendCodeUsecase,
+    this._resetPasswordUsecase,
     this._appManagerCubit,
     this._prefsRepository,
   ) : super(AuthState()) {
     on<RegisterEvent>(_onRegisterEvent);
-    // on<LoginEvent>(_onLoginEvent);
+    on<LoginEvent>(_onLoginEvent);
     on<LogoutEvent>(_onLogoutEvent);
     on<ResetPasswordEvent>(_onResetPasswordEvent);
-    on<ResetPasswordGenerateEvent>(_onResetPasswordGenerateEvent);
-    on<ResetPasswordCheckEvent>(_onResetPasswordCheckEvent);
-    // on<VerificationEvent>(_onVerificationEvent);
-    on<ResendCodeEvent>(_onResendCodeEvent);
+    on<VerificationEvent>(_onVerificationEvent);
     on<ChangeCountryEvent>(_onChangeCountryEvent);
   }
 
@@ -98,9 +91,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final LogoutUsecase _logoutUsecase;
   final RegisterUsecase _registerUsecase;
   final ResetPasswordUsecase _resetPasswordUsecase;
-  final ResetPasswordGenerateUsecase _resetPasswordGenerateUsecase;
-  final ResetPasswordCheckUsecase _resetPasswordCheckUsecase;
-  final ResendCodeUsecase _resendCodeUsecase;
   final VerificationUsecase _verificationUsecase;
   final AppManagerCubit _appManagerCubit;
   final PrefsRepository _prefsRepository;
@@ -162,7 +152,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         validators: [
           Validators.email,
           Validators.required,
-          // const PhoneNumberValidator(),
         ],
       ),
       kFromPassword: FormControl<String>(
@@ -195,20 +184,30 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(state.copyWith(registerStatus: const BlocStatus.loading()));
 
     final registerParams = RegisterParams(
-        name: singUpForm.control(kFromName).value,
-        phone: signUpPhoneNumber,
-        password: singUpForm.control(kFromPassword).value,
-        passwordConfirmation:
-            singUpForm.control(kFromConfirmationPassword).value);
+      fullName: singUpForm.control(kFromName).value,
+      email: singUpForm.control(kFromEmail).value,
+      phoneNumber: signUpPhoneNumber,
+      password: singUpForm.control(kFromPassword).value,
+    );
 
     final response = await _registerUsecase(registerParams);
 
     response.fold(
-      (exception, message) async =>
-          emit(state.copyWith(registerStatus: BlocStatus.fail(error: message))),
+      (exception, message) async {
+        emit(state.copyWith(registerStatus: BlocStatus.fail(error: message)));
+        EasyLoading.showError(
+          message ?? "Something went wrong!",
+          duration: const Duration(seconds: 2),
+          dismissOnTap: true,
+        );
+      },
       (value) async {
         event.onSuccess.call();
-
+        EasyLoading.showSuccess(
+          LocaleKeys.auth_confirmEmail.tr(),
+          duration: const Duration(seconds: 2),
+          dismissOnTap: true,
+        );
         emit(state.copyWith(
           registerStatus: const BlocStatus.success(),
           phone: singUpForm.control(kFromPhone).value,
@@ -222,87 +221,82 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     return "+${state.selectedCountry.phoneCode}$phone";
   }
 
-  // FutureOr<void> _onLoginEvent(
-  //     LoginEvent event, Emitter<AuthState> emit) async {
-  //   if (loginForm.invalid) {
-  //     loginForm.markAllAsTouched();
-  //     return;
-  //   }
-  //   final fcm = await FirebaseService.getFcmToken();
+  FutureOr<void> _onLoginEvent(
+      LoginEvent event, Emitter<AuthState> emit) async {
+    if (loginForm.invalid) {
+      loginForm.markAllAsTouched();
+      return;
+    }
 
-  //   emit(state.copyWith(loginStatus: const BlocStatus.loading()));
+    emit(state.copyWith(loginStatus: const BlocStatus.loading()));
 
-  //   final loginParams = LoginParams(
-  //     phone: loginPhoneNumber,
-  //     password: loginForm.control(kFromPassword).value,
-  //     fcm: fcm,
-  //   );
+    final loginParams = LoginParams(
+      email: loginForm.control(kFromEmail).value,
+      password: loginForm.control(kFromPassword).value,
+    );
 
-  //   final response = await _loginUsecase(loginParams);
+    final response = await _loginUsecase(loginParams);
 
-  //   await response.fold(
-  //     (exception, message) async =>
-  //         emit(state.copyWith(loginStatus: BlocStatus.fail(error: message))),
-  //     (value) async {
-  //       emit(state.copyWith(
-  //         loginStatus: const BlocStatus.success(),
-  //         phone: loginForm.control(kFromPhone).value,
-  //         hasAccountNotVerified: value.data!.customer.phoneVerifiedAt == null,
-  //       ));
-  //       await _prefsRepository.setCustomer(value.data!);
+    await response.fold(
+      (exception, message) async {
+        emit(state.copyWith(loginStatus: BlocStatus.fail(error: message)));
+        EasyLoading.showError(
+          message ?? "Something went wrong!",
+          duration: const Duration(seconds: 4),
+          dismissOnTap: true,
+        );
+      },
+      (value) async {
+        emit(state.copyWith(
+          loginStatus: const BlocStatus.success(),
+        ));
+        await _prefsRepository.setUser(value);
 
-  //       loginForm
-  //         ..value = {
-  //           kFromPhone: "",
-  //           kFromPassword: "",
-  //         }
-  //         ..markAsUntouched();
-  //       _appManagerCubit.checkUser();
+        loginForm
+          ..value = {
+            kFromEmail: "",
+            kFromPassword: "",
+          }
+          ..markAsUntouched();
+        _appManagerCubit.checkUser();
 
-  //       event.onSuccess(value.data!);
-  //     },
-  //   );
-  // }
+        event.onSuccess(value);
+      },
+    );
+  }
 
-  // FutureOr<void> _onVerificationEvent(
-  //     VerificationEvent event, Emitter<AuthState> emit) async {
-  //   emit(state.copyWith(verificationStatus: const BlocStatus.loading()));
+  FutureOr<void> _onVerificationEvent(
+      VerificationEvent event, Emitter<AuthState> emit) async {
+    emit(state.copyWith(verificationStatus: const BlocStatus.loading()));
 
-  //   final response = await _verificationUsecase(
-  //       VerificationParams(code: event.code, phone: event.phone));
+    final response = await _verificationUsecase();
 
-  //   response.fold(
-  //     (exception, message) => emit(
-  //         state.copyWith(verificationStatus: BlocStatus.fail(error: message))),
-  //     (value) {
-  //       event.onSuccess.call();
-
-  //       emit(state.copyWith(
-  //         verificationStatus: const BlocStatus.success(),
-  //         // phone: loginForm.control(kFromPhone).value,
-  //       ));
-  //     },
-  //   );
-  // }
+    response.fold(
+      (exception, message) {
+        EasyLoading.showError(
+          message ?? "Unable to send verification email",
+          duration: const Duration(seconds: 4),
+          dismissOnTap: true,
+        );
+        emit(state.copyWith(
+            verificationStatus: BlocStatus.fail(error: message)));
+      },
+      (value) {
+        EasyLoading.showToast(
+          "Please check your email",
+          duration: const Duration(seconds: 4),
+          dismissOnTap: true,
+        );
+        emit(state.copyWith(
+          verificationStatus: const BlocStatus.success(),
+        ));
+      },
+    );
+  }
 
   String get loginPhoneNumber {
     final phone = loginForm.control(kFromPhone).value;
     return "+${state.selectedCountry.phoneCode}$phone";
-  }
-
-  FutureOr<void> _onResendCodeEvent(
-      ResendCodeEvent event, Emitter<AuthState> emit) async {
-    emit(state.copyWith(resendCodeStatus: const BlocStatus.loading()));
-
-    final phone = "+${state.selectedCountry.phoneCode}${state.phone!}";
-    final response = await _resendCodeUsecase(ResendCodeParams(phone: phone));
-
-    response.fold(
-      (exception, message) => emit(
-          state.copyWith(resendCodeStatus: BlocStatus.fail(error: message))),
-      (value) =>
-          emit(state.copyWith(resendCodeStatus: const BlocStatus.success())),
-    );
   }
 
   FutureOr<void> _onLogoutEvent(
@@ -345,41 +339,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       (value) {
         emit(state.copyWith(resetPasswordStatus: const BlocStatus.success()));
         event.onSuccess();
-      },
-    );
-  }
-
-  FutureOr<void> _onResetPasswordGenerateEvent(
-      ResetPasswordGenerateEvent event, Emitter<AuthState> emit) async {
-    emit(state.copyWith(
-        resetPasswordGenerateStatus: const BlocStatus.loading()));
-
-    final response = await _resetPasswordGenerateUsecase(
-        ResetPasswordGenerateParams(phone: loginPhoneNumber));
-
-    response.fold(
-      (exception, message) => emit(state.copyWith(
-          resetPasswordGenerateStatus: BlocStatus.fail(error: message))),
-      (value) => emit(state.copyWith(
-          resetPasswordGenerateStatus: const BlocStatus.success())),
-    );
-  }
-
-  FutureOr<void> _onResetPasswordCheckEvent(
-      ResetPasswordCheckEvent event, Emitter<AuthState> emit) async {
-    emit(state.copyWith(resetPasswordCheckStatus: const BlocStatus.loading()));
-
-    final response = await _resetPasswordCheckUsecase(
-        ResetPasswordCheckParams(token: event.token, phone: event.phone));
-
-    response.fold(
-      (exception, message) => emit(state.copyWith(
-          resetPasswordCheckStatus: BlocStatus.fail(error: message))),
-      (value) {
-        emit(state.copyWith(
-            authorizationResponse: value.data,
-            resetPasswordCheckStatus: const BlocStatus.success()));
-        event.onSuccess.call();
       },
     );
   }

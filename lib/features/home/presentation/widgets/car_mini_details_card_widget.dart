@@ -8,9 +8,13 @@ import '../../../app/presentation/widgets/top_secrion_car_mini_details_card.dart
 
 class CarMiniDetailsCardWidget extends StatelessWidget {
   const CarMiniDetailsCardWidget(
-      {super.key, this.isFaviorateIcon = true, this.isStatus = false});
+      {super.key,
+      this.isFaviorateIcon = true,
+      this.isStatus = false,
+      this.image});
   final bool isFaviorateIcon;
   final bool isStatus;
+  final String? image;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +32,10 @@ class CarMiniDetailsCardWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            TopSecrionCarMiniDetailsCard(isFaviorateIcon: isFaviorateIcon),
+            TopSecrionCarMiniDetailsCard(
+              isFaviorateIcon: isFaviorateIcon,
+              image: image,
+            ),
             const BottomSectionCarMiniDetailsCard(),
             if (isStatus) const StatusSectionWidget()
           ],

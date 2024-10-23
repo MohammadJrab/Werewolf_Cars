@@ -9,12 +9,12 @@ class AppManagerState {
   });
   final ThemeData lightThemeData;
   final ThemeData darkThemeData;
-  final CustomerInfo? user;
+  final LocalUser? user;
 
   AppManagerState copyWith({
     ThemeData? lightThemeData,
     ThemeData? darkThemeData,
-    Nullable<CustomerInfo?>? user,
+    Nullable<LocalUser?>? user,
   }) {
     return AppManagerState(
       lightThemeData: lightThemeData ?? this.lightThemeData,
