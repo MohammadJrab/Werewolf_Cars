@@ -38,7 +38,7 @@ class EmojiPickerWidget extends StatelessWidget {
                       ? 1.20
                       : 1.0),
             ),
-            swapCategoryAndBottomBar: false,
+            // swapCategoryAndBottomBar: false,
             skinToneConfig: const SkinToneConfig(),
             categoryViewConfig: const CategoryViewConfig(
                 backgroundColor: AppColors.blackLight,
