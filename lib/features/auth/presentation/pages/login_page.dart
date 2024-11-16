@@ -212,7 +212,6 @@ class _LoginPageState extends State<LoginPage> {
       onSuccess: (user) async {
         final bool isUserVerified = user.emailVerified;
         if (isUserVerified) {
-          await GetIt.I<PrefsRepository>().setUser(user);
           GRouter.router.goNamed(GRouter.config.authRoutes.selectCountryPage);
         } else {
           EasyLoading.showToast(

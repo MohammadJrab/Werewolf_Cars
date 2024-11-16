@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -8,13 +9,12 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:phone_numbers_parser/phone_numbers_parser.dart';
 import 'package:werewolf_cars/common/models/page_state/bloc_status.dart';
-import 'package:werewolf_cars/common/models/page_state/page_state.dart';
 import 'package:werewolf_cars/core/api/api_utils.dart';
 import 'package:werewolf_cars/core/config/routing/router.dart';
 import 'package:werewolf_cars/features/app/domin/repositories/prefs_repository.dart';
 import 'package:werewolf_cars/features/app/presentation/bloc/app_manager_cubit.dart';
 import 'package:werewolf_cars/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:werewolf_cars/features/home/presentation/manager/home_cubit/home_cubit.dart';
+import 'package:werewolf_cars/features/profile/domain/use_cases/update_profile.dart';
 import 'package:werewolf_cars/generated/locale_keys.g.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import '../../../../core/utils/nullable.dart';
@@ -66,12 +66,16 @@ class PhoneNumberValidator extends Validator<dynamic> {
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ProfileBloc(
     this._appManagerCubit,
+    this._updateProfileUsecase,
+    this._prefsRepository,
   ) : super(ProfileState()) {
     on<UpdateProfile>(_onUpdateProfile);
     on<ChangeProfileImage>(_onChangeProfileImage);
   }
 
   final AppManagerCubit _appManagerCubit;
+  final PrefsRepository _prefsRepository;
+  final UpdateProfileUsecase _updateProfileUsecase;
 
   // Form Keys
   //{
@@ -85,33 +89,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   //}
   // profileForm
   late FormGroup profileForm;
-
-  // late final profileForm = FormGroup(
-  //   {
-  //     kFromName: FormControl<String>(
-  //       validators: [
-  //         Validators.required,
-  //         Validators.minLength(3),
-  //       ],
-  //     ),
-  //     kFromEmail: FormControl<String>(
-  //       validators: [
-  //         Validators.required,
-  //         Validators.email,
-  //       ],
-  //     ),
-  //     kFromCountryCode: FormControl<String>(validators: [Validators.required]),
-  //     kFromPhone: FormControl<String>(
-  //       validators: [
-  //         Validators.required,
-  //         // const PhoneNumberValidator(),
-  //       ],
-  //     ),
-  //   },
-  //   validators: [
-  //     PhoneNumberValidator(kFromPhone, kFromCountryCode),
-  //   ],
-  // );
 
   @override
   Future<void> close() {
@@ -130,18 +107,36 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
             updateProfileStatus: const BlocStatus.fail(error: "fail")));
         return;
       }
-      showMessage(tr(LocaleKeys.dataHasBeenModifiedSuccessfully),
-          isSuccess: true);
-      GRouter.router.pop();
-      // await _prefsRepository.setCustomerWithoutToken(value.data!);
-      _appManagerCubit.checkUser();
-      emit(state.copyWith(
-        updateProfileStatus: const BlocStatus.success(),
-        selectedFile: const Nullable.value(null),
+      final result = await _updateProfileUsecase(UpdateProfileParams(
+        email: profileForm.control(kFromEmail).value,
+        displayName: profileForm.control(kFromName).value,
+        phoneNumber: profileForm.control(kFromPhone).value,
+        avatar: state.selectedFile,
       ));
+      result.fold(
+        (exception, message) => emit(state.copyWith(
+            updateProfileStatus: BlocStatus.fail(error: message))),
+        (value) async {
+          emit(state.copyWith(
+            updateProfileStatus: const BlocStatus.success(),
+            selectedFile: const Nullable.value(null),
+          ));
 
-      //   },
-      // );
+          String? phoneNumber;
+          await FirebaseFirestore.instance
+              .collection('users')
+              .doc(value.uid)
+              .get()
+              .then((DocumentSnapshot documentSnapshot) {
+            phoneNumber = documentSnapshot["phone_number"];
+          });
+          await _prefsRepository.setUser(value, phoneNumber ?? "");
+          _appManagerCubit.checkUser();
+          showMessage(tr(LocaleKeys.dataHasBeenModifiedSuccessfully),
+              isSuccess: true);
+          GRouter.router.pop();
+        },
+      );
     } catch (exp) {
       emit(state.copyWith(
           updateProfileStatus: const BlocStatus.fail(error: "fail")));

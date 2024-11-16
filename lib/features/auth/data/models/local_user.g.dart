@@ -13,6 +13,7 @@ _$LocalUserImpl _$$LocalUserImplFromJson(Map<String, dynamic> json) =>
       displayName: json['displayName'] as String?,
       emailVerified: json['emailVerified'] as bool?,
       photoURL: json['photoURL'] as String?,
+      phoneNumber: json['phoneNumber'] as String?,
     );
 
 Map<String, dynamic> _$$LocalUserImplToJson(_$LocalUserImpl instance) =>
@@ -22,4 +23,5 @@ Map<String, dynamic> _$$LocalUserImplToJson(_$LocalUserImpl instance) =>
       'displayName': instance.displayName,
       'emailVerified': instance.emailVerified,
       'photoURL': instance.photoURL,
+      'phoneNumber': instance.phoneNumber,
     };

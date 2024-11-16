@@ -22,9 +22,11 @@ class TopSectionProfilePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            40.verticalSpace,
-            const CirclueUserImageWidget(
+            20.verticalSpace,
+            CirclueUserImageWidget(
               width: 90,
+              height: 90,
+              userImage: state.user?.photoURL,
             ),
             20.verticalSpace,
             AppText(
@@ -34,7 +36,7 @@ class TopSectionProfilePage extends StatelessWidget {
             ),
             10.verticalSpace,
             AppText(
-              state.user?.email ?? 'User',
+              state.user?.email ?? 'Email',
               style:
                   context.textTheme.bodyLarge!.s18.withColor(AppColors.white),
             ),
