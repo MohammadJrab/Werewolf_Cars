@@ -1,12 +1,10 @@
 import 'dart:async';
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 import 'package:werewolf_cars/core/config/routing/router.dart';
 import 'package:werewolf_cars/core/config/theme/colors_app.dart';
-import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
 import 'package:werewolf_cars/features/app/domin/repositories/prefs_repository.dart';
 import 'package:werewolf_cars/features/app/presentation/bloc/app_manager_cubit.dart';
 import 'package:werewolf_cars/generated/assets.dart';
@@ -30,42 +28,50 @@ class _SplashScreenState extends State<SplashScreen>
   bool showComic = false;
 
   late AnimationController _controller;
+  bool _isMounted = true;
 
   @override
   void initState() {
+    super.initState();
+
     _controller =
         AnimationController(vsync: this, duration: const Duration(seconds: 1))
           ..addListener(
             () {
-              if (add) {
-                ballY += 15;
-              } else {
-                ballY -= 15;
-              }
-              if (ballY <= -200) {
-                times += 1;
-                add = true;
-                showShadow = true;
-              }
-              if (ballY >= 0) {
-                add = false;
-                showShadow = false;
-                widthVal += 50;
-                heightVal += 50;
-                bottomVal -= 200;
-              }
-              if (times == 3) {
-                showShadow = false;
-                widthVal = 1.sw;
-                heightVal = 1.sh;
-                Timer(const Duration(milliseconds: 300), () {
-                  setState(() {
-                    showComic = true;
-                  });
+              if (_isMounted) {
+                setState(() {
+                  if (add) {
+                    ballY += 15;
+                  } else {
+                    ballY -= 15;
+                  }
+                  if (ballY <= -200) {
+                    times += 1;
+                    add = true;
+                    showShadow = true;
+                  }
+                  if (ballY >= 0) {
+                    add = false;
+                    showShadow = false;
+                    widthVal += 50;
+                    heightVal += 50;
+                    bottomVal -= 200;
+                  }
+                  if (times == 3) {
+                    showShadow = false;
+                    widthVal = 1.sw;
+                    heightVal = 1.sh;
+                    Timer(const Duration(milliseconds: 300), () {
+                      if (_isMounted) {
+                        setState(() {
+                          showComic = true;
+                        });
+                      }
+                    });
+                    _controller.stop();
+                  }
                 });
-                _controller.stop();
               }
-              setState(() {});
             },
           );
     _controller.repeat();
@@ -73,9 +79,12 @@ class _SplashScreenState extends State<SplashScreen>
     EasyLoading.instance
       ..userInteractions = false
       ..dismissOnTap = false;
+
     Timer(
       const Duration(seconds: 3),
       () {
+        if (!_isMounted) return;
+
         final isAuth = GetIt.I<PrefsRepository>().registeredUser;
         final bool isEmailVerified =
             GetIt.I<AppManagerCubit>().state.user?.emailVerified != null;
@@ -93,7 +102,13 @@ class _SplashScreenState extends State<SplashScreen>
         }
       },
     );
-    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _isMounted = false;
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -151,9 +166,6 @@ class _SplashScreenState extends State<SplashScreen>
           ],
         ),
       ),
-    )
-
-        // MainPage(),
-        );
+    ));
   }
 }
