@@ -11,6 +11,7 @@ class LocalUser with _$LocalUser {
     String? displayName,
     bool? emailVerified,
     String? photoURL,
+    String? phoneNumber,
   }) = _LocalUser;
 
   factory LocalUser.fromJson(Map<String, dynamic> json) =>

@@ -44,9 +44,7 @@ class ResetPasswordCheckEvent extends AuthEvent {
 }
 
 class ResetPasswordEvent extends AuthEvent {
-  const ResetPasswordEvent({required this.onSuccess});
-
-  final VoidCallback onSuccess;
+  const ResetPasswordEvent();
 }
 
 class ChangeCountryEvent extends AuthEvent {

@@ -25,6 +25,7 @@ mixin _$LocalUser {
   String? get displayName => throw _privateConstructorUsedError;
   bool? get emailVerified => throw _privateConstructorUsedError;
   String? get photoURL => throw _privateConstructorUsedError;
+  String? get phoneNumber => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,7 +43,8 @@ abstract class $LocalUserCopyWith<$Res> {
       String? email,
       String? displayName,
       bool? emailVerified,
-      String? photoURL});
+      String? photoURL,
+      String? phoneNumber});
 }
 
 /// @nodoc
@@ -63,6 +65,7 @@ class _$LocalUserCopyWithImpl<$Res, $Val extends LocalUser>
     Object? displayName = freezed,
     Object? emailVerified = freezed,
     Object? photoURL = freezed,
+    Object? phoneNumber = freezed,
   }) {
     return _then(_value.copyWith(
       uid: null == uid
@@ -85,6 +88,10 @@ class _$LocalUserCopyWithImpl<$Res, $Val extends LocalUser>
           ? _value.photoURL
           : photoURL // ignore: cast_nullable_to_non_nullable
               as String?,
+      phoneNumber: freezed == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -102,7 +109,8 @@ abstract class _$$LocalUserImplCopyWith<$Res>
       String? email,
       String? displayName,
       bool? emailVerified,
-      String? photoURL});
+      String? photoURL,
+      String? phoneNumber});
 }
 
 /// @nodoc
@@ -121,6 +129,7 @@ class __$$LocalUserImplCopyWithImpl<$Res>
     Object? displayName = freezed,
     Object? emailVerified = freezed,
     Object? photoURL = freezed,
+    Object? phoneNumber = freezed,
   }) {
     return _then(_$LocalUserImpl(
       uid: null == uid
@@ -143,6 +152,10 @@ class __$$LocalUserImplCopyWithImpl<$Res>
           ? _value.photoURL
           : photoURL // ignore: cast_nullable_to_non_nullable
               as String?,
+      phoneNumber: freezed == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -155,7 +168,8 @@ class _$LocalUserImpl implements _LocalUser {
       this.email,
       this.displayName,
       this.emailVerified,
-      this.photoURL});
+      this.photoURL,
+      this.phoneNumber});
 
   factory _$LocalUserImpl.fromJson(Map<String, dynamic> json) =>
       _$$LocalUserImplFromJson(json);
@@ -170,10 +184,12 @@ class _$LocalUserImpl implements _LocalUser {
   final bool? emailVerified;
   @override
   final String? photoURL;
+  @override
+  final String? phoneNumber;
 
   @override
   String toString() {
-    return 'LocalUser(uid: $uid, email: $email, displayName: $displayName, emailVerified: $emailVerified, photoURL: $photoURL)';
+    return 'LocalUser(uid: $uid, email: $email, displayName: $displayName, emailVerified: $emailVerified, photoURL: $photoURL, phoneNumber: $phoneNumber)';
   }
 
   @override
@@ -188,13 +204,15 @@ class _$LocalUserImpl implements _LocalUser {
             (identical(other.emailVerified, emailVerified) ||
                 other.emailVerified == emailVerified) &&
             (identical(other.photoURL, photoURL) ||
-                other.photoURL == photoURL));
+                other.photoURL == photoURL) &&
+            (identical(other.phoneNumber, phoneNumber) ||
+                other.phoneNumber == phoneNumber));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, uid, email, displayName, emailVerified, photoURL);
+  int get hashCode => Object.hash(runtimeType, uid, email, displayName,
+      emailVerified, photoURL, phoneNumber);
 
   @JsonKey(ignore: true)
   @override
@@ -216,7 +234,8 @@ abstract class _LocalUser implements LocalUser {
       final String? email,
       final String? displayName,
       final bool? emailVerified,
-      final String? photoURL}) = _$LocalUserImpl;
+      final String? photoURL,
+      final String? phoneNumber}) = _$LocalUserImpl;
 
   factory _LocalUser.fromJson(Map<String, dynamic> json) =
       _$LocalUserImpl.fromJson;
@@ -231,6 +250,8 @@ abstract class _LocalUser implements LocalUser {
   bool? get emailVerified;
   @override
   String? get photoURL;
+  @override
+  String? get phoneNumber;
   @override
   @JsonKey(ignore: true)
   _$$LocalUserImplCopyWith<_$LocalUserImpl> get copyWith =>

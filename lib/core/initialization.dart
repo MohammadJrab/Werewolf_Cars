@@ -21,7 +21,6 @@ Future<void> initialization(
     DeviceOrientation.portraitUp,
   ]);
   // if (kDebugMode) {
-  //   // Only for debug mode.
   //   try {
   //     final emulatorHost = defaultTargetPlatform == TargetPlatform.android
   //         ? "10.0.2.2"

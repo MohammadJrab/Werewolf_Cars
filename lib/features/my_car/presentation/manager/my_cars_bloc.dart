@@ -2,29 +2,38 @@ import 'dart:async';
 import 'dart:io';
 import 'package:collection/collection.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
+import 'package:werewolf_cars/common/models/page_state/bloc_status.dart';
 import 'package:werewolf_cars/common/models/page_state/page_state.dart';
 import 'package:werewolf_cars/core/api/api_utils.dart';
 import 'package:werewolf_cars/core/config/routing/router.dart';
 import 'package:werewolf_cars/core/utils/nullable.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:werewolf_cars/features/my_car/domain/usecases/sell_my_car_usecase.dart';
+import 'package:werewolf_cars/features/my_car/presentation/pages/sell_my_car_page.dart';
+import 'package:werewolf_cars/generated/locale_keys.g.dart';
 
 part 'my_cars_event.dart';
 part 'my_cars_state.dart';
 
 @lazySingleton
 class MyCarsBloc extends Bloc<MyCarsEvent, MyCarsState> {
-  MyCarsBloc() : super(const MyCarsState()) {
+  MyCarsBloc(this._sellMyCarUsecase) : super(const MyCarsState()) {
     on<NextPageEvent>(nextPage);
     on<PreviousPageEvent>(previousPage);
     on<BackPageEvent>(back);
     on<AddOptionalImageEvent>(addOptionalImageControl);
     on<ResetSellMyCarEvent>(resetSellMyCar);
+    on<SellMyCarEvent>(sellMyCar);
   }
+  final SellMyCarUsecase _sellMyCarUsecase;
   final String kFromCarMaker = 'carMaker';
   final String kFromCarModel = 'carModel';
   final String kFromCarEngine = 'carEngine';
@@ -58,6 +67,97 @@ class MyCarsBloc extends Bloc<MyCarsEvent, MyCarsState> {
 
   final PageController pagedSellMyCarController = PageController();
 
+  FutureOr<void> sellMyCar(
+      SellMyCarEvent event, Emitter<MyCarsState> emit) async {
+    try {
+      emit(state.copyWith(sellMyCarStatus: const BlocStatus.loading()));
+      EasyLoading.show(
+        status: LocaleKeys.requestIsInProgress.tr(),
+        dismissOnTap: false,
+      );
+      final String userId = FirebaseAuth.instance.currentUser!.uid;
+      final params = SellMyCarParams(
+        userId: userId,
+        location: 'Dubie',
+        status: 'Available',
+        carMaker: sellMyCarForm.control(kFromCarMaker).value as String,
+        carModel: sellMyCarForm.control(kFromCarModel).value as String,
+        carEngine: sellMyCarForm.control(kFromCarEngine).value as String,
+        carYear: sellMyCarForm.control(kFromCarYear).value as String,
+        carTransmission:
+            sellMyCarForm.control(kFromCarTransmission).value as String,
+        carMileage: sellMyCarForm.control(kFromCarMileage).value as String,
+        carFuelType: sellMyCarForm.control(kFromCarFuelType).value as String,
+        carTrim: sellMyCarForm.control(kFromCarTrim).value as String,
+        carCylinders: sellMyCarForm.control(kFromCarCylinders).value as String,
+        carSeats: sellMyCarForm.control(kFromCarSeats).value as String,
+        carPaintParts:
+            sellMyCarForm.control(kFromCarPaintParts).value as String,
+        carCondition: sellMyCarForm.control(kFromCarCondition).value as String,
+        carPlate: sellMyCarForm.control(kFromCarPlate).value as String,
+        carColor: sellMyCarForm.control(kFromCarColor).value as String,
+        carSeatMaterial:
+            sellMyCarForm.control(kFromCarSeatMaterial).value as String,
+        carWheels: sellMyCarForm.control(kFromCarWheels).value as String,
+        carVehicleType:
+            sellMyCarForm.control(kFromCarVehicleType).value as String,
+        carInteriorColor:
+            sellMyCarForm.control(kFromCarInteriorColor).value as String,
+        carExteriorColor:
+            sellMyCarForm.control(kFromCarExteriorColor).value as String,
+        carSafety: sellMyCarForm.control(kFromCarSafety).value as List<String>,
+        carExteriorFeatures:
+            sellMyCarForm.control(kFromCarExterior).value as List<String>,
+        carInteriorFeatures:
+            sellMyCarForm.control(kFromCarInterior).value as List<String>,
+        carDescription:
+            descriptionSectionForm.control(kFromCarDescription).value as String,
+        carPrice: descriptionSectionForm.control(kFromCarPrice).value as String,
+        carLocation:
+            descriptionSectionForm.control(kFromCarLocation).value as String,
+        carImages: [
+          imagesSectionForm.control(kFromCarImageFullRight).value as File?,
+          imagesSectionForm.control(kFromCarImageFullLeft).value as File?,
+          imagesSectionForm.control(kFromCarImageRear).value as File?,
+          imagesSectionForm.control(kFromCarImageFront).value as File?,
+          imagesSectionForm.control(kFromCarImageDashboard).value as File?,
+          ...imagesSectionForm.controls.entries
+              .where((entry) => entry.key.startsWith('optionalImage'))
+              .map((entry) => entry.value.value as File?)
+        ],
+        createAt: DateTime.now(),
+        updateAt: DateTime.now(),
+      );
+      final result = await _sellMyCarUsecase(params);
+      result.fold(
+        (exception, message) {
+          EasyLoading.dismiss();
+
+          emit(
+              state.copyWith(sellMyCarStatus: BlocStatus.fail(error: message)));
+          EasyLoading.showError(
+            message ?? "Something went wrong!",
+            duration: const Duration(seconds: 2),
+            dismissOnTap: true,
+          );
+        },
+        (value) {
+          EasyLoading.dismiss();
+
+          GRouter.router
+              .pushNamed(GRouter.config.myCarsRoutes.congratulationsPage);
+
+          emit(state.copyWith(sellMyCarStatus: const BlocStatus.success()));
+        },
+      );
+    } catch (e) {
+      emit(state.copyWith(
+          sellMyCarStatus: const BlocStatus.fail(error: "e.toString()")));
+
+      EasyLoading.dismiss();
+    }
+  }
+
   FutureOr<void> nextPage(NextPageEvent event, Emitter<MyCarsState> emit) {
     if ((sellMyCarForm.valid && state.activeStep == 0)) {
       emit(state.copyWith(activeStep: state.activeStep + 1));
@@ -83,7 +183,7 @@ class MyCarsBloc extends Bloc<MyCarsEvent, MyCarsState> {
         descriptionSectionForm.valid &&
         state.activeStep == 3 &&
         sellMyCarForm.valid) {
-      GRouter.router.pushNamed(GRouter.config.myCarsRoutes.congratulationsPage);
+      add(SellMyCarEvent());
     } else {
       if (state.activeStep == 0) {
         sellMyCarForm.markAllAsTouched();

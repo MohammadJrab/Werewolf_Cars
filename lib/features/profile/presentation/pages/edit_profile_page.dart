@@ -1,8 +1,6 @@
-import 'package:faker/faker.dart' hide Color, Image;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:werewolf_cars/core/config/theme/colors_app.dart';
-import 'package:werewolf_cars/core/config/theme/my_color_scheme.dart';
 import 'package:werewolf_cars/core/config/theme/typography.dart';
 import 'package:werewolf_cars/core/utils/extensions/build_context.dart';
 import 'package:werewolf_cars/core/utils/responsive_padding.dart';
@@ -10,21 +8,18 @@ import 'package:werewolf_cars/features/app/presentation/bloc/app_manager_cubit.d
 import 'package:werewolf_cars/features/app/presentation/widgets/app_elvated_button.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_svg_picture.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
-import 'package:werewolf_cars/features/app/presentation/widgets/app_text_field.dart';
 import 'package:werewolf_cars/features/app/presentation/widgets/custom_appbar.dart';
 import 'package:werewolf_cars/features/auth/presentation/widgets/custom_textfeild.dart';
-import 'package:werewolf_cars/features/auth/presentation/widgets/phone_text_field.dart';
+import 'package:werewolf_cars/features/chat/presentation/widgets/circlue_user_image_widget.dart';
 import 'package:werewolf_cars/features/profile/presentation/manager/profile_bloc.dart';
 import 'package:werewolf_cars/generated/assets.dart';
 import 'package:werewolf_cars/generated/locale_keys.g.dart';
 import 'dart:io';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import '../../../../core/config/routing/router.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({super.key});
@@ -53,7 +48,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         _profileCubit.kFromEmail: FormControl<String>(
             validators: [Validators.email], value: blocApp.state.user?.email),
         _profileCubit.kFromPhone:
-            FormControl<String>(value: "+963 948 305 198"),
+            FormControl<String>(value: blocApp.state.user?.phoneNumber),
       },
     );
   }
@@ -113,24 +108,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                       Assets.svgPhone,
                                     ),
                                   ),
-                                  // PhoneTextField(
-                                  //   controlName: _profileCubit.kFromPhone,
-                                  //   onSelect: (value) => _profileCubit
-                                  //       .profileForm
-                                  //       .control(_profileCubit.kFromCountryCode)
-                                  //       .value = value.phoneCode,
-                                  //   onInit: (value) => _profileCubit.profileForm
-                                  //       .control(_profileCubit.kFromCountryCode)
-                                  //       .value = value.phoneCode,
-                                  // ),
                                   80.verticalSpace,
                                   AppElevatedButton(
                                     text: LocaleKeys.saveChanges,
+                                    isLoading:
+                                        state.updateProfileStatus.isLoading(),
                                     onPressed: () {
                                       _profileCubit.add(UpdateProfile());
                                     },
-                                    isLoading:
-                                        state.updateProfileStatus.isLoading(),
                                     textStyle: context
                                         .textTheme.labelMedium.s18.b
                                         .withColor(AppColors.blackLight),
@@ -173,28 +158,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                           fit: BoxFit.cover,
                                         ),
                                       )
-                                    : ClipOval(
-                                        child: CachedNetworkImage(
-                                          imageUrl: Faker().image.loremPicsum(),
-                                          fit: BoxFit.cover,
-                                          errorWidget: (context, url, error) =>
-                                              const Padding(
-                                            padding: EdgeInsets.all(20.0),
-                                            child: AppSvgPicture(
-                                              Assets.svgPerson,
-                                              color: AppColors.primary,
-                                            ),
-                                          ),
-                                          placeholder: (context, url) =>
-                                              const Padding(
-                                            padding: EdgeInsets.all(20.0),
-                                            child: AppSvgPicture(
-                                              Assets.svgPerson,
-                                              color: AppColors.primary,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
+                                    : CirclueUserImageWidget(
+                                        userImage:
+                                            blocApp.state.user?.photoURL),
                               ),
                               Align(
                                 alignment: Alignment.bottomRight,
@@ -289,53 +255,4 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
     _profileCubit.add(ChangeProfileImage(file: File(file.path)));
   }
-
-  // Widget profileInfo(
-  //     {required String title,
-  //     required String formControlName,
-  //     TextDirection? textDirection}) {
-  //   return Padding(
-  //     padding: HWEdgeInsets.only(bottom: 30.0),
-  //     child: Column(
-  //       mainAxisSize: MainAxisSize.min,
-  //       children: [
-  //         AppText(
-  //           title,
-  //           style: context.textTheme.bodySmall.s13.m
-  //               .withColor(AppColors.blackLight.withOpacity(0.77)),
-  //         ),
-  //         6.verticalSpace,
-  //         Container(
-  //           decoration: BoxDecoration(
-  //             boxShadow: [
-  //               BoxShadow(
-  //                 color: AppColors.primary.withOpacity(0.15),
-  //                 spreadRadius: 3,
-  //                 blurRadius: 5,
-  //               ),
-  //             ],
-  //             borderRadius: BorderRadius.circular(8).r,
-  //           ),
-  //           padding: EdgeInsets.zero,
-  //           margin: EdgeInsets.zero,
-  //           child: AppTextField(
-  //             formControlName: formControlName,
-  //             textAlign: TextAlign.center,
-  //             textDirection: textDirection,
-  //             // borderSideColor: AppColors.primary.withOpacity(0.65),
-  //             contentPadding: HWEdgeInsetsDirectional.only(
-  //                 start: 16, end: 10, top: 15, bottom: 15),
-  //             borderRadius: BorderRadius.circular(8).r,
-  //             borderWidth: 1.5,
-  //             filled: true,
-  //             maxLines: 1,
-  //             fillColor: Colors.white,
-  //             textStyle: context.textTheme.titleMedium.m
-  //                 .withColor(AppColors.blackLight),
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
 }

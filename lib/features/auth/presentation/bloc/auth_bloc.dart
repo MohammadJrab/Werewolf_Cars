@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:equatable/equatable.dart';
@@ -8,14 +9,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:injectable/injectable.dart';
 import 'package:werewolf_cars/common/models/page_state/bloc_status.dart';
-import 'package:werewolf_cars/core/api/api_utils.dart';
 import 'package:werewolf_cars/core/config/routing/router.dart';
 import 'package:werewolf_cars/core/utils/nullable.dart';
 import 'package:werewolf_cars/features/app/domin/repositories/prefs_repository.dart';
 import 'package:werewolf_cars/features/app/presentation/bloc/app_manager_cubit.dart';
 import 'package:werewolf_cars/features/auth/domain/use_cases/logout_usecase.dart';
 import 'package:werewolf_cars/features/auth/domain/use_cases/register_usecase.dart';
-import 'package:werewolf_cars/features/auth/domain/use_cases/resend_code_usecase.dart';
 import 'package:werewolf_cars/features/auth/domain/use_cases/reset_password_usecase.dart';
 import 'package:phone_numbers_parser/phone_numbers_parser.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -250,7 +249,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(state.copyWith(
           loginStatus: const BlocStatus.success(),
         ));
-        await _prefsRepository.setUser(value);
+        String? phoneNumber;
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(value.uid)
+            .get()
+            .then((DocumentSnapshot documentSnapshot) {
+          phoneNumber = documentSnapshot["phone_number"];
+        });
+
+        await _prefsRepository.setUser(value, phoneNumber ?? "");
 
         loginForm
           ..value = {
@@ -338,7 +346,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           state.copyWith(resetPasswordStatus: BlocStatus.fail(error: message))),
       (value) {
         emit(state.copyWith(resetPasswordStatus: const BlocStatus.success()));
-        event.onSuccess();
+        if (value) {
+          EasyLoading.showToast(
+            "Please check your email to reset password",
+            duration: const Duration(seconds: 4),
+            dismissOnTap: true,
+          );
+        } else {
+          EasyLoading.showError(
+            "This email not exist !",
+            duration: const Duration(seconds: 4),
+            dismissOnTap: true,
+          );
+        }
+
+        GRouter.router.pop();
       },
     );
   }

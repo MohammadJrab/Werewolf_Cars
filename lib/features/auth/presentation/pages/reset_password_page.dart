@@ -114,8 +114,6 @@ class _ResetPasswordState extends State<ResetPassword> {
   }
 
   void _onResetPassword() {
-    _authBloc.add(ResetPasswordEvent(
-      onSuccess: () {},
-    ));
+    _authBloc.add(const ResetPasswordEvent());
   }
 }

@@ -22,10 +22,6 @@ class PrefsRepositoryImpl extends PrefsRepository {
   @override
   String? get token => _preferences.getString(PrefsKey.token);
 
-  // @override
-  // Future<bool> setTheme(ThemeMode themeMode) =>
-  //     _preferences.setString(PrefsKey.theme, themeMode.name);
-
   @override
   Future<bool> clearLocal() async {
     return (await Future.wait([
@@ -40,7 +36,7 @@ class PrefsRepositoryImpl extends PrefsRepository {
   bool get registeredUser => token != null;
 
   @override
-  Future<bool> setUser(User user) async {
+  Future<bool> setUser(User user, String phoneNumber) async {
     final idToken = await user.getIdToken();
     await setToken(idToken!);
     final userData = {
@@ -49,6 +45,7 @@ class PrefsRepositoryImpl extends PrefsRepository {
       'displayName': user.displayName,
       'emailVerified': user.emailVerified,
       'photoURL': user.photoURL,
+      'phoneNumber': phoneNumber
     };
     return _preferences.setString(PrefsKey.user, jsonEncode(userData));
   }

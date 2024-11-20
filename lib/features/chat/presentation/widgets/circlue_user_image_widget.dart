@@ -1,10 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:faker/faker.dart' hide Image;
 import 'package:fancy_shimmer_image/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:werewolf_cars/core/config/theme/colors_app.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:werewolf_cars/features/app/presentation/widgets/app_svg_picture.dart';
+import 'package:werewolf_cars/generated/assets.dart';
 
 class CirclueUserImageWidget extends StatelessWidget {
   const CirclueUserImageWidget({
@@ -32,27 +33,31 @@ class CirclueUserImageWidget extends StatelessWidget {
         ],
       ),
       child: ClipOval(
-        child: CachedNetworkImage(
-          fit: BoxFit.cover,
-          imageUrl: userImage ??
-              Faker()
-                  .image
-                  .loremPicsum(seed: "Person", height: 200, width: 200),
-          progressIndicatorBuilder: (context, url, progress) {
-            return ImageShimmerWidget(
-              backColor: AppColors.white,
-              baseColor: AppColors.grey,
-              shimmerDirection: ShimmerDirection.ltr,
-              shimmerDuration: const Duration(seconds: 5),
-              highlightColor: AppColors.white,
-            );
-          },
-          errorWidget: (context, url, error) => Container(
-            width: width,
-            color: AppColors.grey,
-            child: const Icon(Icons.error),
-          ),
-        ),
+        child: userImage != null
+            ? CachedNetworkImage(
+                fit: BoxFit.cover,
+                imageUrl: userImage!,
+                progressIndicatorBuilder: (context, url, progress) {
+                  return ImageShimmerWidget(
+                    backColor: AppColors.white,
+                    baseColor: AppColors.grey,
+                    shimmerDirection: ShimmerDirection.ltr,
+                    shimmerDuration: const Duration(seconds: 5),
+                    highlightColor: AppColors.white,
+                  );
+                },
+                errorWidget: (context, url, error) => Container(
+                  width: width,
+                  color: AppColors.grey,
+                  child: const Icon(Icons.error),
+                ),
+              )
+            : AppSvgPicture(
+                Assets.svgNoProfilePicture,
+                width: width.w,
+                height: height?.h,
+                fit: BoxFit.cover,
+              ),
       ),
     );
   }

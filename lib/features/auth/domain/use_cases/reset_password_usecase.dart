@@ -5,13 +5,12 @@ import 'package:werewolf_cars/core/use_case/use_case.dart';
 import 'package:werewolf_cars/features/auth/data/data_sources/auth_datasource.dart';
 
 @injectable
-class ResetPasswordUsecase
-    extends UseCase<Result<ResponseWrapper<bool>>, ResetPasswordParams> {
+class ResetPasswordUsecase extends UseCase<Result<bool>, ResetPasswordParams> {
   ResetPasswordUsecase(this._datasource);
   final AuthDatasource _datasource;
   @override
-  Future<Result<ResponseWrapper<bool>>> call(ResetPasswordParams params) {
-    return _datasource.resetPassword(params.data);
+  Future<Result<bool>> call(ResetPasswordParams params) {
+    return _datasource.resetPassword(params.email);
   }
 }
 
@@ -21,8 +20,4 @@ class ResetPasswordParams {
   });
 
   final String email;
-
-  Map<String, dynamic> get data => {
-        'email': email,
-      };
 }

@@ -11,3 +11,7 @@ class BackPageEvent extends MyCarsEvent {}
 class AddOptionalImageEvent extends MyCarsEvent {}
 
 class ResetSellMyCarEvent extends MyCarsEvent {}
+
+class SellMyCarEvent extends MyCarsEvent {
+  SellMyCarEvent();
+}

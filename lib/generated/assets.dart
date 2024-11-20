@@ -100,6 +100,7 @@ class Assets {
   static const String svgNavFavorite = 'assets/svg/nav_favorite.svg';
   static const String svgNavHome = 'assets/svg/nav_home.svg';
   static const String svgNavSearch = 'assets/svg/nav_search.svg';
+  static const String svgNoProfilePicture = 'assets/svg/no-profile-picture.svg';
   static const String svgPerson = 'assets/svg/person.svg';
   static const String svgPhone = 'assets/svg/phone.svg';
   static const String svgPickupCar = 'assets/svg/pickup-car.svg';

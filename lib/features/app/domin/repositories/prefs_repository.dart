@@ -9,5 +9,5 @@ abstract class PrefsRepository {
   Future<bool> clearLocal();
   bool get registeredUser;
   LocalUser? get user;
-  Future<bool> setUser(User user);
+  Future<bool> setUser(User user, String phoneNumber);
 }
