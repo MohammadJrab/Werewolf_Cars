@@ -8,11 +8,14 @@ import 'package:werewolf_cars/features/app/presentation/widgets/app_svg_picture.
 import 'package:werewolf_cars/features/app/presentation/widgets/app_text.dart';
 import 'package:werewolf_cars/generated/assets.dart';
 
+import '../../../home/domain/entity/car_entity.dart';
 import 'space_text_widget.dart';
 
 class BottomSectionCarMiniDetailsCard extends StatelessWidget {
+  final Car car;
+
   const BottomSectionCarMiniDetailsCard({
-    super.key,
+    super.key, required this.car,
   });
 
   @override
@@ -27,7 +30,7 @@ class BottomSectionCarMiniDetailsCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AppText(
-                '2021 KIA SELTOS',
+              '${car.year} ${car.maker} ${car.model}',//  '2021 KIA SELTOS',
                 style:
                     context.textTheme.titleSmall!.xb.withColor(AppColors.white),
               ),
@@ -35,13 +38,13 @@ class BottomSectionCarMiniDetailsCard extends StatelessWidget {
               Row(
                 children: [
                   AppText(
-                    'GTX 1.4 GDI PETROL',
+                   '${car.trim} ${car.engine} ${car.fuelType}',// 'GTX 1.4 GDI PETROL',
                     style: context.textTheme.titleSmall!.s13.b
                         .withColor(AppColors.white),
                   ),
                   const SpaceTextWidget(),
                   AppText(
-                    'Manual',
+                  car.transmission,//    'Manual',
                     style: context.textTheme.titleSmall!.s13.sb
                         .withColor(AppColors.white),
                   ),
@@ -51,14 +54,14 @@ class BottomSectionCarMiniDetailsCard extends StatelessWidget {
               Row(
                 children: [
                   AppText(
-                    '99,488 KM',
+                   '${car.mileage} KM',//    '99,488 KM',
                     style: context.textTheme.titleSmall!.s13.sb
                         .withColor(AppColors.white),
                   ),
                   const SpaceTextWidget(),
 
                   AppText(
-                    'Petrol',
+                    '${car.fuelType}',
                     style: context.textTheme.titleSmall!.s13.sb
                         .withColor(AppColors.white),
                   ),
@@ -73,7 +76,7 @@ class BottomSectionCarMiniDetailsCard extends StatelessWidget {
                     ),
                   ),
                   AppText(
-                    ' Germany',
+                    ' ${car.location}',
                     style: context.textTheme.titleSmall!.sb
                         .withColor(AppColors.white),
                   ),
@@ -83,7 +86,7 @@ class BottomSectionCarMiniDetailsCard extends StatelessWidget {
           ),
           const Spacer(),
           AppText(
-            r'34,999$',
+           car.price != null ? '${car.price}\$' : 'Soon',
             style: context.textTheme.titleMedium!.xb.withColor(AppColors.white),
           ),
         ],

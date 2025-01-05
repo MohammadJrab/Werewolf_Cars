@@ -26,7 +26,7 @@ class TopSecrionCarMiniDetailsCard extends StatelessWidget {
           border:
               Border(bottom: BorderSide(color: AppColors.grey, width: 1.5.w)),
           image: DecorationImage(
-            image: AssetImage(image ?? Assets.imagesCar2),
+            image: NetworkImage(image ?? Assets.imagesCar2),// Assets.imagesCar2 to network
             fit: BoxFit.cover,
           )),
       child: isFaviorateIcon ? const FavorateIconWidget() : const SizedBox(),

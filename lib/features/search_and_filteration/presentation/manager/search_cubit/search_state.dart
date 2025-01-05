@@ -15,6 +15,7 @@ class SearchState {
   final String? seletedSeatsCount;
   final String? seletedCondition;
   final String? seletedFuelType;
+  final List<Car>? carsLoaded;
   @override
   List<Object?> get props => [
         selectedPrice,
@@ -30,6 +31,7 @@ class SearchState {
         seletedSeatsCount,
         seletedCondition,
         seletedFuelType,
+        carsLoaded,
       ];
   const SearchState({
     this.selectedPrice,
@@ -45,24 +47,25 @@ class SearchState {
     this.seletedSeatsCount,
     this.seletedCondition,
     this.seletedFuelType,
+    this.carsLoaded,
   });
 
   factory SearchState.initial() {
     return const SearchState(
-      selectedPrice: null,
-      selectedTransmission: null,
-      seletedBodyType: null,
-      selectedCarMinYear: null,
-      selectedCarMaxYear: null,
-      selectedCarMinKilometers: null,
-      selectedCarMaxKilometers: null,
-      selectedCarMakersFilter: [],
-      seletedColors: [],
-      seletedCylinders: null,
-      seletedSeatsCount: null,
-      seletedCondition: null,
-      seletedFuelType: null,
-    );
+        selectedPrice: null,
+        selectedTransmission: null,
+        seletedBodyType: null,
+        selectedCarMinYear: null,
+        selectedCarMaxYear: null,
+        selectedCarMinKilometers: null,
+        selectedCarMaxKilometers: null,
+        selectedCarMakersFilter: [],
+        seletedColors: [],
+        seletedCylinders: null,
+        seletedSeatsCount: null,
+        seletedCondition: null,
+        seletedFuelType: null,
+        carsLoaded: null);
   }
 
   SearchState copyWith({
@@ -79,44 +82,45 @@ class SearchState {
     Nullable<String?>? seletedSeatsCount,
     Nullable<String?>? seletedCondition,
     Nullable<String?>? seletedFuelType,
+    List<Car>? carsLoaded,
   }) {
     return SearchState(
-      selectedPrice:
-          selectedPrice != null ? selectedPrice.value : this.selectedPrice,
-      selectedTransmission: selectedTransmission != null
-          ? selectedTransmission.value
-          : this.selectedTransmission,
-      seletedBodyType: seletedBodyType != null
-          ? seletedBodyType.value
-          : this.seletedBodyType,
-      selectedCarMinYear: selectedCarMinYear != null
-          ? selectedCarMinYear.value
-          : this.selectedCarMinYear,
-      selectedCarMaxYear: selectedCarMaxYear != null
-          ? selectedCarMaxYear.value
-          : this.selectedCarMaxYear,
-      selectedCarMinKilometers: selectedCarMinKilometers != null
-          ? selectedCarMinKilometers.value
-          : this.selectedCarMinKilometers,
-      selectedCarMaxKilometers: selectedCarMaxKilometers != null
-          ? selectedCarMaxKilometers.value
-          : this.selectedCarMaxKilometers,
-      selectedCarMakersFilter:
-          selectedCarMakersFilter ?? this.selectedCarMakersFilter,
-      seletedColors: seletedColors ?? this.seletedColors,
-      seletedCylinders: seletedCylinders != null
-          ? seletedCylinders.value
-          : this.seletedCylinders,
-      seletedSeatsCount: seletedSeatsCount != null
-          ? seletedSeatsCount.value
-          : this.seletedSeatsCount,
-      seletedCondition: seletedCondition != null
-          ? seletedCondition.value
-          : this.seletedCondition,
-      seletedFuelType: seletedFuelType != null
-          ? seletedFuelType.value
-          : this.seletedFuelType,
-    );
+        selectedPrice:
+            selectedPrice != null ? selectedPrice.value : this.selectedPrice,
+        selectedTransmission: selectedTransmission != null
+            ? selectedTransmission.value
+            : this.selectedTransmission,
+        seletedBodyType: seletedBodyType != null
+            ? seletedBodyType.value
+            : this.seletedBodyType,
+        selectedCarMinYear: selectedCarMinYear != null
+            ? selectedCarMinYear.value
+            : this.selectedCarMinYear,
+        selectedCarMaxYear: selectedCarMaxYear != null
+            ? selectedCarMaxYear.value
+            : this.selectedCarMaxYear,
+        selectedCarMinKilometers: selectedCarMinKilometers != null
+            ? selectedCarMinKilometers.value
+            : this.selectedCarMinKilometers,
+        selectedCarMaxKilometers: selectedCarMaxKilometers != null
+            ? selectedCarMaxKilometers.value
+            : this.selectedCarMaxKilometers,
+        selectedCarMakersFilter:
+            selectedCarMakersFilter ?? this.selectedCarMakersFilter,
+        seletedColors: seletedColors ?? this.seletedColors,
+        seletedCylinders: seletedCylinders != null
+            ? seletedCylinders.value
+            : this.seletedCylinders,
+        seletedSeatsCount: seletedSeatsCount != null
+            ? seletedSeatsCount.value
+            : this.seletedSeatsCount,
+        seletedCondition: seletedCondition != null
+            ? seletedCondition.value
+            : this.seletedCondition,
+        seletedFuelType: seletedFuelType != null
+            ? seletedFuelType.value
+            : this.seletedFuelType,
+        carsLoaded: carsLoaded ?? this.carsLoaded);
   }
 
   SearchState resetAllFilters() {

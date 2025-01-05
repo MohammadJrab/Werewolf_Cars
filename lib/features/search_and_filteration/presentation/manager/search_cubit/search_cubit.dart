@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -6,6 +7,9 @@ import 'package:werewolf_cars/core/utils/debouncer.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:werewolf_cars/core/utils/nullable.dart';
 import 'package:werewolf_cars/services/search_and_filters_service.dart';
+
+import '../../../../home/domain/entity/car_entity.dart';
+import '../../../../home/domain/repo/cars_repository.dart';
 
 part 'search_state.dart';
 
@@ -15,9 +19,11 @@ class SearchCubit extends Cubit<SearchState> {
   final form = FormGroup({"searchCars": FormControl()});
   late StreamSubscription carsSearchStream;
   final Debounce debounce = Debounce();
+  final CarsRepository carsRepository;
 
   SearchCubit(
     this._searchFilterService,
+    this.carsRepository,
   ) : super(SearchState.initial()) {
     _initStreams();
   }
@@ -171,5 +177,11 @@ class SearchCubit extends Cubit<SearchState> {
     if (kDebugMode) {
       print('Error in stream: $error');
     }
+  }
+
+  Future<void> fetchCars() async {
+    final cars = await carsRepository.fetchCars();
+    log("fetchCars cars is :: $cars");
+    emit(state.copyWith(carsLoaded: cars));
   }
 }

@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:werewolf_cars/core/config/routing/router.dart';
 import 'package:werewolf_cars/core/config/theme/colors_app.dart';
+import 'package:werewolf_cars/features/home/domain/entity/car_entity.dart';
 import '../../../app/presentation/widgets/bottom_section_car_mini_details_card.dart';
 import '../../../app/presentation/widgets/status_section_widget.dart';
 import '../../../app/presentation/widgets/top_secrion_car_mini_details_card.dart';
 
 class CarMiniDetailsCardWidget extends StatelessWidget {
-  const CarMiniDetailsCardWidget(
-      {super.key,
-      this.isFaviorateIcon = true,
-      this.isStatus = false,
-      this.image});
+  const CarMiniDetailsCardWidget({
+    super.key,
+    this.isFaviorateIcon = true,
+    this.isStatus = false, required this.car,
+  });
   final bool isFaviorateIcon;
   final bool isStatus;
-  final String? image;
-
+  final Car car;
   @override
   Widget build(BuildContext context) {
     double h = isStatus ? 200.h + 60.h : 215.h;
@@ -34,9 +34,10 @@ class CarMiniDetailsCardWidget extends StatelessWidget {
           children: [
             TopSecrionCarMiniDetailsCard(
               isFaviorateIcon: isFaviorateIcon,
-              image: image,
+              image: car.images.first,
+              // image: image,
             ),
-            const BottomSectionCarMiniDetailsCard(),
+             BottomSectionCarMiniDetailsCard(car: car,),
             if (isStatus) const StatusSectionWidget()
           ],
         ),

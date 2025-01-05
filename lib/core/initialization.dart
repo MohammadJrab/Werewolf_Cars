@@ -3,9 +3,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:get_it/get_it.dart';
 import 'package:werewolf_cars/core/models/localization_config.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:werewolf_cars/features/home/data/repo/cars_repository_impl.dart';
+import 'package:werewolf_cars/features/home/domain/repo/cars_repository.dart';
 import '../services/firebase_service.dart';
 import 'di/di_container.dart';
 
@@ -16,6 +19,8 @@ Future<void> initialization(
   WidgetsFlutterBinding.ensureInitialized();
   await configureDependencies();
   await FirebaseService.initialize();
+  GetIt.I.registerLazySingleton<CarsRepository>(() => CarsRepositoryImpl(FirebaseFirestore.instance));
+
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitDown,
     DeviceOrientation.portraitUp,
